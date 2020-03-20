@@ -173,6 +173,7 @@ Plug 'preservim/nerdtree'
 "Plug 'ryanoasis/vim-devicons'       " add beautiful icons besides files
 "Plug 'Xuyuanp/nerdtree-git-plugin'  " display git status within Nerdtree
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " enhance devicons
+Plug 'majutsushi/tagbar'
 "<markdown>
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'dense-analysis/ale'
