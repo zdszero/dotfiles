@@ -17,19 +17,8 @@ set autoindent smartindent
 " 使用鼠标
 set mouse=nv 
 " 剪切操作
-set clipboard+=unnamedplus
-let g:clipboard = {
-      \   'name': 'myClipboard',
-      \   'copy': {
-      \      '+': 'xclip -i',
-      \      '*': 'xclip -i',
-      \    },
-      \   'paste': {
-      \      '+': 'xclip -o',
-      \      '*': 'xclip -o',
-      \   },
-      \   'cache_enabled': 1,
-      \ }
+" 一直与系统剪切板连接
+" set clipboard+=unnamedplus
 
 " 文件类型相关
 filetype on
@@ -80,8 +69,10 @@ set nobackup    "default backup file format: original-file~
 set undofile    "save undo info of last time's opening
 set history=1000
 " 如果行尾有多余的空格，显示为小方块
-"set listchars=tab:»■,trail:■
-"set nolist
+" set list
+" set listchars=tab:»■
+" set listchars=trail:■
+set nolist
 
 " <++++ 快捷键 ++++>
 
@@ -92,7 +83,8 @@ iabbrev ,e ==
 iabbrev ,n !=
 iabbrev ,g >=
 iabbrev ,l <=
-autocmd Filetype cpp,c inoremap ,. ->
+iabbrev ,. ->
+" autocmd Filetype cpp,c inoremap ,. ->
 
 " 移动到行首和行尾
 noremap <c-h> 0
@@ -104,6 +96,7 @@ noremap H 5h
 noremap K 7k
 noremap J 7j
 noremap L 5l
+noremap <C-u> gUaw
 " 清除查询后的高亮
 noremap <LEADER><CR> :nohlsearch<CR>
 
@@ -118,65 +111,75 @@ inoremap jj <Esc>
 inoremap <C-l> <Right>
 inoremap <A-h> <Delete>
 
-" ex模式下进行选择
-cnoremap <C-p> <Left>
-cnoremap <C-n> <Right>
-
-vnoremap <leader>; <esc>
+vnoremap ;; <Esc>
 
 " 光标在窗口间的移动
-map sl :set splitright<CR>:vsplit<CR>
-map sj :set splitbelow<CR>:split<CR>
+map s; :set splitright<CR>:vsplit<CR>
+map sk :set splitbelow<CR>:split<CR>
 
 " 在窗口之间移动光标
-map <LEADER>l <C-w>l
-map <LEADER>h <C-w>h
-map <LEADER>k <C-w>k
-map <LEADER>j <C-w>j
+map <LEADER>; <C-w>l
+map <LEADER>j <C-w>h
+map <LEADER>l <C-w>k
+map <LEADER>k <C-w>j
 
 " 改变窗口的大小
-map <up> :res -5<CR>
-map <down> :res +5<CR>
-map <left> :vertical resize+5<CR>
-map <right> :vertical resize-5<CR>
+map <up> :res +5<CR>
+map <down> :res -5<CR>
+map <left> :vertical resize-5<CR>
+map <right> :vertical resize+5<CR>
 
-" 打开新的tab页面
-map <LEADER>t :tabe<CR>
+
+nnoremap tn :tabnew 
+nnoremap tc :tabclose<CR>
 " 在tab页面之间进行切换
-map tj :tabnext<CR>
-map tk :tabprevious<CR>
+nnoremap t; :tabnext<CR>
+nnoremap tj :tabprevious<CR>
+" 在buffer之间快速切换
+nnoremap [b :bprevious<CR>
+nnoremap ]b :bnext<CR>
+nnoremap [B :bfirst<CR>
+nnoremap ]B :blast<CR>
 
 " 改变窗口的排列方式
 map sv <C-w>t<C-w>H
 map sh <C-w>t<C-w>K
+
+" open terminal in newvim
+nnoremap <LEADER>t :set splitright<CR>:vsplit<CR>:term fish<CR>:vertical resize-15<CR>
+tnoremap jj <C-\><C-N>
 
 " <++++ 插件 ++++>
 
 call plug#begin('~/.vim/plugged')
 
 "<colorscheme>
-Plug 'connorholyday/vim-snazzy'
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
+Plug 'liuchengxu/eleline.vim'
 Plug 'morhetz/gruvbox'
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'sickill/vim-monokai'
+"<highlight>
 Plug 'yggdroot/indentline'
-"<auto-completion>
-Plug 'ycm-core/YouCompleteMe'
-Plug 'SirVer/ultisnips'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'octol/vim-cpp-enhanced-highlight'
+"<completion>
+Plug 'SirVer/ultisnips'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"<fast-edit>
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'vim-scripts/a.vim'
+"<lint>
+" Plug 'dense-analysis/ale'
 "<nerd-tree>
 Plug 'preservim/nerdtree'
-"Plug 'jistr/vim-nerdtree-tabs'      " enhance nerdtree's tabs
-"Plug 'ryanoasis/vim-devicons'       " add beautiful icons besides files
-"Plug 'Xuyuanp/nerdtree-git-plugin'  " display git status within Nerdtree
-"Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " enhance devicons
 Plug 'majutsushi/tagbar'
 "<markdown>
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -184,9 +187,7 @@ call plug#end()
 " === colorscheme
 " ===
 
-" colorscheme snazzy
-" colorscheme gruvbox
-colorscheme monokai
+colorscheme gruvbox
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 " au Syntax * RainbowParenthesesLoadSquare
@@ -196,39 +197,47 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
 
+let g:semshi#error_sign = 0
+let g:semshi#mark_selected_nodes = 0
+
+
 " ===
-" === You Complete Me
+" === Coc
 " ===
-nnoremap gd :YcmCompleter GoToDeclaration<CR>
-nnoremap gf :YcmCompleter GoToDefinition<CR>
-nnoremap g/ :YcmCompleter GetDoc<CR>
-nnoremap gt :YcmCompleter GetType<CR>
-nnoremap gr :YcmCompleter GoToReference<CR>
+function GoCoc()
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gD <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+endfunction
 
-let g:ycm_python_interpreter_path="/usr/bin/python3"
-let g:ycm_python_binary_path="/usr/bin/python3"
-" 允许vim在ycm_extra_conf.py，不再提示
-let g:ycm_confirm_extra_conf=0
-let g:ycm_global_ycm_extra_conf="/home/zds/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" C++ Completion
-" 在顶层时按下触发语义补全
-let g:ycm_key_invoke_completion = '<c-z>'
-" 不使用YCM提供的诊断功能，有ale了
-let g:ycm_show_diagnostics_ui = 0
-let g:YcmShowDetailedDiagnostic=0
-" 从第2个键入字符就开始罗列匹配项，为符号补全
-let g:ycm_min_num_of_chars_for_completion=2
-" 语法关键字补全
-let g:ycm_seed_identifiers_with_syntax=1
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-let g:ycm_filetype_whitelist = { 
-			\ "c":1,
-			\ "cpp":1, 
-            \ "python":1,
-            \ "h":1,
-			\ }
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
+set laststatus=2
+
+" Symbol renaming.
+" nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+autocmd BufEnter :call GoCoc()
+autocmd Filetype python nmap <LEADER>rn :Semshi rename<CR>
+" autocmd FileType cpp,cxx,h,hpp,c let g:coc_suggest_disable = 1
 
 " ===
 " === UtilSnips
@@ -264,12 +273,8 @@ let NERDTreeDirArrows = 1
 " === marddown-preview
 " ===
 "let g:instant_markdown_slow = 1
-"let g:instant_markdown_autostart = 0
-"let g:instant_markdown_open_to_the_world = 1
-"let g:instant_markdown_allow_unsafe_content = 1
-"let g:instant_markdown_allow_external_content = 0
+let g:instant_markdown_autostart = 0
 "let g:instant_markdown_mathjax = 1
-"let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 "let g:instant_markdown_autoscroll = 0
 "let g:instant_markdown_port = 8888
 "let g:instant_markdown_python = 1
@@ -281,31 +286,16 @@ autocmd Filetype markdown inoremap ,3 ###<Space><Enter><Enter><++><Esc>2kA
 autocmd Filetype markdown inoremap ,4 ####<Space><Enter><Enter><++><Esc>2kA
 
 " ===
-" === ale
+" === tagbar
 " ===
-" 只有保存时才运行Lint
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_save = 1
-" You can disable this option too
-" if you don't want linters to run on opening a file
-let g:ale_lint_on_enter = 0
-"始终开启标志列
-let g:ale_sign_column_always = 0
-let g:ale_set_highlights = 0
-"自定义error和warning图标
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
-"在vim自带的状态栏中整合ale
-let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
-"显示Linter名称,出错或警告等相关信息
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
-nmap sp <Plug>(ale_previous_wrap)
-nmap sn <Plug>(ale_next_wrap)
-"<Leader>s触发/关闭语法检查
-nmap <Leader>s :ALEToggle<CR>
-"<Leader>d查看错误或警告的详细信息
-nmap <Leader>d :ALEDetail<CR>
+nmap <C-t> :TagbarToggle<CR>
+
+
+" ===
+" === vim-easy-align
+" ===
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
