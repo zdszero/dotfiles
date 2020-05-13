@@ -38,8 +38,7 @@ au Syntax * RainbowParenthesesLoadRound
 " au Syntax * RainbowParenthesesLoadBraces
 let g:indentLine_color_term = 239
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_concealcursor = 'inc'
-let g:indentLine_conceallevel = 2
+let g:indentLine_setConceal=0
 
 let g:semshi#error_sign = 0
 let g:semshi#mark_selected_nodes = 0

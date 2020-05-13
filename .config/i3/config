@@ -209,7 +209,7 @@ bar {
         # status_command i3status --config ~/.config/i3status/config
 }
 
-gaps inner 9
+gaps inner 15
 
 # new_window 1pixel
 default_border none

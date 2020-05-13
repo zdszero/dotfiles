@@ -4,8 +4,6 @@ command! PrintRTP call printer#PrintRTP()
 
 command! G execute '!google-chrome-stable %'
 
-command! VG normal ggVG
-
 augroup MarkdownShortcut
     autocmd!
     autocmd Filetype markdown inoremap ,f <Esc>/<++><CR>:nohlsearch<CR>d4li
