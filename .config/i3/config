@@ -31,9 +31,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# excute compton always
+# excute compton always: also exucute it when restarting i3
 exec_always compton
-exec_always feh --bg-scale /usr/share/backgrounds/wallpapers-2018/mountains-1412683.jpg
+
+# run polybar
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -46,7 +48,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec konsole
+bindsym $mod+Return exec alacritty
 
 # start google-chrome
 bindsym $mod+g exec google-chrome-stable
@@ -59,11 +61,11 @@ bindsym $mod+Shift+q kill
 
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -189,6 +191,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        #         USE I3 STATUS RUST
         font pango:DejaVu Sans Mono, FontAwesome 12
         position top
         status_command i3status-rs ~/.config/i3/config.toml
@@ -201,7 +204,12 @@ bar {
             inactive_workspace #333333 #333333 #888888
             urgent_workspace #2f343a #900000 #ffffff
         }
+        
+        #           USE I3 STATUS
+        # status_command i3status --config ~/.config/i3status/config
 }
+
+gaps inner 9
 
 # new_window 1pixel
 default_border none
@@ -231,3 +239,11 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_role="About"] floating enable 
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
+
+# qq floating
+for_window [instance="QQ.exe"] floating enable
+for_window [instance="QQ.exe"] border none
+
+# tim floating 
+for_window [instance="Tim.exe"] floating enable
+for_window [instance="Tim.exe"] floating enable
