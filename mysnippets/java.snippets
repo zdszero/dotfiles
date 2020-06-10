@@ -1,0 +1,41 @@
+priority -50
+
+snippet if "if .. (if)"
+if (${1:/* condition */}) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet el "else .. (else)"
+else {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet eli "else if .. (eli)"
+else if (${1:/* condition */}) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet pl
+System.out.println($1);
+$0
+endsnippet
+
+snippet p
+System.out.print($1);
+$0
+endsnippet
+
+snippet pf
+System.out.printf($1);
+$0
+endsnippet
+
+snippet main
+public static void main(String[] args) {
+	$1
+}
+$0
+endsnippet

@@ -74,13 +74,13 @@ switch (${1:/* condition */}) {
 }
 endsnippet
 # 通过迭代器遍历容器（可读写）
-snippet for
+snippet cfor
 for (auto ${2:iter} = ${1:c}.begin(); ${3:$2} != $1.end(); ${4:++iter}) {
     ${5:TODO}
 }
 endsnippet
 # 通过迭代器遍历容器（只读）
-snippet cfor
+snippet cFor
 for (auto ${2:citer} = ${1:c}.cbegin(); ${3:$2} != $1.cend(); ${4:++citer}) {
     ${5:TODO}
 }
@@ -102,8 +102,8 @@ for (const auto& e : ${1:c}) {
 }
 endsnippet
 # For Loop
-snippet FOR
-for (unsigned ${2:i} = 0; $2 < ${1:count}; ${3:++}$2) {
+snippet for
+for (int ${1:i} = 0; $1 < ${2:count}; $1++) {
     ${4:TODO}
 }
 endsnippet

@@ -20,10 +20,10 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'vim-scripts/a.vim'
+Plug 'tmhedberg/SimpylFold'
 "<nerd-tree>
 Plug 'preservim/nerdtree'
 Plug 'majutsushi/tagbar'
-"<markdown>
 
 call plug#end()
 
@@ -38,7 +38,7 @@ au Syntax * RainbowParenthesesLoadRound
 " au Syntax * RainbowParenthesesLoadBraces
 let g:indentLine_color_term = 239
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_setConceal=0
+let g:indentLine_setConceal=1
 
 let g:semshi#error_sign = 0
 let g:semshi#mark_selected_nodes = 0

@@ -2,6 +2,12 @@ theme = "solarized-dark"
 icons = "awesome"
 
 [[block]]
+block = "net"
+device = "wlp2s0"
+ssid = true
+signal_strength = true
+
+[[block]]
 block = "bluetooth"
 mac = "34:88:5D:EC:7D:99"
 label = " bluetooth"
