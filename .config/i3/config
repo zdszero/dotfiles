@@ -17,8 +17,8 @@ font pango:monospace 12
 
 exec compton
 
-# exec feh --bg-scale /usr/share/backgrounds/wallpapers-2018/mountains-1412683.jpg
-exec feh --bg-scale /home/zds/.config/variety/Downloaded/Bing/OHR.LacMidi_ZH-CN9682566554_1920x1080.jpg
+# exec feh --bg-scale /home/zds/.config/variety/Downloaded/Bing/OHR.LacMidi_ZH-CN9682566554_1920x1080.jpg
+exec feh --bg-scale /usr/share/backgrounds/xfce/matrix-manjaro.jpg
 
 # exec --no-startup-id variety
 
@@ -34,7 +34,7 @@ exec feh --bg-scale /home/zds/.config/variety/Downloaded/Bing/OHR.LacMidi_ZH-CN9
 floating_modifier $mod
 
 # terminal
-bindsym $mod+Return exec /usr/local/bin/st -e fish
+bindsym $mod+Return exec /usr/local/bin/st -e zsh
 
 # browser
 bindsym $mod+g exec google-chrome-stable
@@ -210,7 +210,9 @@ bar {
 # gaps inner 9
 
 # new_window 1pixel
-default_border none
+# default_border none
+
+for_window[class=".*"] border none
 
 # >>> Plasma Integration <<<
 

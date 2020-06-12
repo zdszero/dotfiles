@@ -19,7 +19,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'vim-scripts/a.vim'
 Plug 'tmhedberg/SimpylFold'
 "<nerd-tree>
 Plug 'preservim/nerdtree'

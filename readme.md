@@ -151,3 +151,5 @@ wps-office-mui-zh-cn
 + simplescreenrecorder
 
 + gimp
+
++ libreoffice-fresh-zh-cn

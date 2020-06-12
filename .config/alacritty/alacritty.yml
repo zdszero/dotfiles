@@ -343,7 +343,7 @@ background_opacity: 0.6
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
- program: /usr/bin/fish
+ program: /usr/bin/zsh
 #  args:
 #    - --login
 

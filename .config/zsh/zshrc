@@ -1,0 +1,49 @@
+alias zshconfig="nvim ~/.config/zsh/zshrc"
+alias omz="cd ~/.oh-my-zsh"
+
+alias scf=screenfetch
+alias sudo="sudo -E"
+alias c=clear
+alias l="ls -la *"
+alias vi="nvim"
+alias vim='nvim'
+alias sp="pwd | xclip -i"
+alias gp='cd $(xclip -o)'
+
+# tmux
+alias t="tmux"
+alias tsj="tmux split-window"
+alias tsl="tmux split-window -h"
+alias tns="tmux new -s"
+alias td="tmux detach"
+alias ta="tmux attach -t"
+alias tls="tmux list-sessions"
+alias tlk="tmux list-keys"
+alias tlc="tmux list-commands"
+alias tlsc="cat /etc/bash.bashrc | grep \"alias t\""
+alias tks="tmux kill-session -t"
+alias tss="tmux switch -t"
+alias trs="tmux rename-session -t"
+alias tnw="tmux new-window"
+alias tsw="tmux select-window -t"
+alias trw="tmux rename-window"
+
+export EDITOR='/usr/bin/nvim'
+export PAGER='/usr/bin/less'
+export SHELL='/usr/bin/zsh'
+
+
+# functions
+function ranger-cd {
+    tempfile="$(mktemp -t tmp.XXXXXX)"
+    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi  
+    rm -f -- "$tempfile"
+}
+
+alias r="ranger-cd"
+
+source ~/.config/zsh/fzf.zsh

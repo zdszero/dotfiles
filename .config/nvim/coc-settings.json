@@ -1,0 +1,4 @@
+{
+    "python.jediEnabled": false,
+    "java.home": "/usr/lib/jvm/java-11-openjdk/"
+}
