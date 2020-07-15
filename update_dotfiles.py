@@ -3,19 +3,28 @@
 import os
 
 FILE_LIST = [
-    # apps
-    '~/.config/i3/config',
+    # i3wm
+    '~/.config/i3/*',
     '~/.config/i3status/config',
+    # alacritty
     '~/.config/alacritty/alacritty.yml',
+    # ranger
     '~/.config/ranger/*',
-    # vim configration
+    # vim
     '~/.config/nvim/*',
     '~/.vim/*.vim',
     '~/.vim/autoload/*',
-    # shell
-    '~/.zshrc',
+    '~/.config/coc/ultisnips/*',
+    # zsh
     '~/.config/zsh/*',
-    '~/.config/fish/*'
+    '~/.zshrc',
+    # fish
+    '~/.config/fish/*',
+    # some config files
+    '~/.config/fontconfig/fonts.conf',
+    '~/.pylintrc',
+    '~/.ideavimrc',
+    '~/.gitconfig'
 ]
 
 # create directory that doesn't exist

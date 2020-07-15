@@ -1,4 +1,22 @@
 {
-    "python.jediEnabled": false,
-    "java.home": "/usr/lib/jvm/java-11-openjdk/"
+  "coc.preferences.diagnostic.displayByAle": true,
+  "coc.preferences.colorSupport": true,
+  "diagnostic.enable": false,
+  "suggest.maxCompleteItemCount": 15,
+  "coc.source.buffer.disableSyntaxes": ["comment", "string"],
+  "explorer.keyMappings": {
+    "v": ["open:vsplit"]
+  },
+  "highlight.colors.enable": true,
+  "snippets.ultisnips.enable": true,
+  "snippets.loadFromExtensions": true,
+  "snippets.extends": {
+    "cpp": ["c"],
+    "html": ["javascript"],
+    "jst": ["html"]
+  },
+  "emmet.includeLanguages": {
+    "jst": "html"
+  },
+  "java.home": "/usr/lib/jvm/java-11-openjdk/"
 }

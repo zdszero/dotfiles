@@ -1,0 +1,20 @@
+[user]
+	email = 1335908147@qq.com
+	name = zdszero
+[core]
+	editor = nvim
+[alias]
+	last = log -1 HEAD
+	cm = commit
+	ck = checkout
+	br = branch
+	mg = merge
+	vi = log --oneline --decorate --graph --all
+	st = status
+	rs = git restore
+[diff]
+	tool = kdiff3
+[https]
+	proxy = socks5://127.0.0.1:1080
+[http]
+	proxy = socks5://127.0.0.1:1080

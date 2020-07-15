@@ -1,69 +1,94 @@
 call plug#begin('~/.vim/plugged')
 
-"<colorscheme>
-" Plug 'vim-airline/vim-airline'
-Plug 'liuchengxu/eleline.vim'
-Plug 'morhetz/gruvbox'
-Plug 'sickill/vim-monokai'
-"<highlight>
-Plug 'yggdroot/indentline'
+"<HIGHLIGHT>
+" Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-Plug 'octol/vim-cpp-enhanced-highlight'
-"<completion>
-Plug 'SirVer/ultisnips'
+Plug 'sheerun/vim-polyglot'
+"<COLORSCHEME>
+Plug 'liuchengxu/eleline.vim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/edge'
+Plug 'sainnhe/forest-night'
+"<COMPLETION>
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"<fast-edit>
+"<FAST-EDIT>
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'justinmk/vim-sneak'
 Plug 'junegunn/vim-easy-align'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'tmhedberg/SimpylFold'
-"<nerd-tree>
-Plug 'preservim/nerdtree'
+Plug 'mattn/emmet-vim'
+"<CODE-HELP>
 Plug 'majutsushi/tagbar'
+Plug 'dense-analysis/ale'
+Plug 'Chiel92/vim-autoformat'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
 " ===
-" === colorscheme
+" === COLORSCHEME
 " ===
+set t_Co=256
 
-colorscheme gruvbox
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
+" set background=dark
+let g:edge_style='neon'
+let g:edge_transparent_background=0
+let g:forest_night_transparent_background=1
+let g:gruvbox_material_transparent_background=0
+let g:edge_enable_italic=1 " italic keywords
+let g:gruvbox_material_enable_italic = 1
+let g:forest_night_enable_italic = 1
+
+colorscheme gruvbox-material
+
+" === RAINBOW PARENTHESES
+" au VimEnter * RainbowParenthesesToggle
+" au Syntax * RainbowParenthesesLoadRound
 " au Syntax * RainbowParenthesesLoadSquare
 " au Syntax * RainbowParenthesesLoadBraces
-let g:indentLine_color_term = 239
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_setConceal=1
 
-let g:semshi#error_sign = 0
-let g:semshi#mark_selected_nodes = 0
+" === INDENT GUIDE
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_tab_guides = 0
+" let g:indent_guides_guide_size = 1
+" let g:indent_guides_start_level = 2
+" let g:indent_guides_exclude_filetypes = ['help', 'term', 'sh', 'vim', 'coc-explorer']
+
+" === INDENT LINE
+let g:indentLine_char = '┊'
+" let g:indentLine_char_list = ['', '¦', '┆', '┊']
+let g:indentLine_setConceal = 1
+let g:indentLine_fileTypeExclude = ['sh', 'vim', 'javascript', 'css', 'help', 'term', 'coc-explorer']
+nmap <leader>ig :IndentLinesToggle<CR>
 
 
 " ===
-" === Coc
+" === COC-GENERAL-SETTING
 " ===
-function GoCoc()
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gD <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-endfunction
 
-autocmd BufEnter :call GoCoc()
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gD <Plug>(coc-declaration)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ "\<TAB>"
+" use tab for completion
+  " \ <SID>check_back_space() ? "\<TAB>" :
+  " \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+ " Use <c-z> to trigger completion.
+" inoremap <silent><expr> <c-z> coc#refresh()
+" select the first completion item and confirm the completion when no item has been selected
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" close preview window when completion is done
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -74,62 +99,133 @@ set laststatus=2
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
-
 " Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
+
+" Open Link
+nmap <leader>O :call CocAction("openLink")
 
 " ===
-" === UtilSnips
+" === COC-SNIPPETS
 " ===
-let g:UltiSnipsExpandTrigger=";<Tab>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-let g:UltiSnipsSnippetDirectories=["mysnippets"]
+imap ;<tab> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_prev = '<s-tab>'
+" imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " ===
-" === NERDTREE
+" === COC-EXPLORER
 " ===
-"autocmd vimenter * NERDTree  "自动开启Nerdtree
-"let g:NERDTreeWinSize = 25 "设定 NERDTree 视窗大小
-"开启/关闭nerdtree快捷键
-map <C-f> :NERDTreeToggle<CR>
-"let NERDTreeShowBookmarks=1  " 开启Nerdtree时自动显示Bookmarks
-"打开vim时如果没有文件自动打开NERDTree
-" autocmd vimenter * if !argc()|NERDTree|endif
-"当NERDTree为剩下的唯一窗口时自动关闭
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"设置树的显示图标
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeIgnore = ['\.pyc$']  " 过滤所有.pyc文件不显示
-"let g:NERDTreeShowLineNumbers=1  " 是否显示行号
-let g:NERDTreeHidden=0     "不显示隐藏文件
-"Making it prettier
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
 
+let g:coc_explorer_global_presets = {
+\   'vim': {
+\      'root-uri': '~/.config/nvim',
+\   },
+\   'floating': {
+\      'position': 'floating',
+\   },
+\   'floatingTop': {
+\     'position': 'floating',
+\     'floating-position': 'center-top',
+\   },
+\   'floatingLeftside': {
+\      'position': 'floating',
+\      'floating-position': 'left-center',
+\      'floating-width': 50,
+\   },
+\   'floatingRightside': {
+\      'position': 'floating',
+\      'floating-position': 'left-center',
+\      'floating-width': 50,
+\  },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   }
+\ } 
+
+" open explorer
+nmap <leader>e :CocCommand explorer<CR>
+nmap <leader>b :CocCommand explorer --sources=buffer+ --preset floating<CR>
 
 " ===
-" === tagbar
+" === TAGBAR
 " ===
 nmap <C-t> :TagbarToggle<CR>
 
-
 " ===
-" === vim-easy-align
+" === VIM-EASY-ALIGN
 " ===
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" ===
+" === SIMPLY-FOLD
+" ===
+let g:SimpylFold_fold_import = 0
+
+" ===
+" === SNEAK
+" ===
+nmap ss <Plug>Sneak_s
+
+" ===
+" === ASYN-LINTER-MANAGER
+" ===
+" when to lint
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 1
+" select linters
+let g:ale_linters = {
+\   'python': ['pylint'],
+\   'c++': ['clangd'],
+\   'c': ['clangd'],
+\   'sh': ['shell'],
+\   'javascript': ['standard'],
+\   'html': ['tidy'],
+\   'css': ['stylelint'],
+\   'json': ['jsonlint'],
+\}
+" fixers used
+let g:ale_fixers = {
+\   'javascript': ['standard'],
+\}
+let g:ale_css_stylelint_options = '--config ~/.stylelintrc'
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(ale_previous_wrap)
+nmap <silent> ]g <Plug>(ale_next_wrap)
+" show detail
+nmap <Leader>d :ALEDetail<CR>
+" error sign
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+let g:ale_sign_column_always = 1
+let g:ale_fix_on_save = 0
+
+" ===
+" === AUTO FORMAT
+" ===
+nmap <leader>f :Autoformat<CR>
+
+" ===
+" === VIM WIKI
+" ===
+let wiki = {}
+let wiki.path = '~/vimwiki/'
+let wiki.nested_syntaxes = {'python': 'python', 'cpp': 'cpp', 'c': 'c'}
+let g:vimwiki_list = [wiki]
+
+" ===
+" === EMMET
+" ===
+let g:user_emmet_mode='i'

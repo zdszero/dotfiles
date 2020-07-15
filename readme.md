@@ -73,6 +73,27 @@ mkfontdir
 fc -cache -f -v
 ```
 
++ nerd fonts
+
+```python
+# Icon Patched Fonts
+awesome-terminal-fonts  # Font Awesome
+otf-font-awesome        # Font Awesome 5
+# Full Icon Support Fonts
+nerd-fonts-fira-code
+nerd-fonts-hacks
+```
+
++ ligature
+
+```
+Fira Code
+Mono Lisa
+JetBrains Mono
+DejaVu Sans Code
+Cascadia
+```
+
 ## proxy
 
 + ss-qt5
@@ -106,13 +127,11 @@ sudo pacman -S gsd-xsettings
 在setting → WorkSpace → Start and Shutdown → AutoStart
 添加Script File: Run on startup
 
-## WPS
+## libreoffice
 
-```
-ttf-wps-fonts
-wps-office-cn
-wps-office-mui-zh-cn
-```
+'''shell
+sudo pacman -S libreoffice-fresh-zh-cn
+'''
 
 ## softwares
 
@@ -120,25 +139,17 @@ wps-office-mui-zh-cn
 
 + compton | alacritty
 
-+ nm-applet
-
-+ blueman
++ nm-applet | blueman
 
 + feh | variety
-
-+ fish
 
 + nvim | code
 
 + ranger
 
-+ thefuck
-
 + yay
 
-+ ss-qt5
-
-+ proxychains-ng
++ ss-qt5 | proxychains-ng
 
 + google-chrome-stable
 
@@ -151,5 +162,3 @@ wps-office-mui-zh-cn
 + simplescreenrecorder
 
 + gimp
-
-+ libreoffice-fresh-zh-cn

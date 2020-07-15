@@ -32,8 +32,8 @@ function EV#Commander(...) abort
   endif
 
   " edit ultisnips
-  if l:arg == 's' && exists(':UltiSnipsEdit')
-    UltiSnipsEdit
+  if l:arg == 's'
+    execute 'CocCommand snippets.editSnippets'
     return 1
   endif
 
@@ -82,4 +82,3 @@ function s:FindInRTP (file) abort
   endfor
   return ''
 endfunction
-
