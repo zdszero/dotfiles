@@ -81,7 +81,7 @@
 # Font configuration
 font:
   normal:
-    family: MonoLisa
+    family: Source Code Pro
     style: Medium
 
   # bold:

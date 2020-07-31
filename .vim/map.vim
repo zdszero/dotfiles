@@ -70,7 +70,7 @@ nnoremap sh <C-w>t<C-w>K
 nnoremap se <C-w>r
 
 " terminal
-nnoremap <LEADER>t :set splitright<CR>:vsplit<CR>:term fish<CR>:vertical resize-15<CR>
+nnoremap <LEADER>t :set splitright<CR>:vsplit<CR>:term fish<CR>:vertical resize-15<CR>:set nonumber<CR>
 tnoremap jj <C-\><C-N>
 
 inoremap <C-w> <Tab>

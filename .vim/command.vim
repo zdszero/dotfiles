@@ -45,7 +45,6 @@ augroup TabTwoFiles
   autocmd FileType vim,sh,html,javascript,jst set softtabstop=2
   autocmd FileType vim,sh,html,javascript,jst set tabstop=2
   autocmd FileType vim,sh,html,javascript,jst set shiftwidth=2
-  " let g:indent_guides_enable_on_vim_startup = 0
 augroup END
 
 function! SetTabTwo () abort

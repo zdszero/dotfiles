@@ -1,3 +1,29 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 # This file contains snippets that are always defined. I personally
 # have snippets for signatures and often needed texts
 
@@ -119,64 +145,3 @@ tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
 vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
 no sea takimata sanctus est Lorem ipsum dolor sit amet.
 endsnippet
-
-snippet jt "arrow"
-→
-endsnippet
-
-snippet ep "epsilon"
-ε
-endsnippet
-
-snippet af "alpha"
-α
-endsnippet
-
-snippet bt "beta"
-β
-endsnippet
-
-snippet gm "gamma"
-γ
-endsnippet
-
-snippet di "dian"
-●
-endsnippet
-
-snippet sy "shu yu"
-∈
-endsnippet
-
-snippet bj "bing ji"
-∪
-endsnippet
-
-snippet "jiao" "jiao ji"
-∩
-endsnippet
-# A valid snippet should starts with:
-#
-#		snippet trigger_word [ "description" [ options ] ]
-#
-# and end with:
-#
-#		endsnippet
-#
-# Snippet options:
-#
-#		b - Beginning of line.
-#		i - In-word expansion.
-#		w - Word boundary.
-#		r - Regular expression
-#		e - Custom context snippet
-#		A - Snippet will be triggered automatically, when condition matches.
-#
-# Basic example:
-#
-#		snippet emitter "emitter properties" b
-#		private readonly ${1} = new Emitter<$2>()
-#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
-#		endsnippet
-#
-# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt

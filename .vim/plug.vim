@@ -59,11 +59,11 @@ colorscheme gruvbox-material
 
 " === INDENT LINE
 let g:indentLine_char = '┊'
-" let g:indentLine_char_list = ['', '¦', '┆', '┊']
 let g:indentLine_setConceal = 1
-let g:indentLine_fileTypeExclude = ['sh', 'vim', 'javascript', 'css', 'help', 'term', 'coc-explorer']
+let g:indentLine_fileTypeExclude = ['sh', 'vim', 'javascript', 'css', 'coc-explorer']
+let g:indentLine_bufTypeExclude = ['help', 'terminal']
+autocmd BufEnter *.wiki let g:indentLine_enabled=0
 nmap <leader>ig :IndentLinesToggle<CR>
-
 
 " ===
 " === COC-GENERAL-SETTING
