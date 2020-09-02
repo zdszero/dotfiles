@@ -66,8 +66,26 @@ autocmd BufEnter *.wiki let g:indentLine_enabled=0
 nmap <leader>ig :IndentLinesToggle<CR>
 
 " ===
-" === COC-GENERAL-SETTING
+" === COC
 " ===
+
+let g:coc_global_extensions = [
+  \ 'coc-clangd',
+  \ 'coc-python',
+  \ 'coc-pyright',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-emmet',
+  \ 'coc-tsserver',
+  \ 'coc-vimlsp',
+  \ 'coc-json',
+  \ 'coc-highlight',
+  \ 'coc-explorer',
+  \ 'coc-snippets' ]
+
+let g:coc_filetype_map = {
+  \ 'jst': 'html',
+  \ }
 
 nmap <silent> gD <Plug>(coc-declaration)
 nmap <silent> gd <Plug>(coc-definition)
@@ -89,6 +107,9 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 " close preview window when completion is done
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" close coc when editing text files
+autocmd BufEnter *.txt let g:coc_enabled -
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -201,6 +222,7 @@ let g:ale_fixers = {
 \   'javascript': ['standard'],
 \}
 let g:ale_css_stylelint_options = '--config ~/.stylelintrc'
+let g:ale_python_pylint_options = '--extension-pkg-whitelist=pygame'
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(ale_previous_wrap)
 nmap <silent> ]g <Plug>(ale_next_wrap)

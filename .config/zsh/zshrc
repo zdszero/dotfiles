@@ -4,11 +4,11 @@ alias lg="lazygit"
 alias scf=screenfetch
 alias sudo="sudo -E"
 alias c=clear
+alias n=nvim-qt
 alias p='proxychains'
 alias pg='proxychains wget'
 alias sup="sudo proxychains"
 alias ll="ls -l"
-alias nv="nvim"
 alias sp="pwd | xclip -i"
 alias gp='cd $(xclip -o)'
 
@@ -62,7 +62,7 @@ function mkcd {
     cd $1
 }
 
-alias r="ranger-cd"
+alias rg="ranger-cd"
 
 source ~/.config/zsh/fzf.zsh
 

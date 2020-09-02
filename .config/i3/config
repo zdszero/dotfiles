@@ -13,12 +13,12 @@ font pango:monospace 12
 #  AUTOSTART APPLICATIONS  #
 ############################
 
-exec compton
-# exec feh --bg-scale ~/Pictures/Favorite/boat_sea_view_from_above_water_119937_1920x1080.jpg
+exec --no-startup-id compton
+exec --no-startup-id dunst
 exec --no-startup-id /home/zds/.local/bin/set_wallpaper
-# exec --no-startup-id pamac-tray
-# exec --no-startup-id blueman-applet
-# exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
+exec --no-startup-id pamac-tray
+exec --no-startup-id blueman-applet
 
 #########################
 #  MY OWN KEY BINDINGS  #
@@ -41,7 +41,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
 
 # screen shot
-bindsym $mod+p exec spectacle
+bindsym $mod+p exec flameshot gui
+bindsym $mod+shift+p exec flameshot full
+
 
 # ss-qt5
 bindsym $mod+q exec ss-qt5

@@ -1,4 +1,4 @@
-GuiFont! WenQuanYi Micro Hei Mono:h16
+GuiFont! Consolas-with-Yahei:h15
 
 set mouse=a
 set linespace=2

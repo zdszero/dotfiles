@@ -3,57 +3,48 @@
 + add cn mirrors
 
 1. 切换到中国的源
-
 ```shell
 sudo pacman-mirrors -i -c China -m rank
 ```
 
 2. 查看源是否添加成功
-
 ```shell
 cat /etc/pacman.d/mirrorlist
 ```
 
 3. [optional] → 添加archilinuxcn源
-
 > ArchLinuxCN 是 Arch 中文组维护的一个软件合集，
 包含了中文用户常用的 WPS Office、搜狗拼音、Google Chrome 等软件。
 不过，Arch 本身和它的常见衍生版（如：Manjaro）默认都不包含这个源，因此我们需要手动来配置使用这个源。
 
 vim /etc/pamac.conf
-
 ```
 [archlinuxcn]
 SigLevel = Never
 Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 ```
 
-## aur
+## fcitx5拼音输入法框架
 
-aur可以使用国内镜像源，文档见 [yay](https://mirror.tuna.tsinghua.edu.cn/help/AUR/)
-
-## fcitx
-
-+ install package
-
-```
-sudo pacman -S fcitx-im fcitx-configtool
-sudo pacan -S fcitx-sunpinyin
++ install packages
+```shell
+sudo pacman -S fcitx5-im             # fcitx应用组
+sudo pacman -S fcitx5-chinese-addons # 中文输入法支持
+sudo pacman -S fcitx5-pinyin-zhwiki  # 中文字库
+sudo pacman -S fcitx5-material-color # 主题样式
 ```
 
-+ edit enviroment variables
-
-vim ~/.xprofile
-
++ edit enviroment variables to enable input method to be used in apps
+edit ~/.xprofile
+```shell
+export INPUT_METHOD=fcitx5
+export GTK_IM_MODULE=fcitx5
+export QT_IM_MODULE=fcitx5
+export XMODIFIERS="@im=fcitx5"
 ```
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS="@im=fcitx"
-```
 
-+ 添加自己的字库
-
-拷贝文件到 ~/.config/fcitx/data/QuickPhrase.mb
++ 修改配置文件
+如果是kde的话，用fcitx5-configtool进行配置，在输入法选项中添加拼音，并对插件进行配置。
 
 ## fonts
 
@@ -67,7 +58,7 @@ fc-list:lang=zh
 + install new fonts
 
 ```shell
-mkdir /usr/share/fonts/myfonts.
+mkdir /usr/share/fonts/myfonts
 mkfontscale
 mkfontdir
 fc -cache -f -v
@@ -80,18 +71,8 @@ fc -cache -f -v
 awesome-terminal-fonts  # Font Awesome
 otf-font-awesome        # Font Awesome 5
 # Full Icon Support Fonts
-nerd-fonts-fira-code
-nerd-fonts-hacks
-```
-
-+ ligature
-
-```
-Fira Code
-Mono Lisa
-JetBrains Mono
-DejaVu Sans Code
-Cascadia
+Fira Code Nerd Font
+JetBrans Mono Nerd Font
 ```
 
 ## proxy
@@ -129,9 +110,9 @@ sudo pacman -S gsd-xsettings
 
 ## libreoffice
 
-'''shell
+```shell
 sudo pacman -S libreoffice-fresh-zh-cn
-'''
+```
 
 ## softwares
 
@@ -151,7 +132,7 @@ sudo pacman -S libreoffice-fresh-zh-cn
 
 + ss-qt5 | proxychains-ng
 
-+ google-chrome-stable
++ google-chrome
 
 + deepin.com.im.qq | gsd-xsettings
 
