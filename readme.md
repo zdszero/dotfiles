@@ -49,14 +49,12 @@ export XMODIFIERS="@im=fcitx5"
 ## fonts
 
 + list current fonts
-
 ```shell
 fc-list
 fc-list:lang=zh
 ```
 
 + install new fonts
-
 ```shell
 mkdir /usr/share/fonts/myfonts
 mkfontscale
@@ -65,7 +63,6 @@ fc -cache -f -v
 ```
 
 + nerd fonts
-
 ```python
 # Icon Patched Fonts
 awesome-terminal-fonts  # Font Awesome

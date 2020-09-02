@@ -24,7 +24,8 @@ FILE_LIST = [
     '~/.config/fontconfig/fonts.conf',
     '~/.pylintrc',
     '~/.ideavimrc',
-    '~/.gitconfig'
+    '~/.gitconfig',
+    '~/.local/share/fcitx5/data/*'
 ]
 
 # create directory that doesn't exist
