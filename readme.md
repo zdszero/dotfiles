@@ -96,15 +96,6 @@ socks5 127.0.0.1:1080
 在Import | Export 中添加 restore from online: 
 [https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt](https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt)
 
-## QQ
-
-```shell
-sudo pacman -S gsd-xsettings
-```
-
-在setting → WorkSpace → Start and Shutdown → AutoStart
-添加Script File: Run on startup
-
 ## libreoffice
 
 ```shell
@@ -125,18 +116,12 @@ sudo pacman -S libreoffice-fresh-zh-cn
 
 + ranger
 
-+ yay
-
 + ss-qt5 | proxychains-ng
 
 + google-chrome
-
-+ deepin.com.im.qq | gsd-xsettings
 
 + qt5-doc | qt-creator
 
 + kolourpaint | kcolorchooser
 
 + simplescreenrecorder
-
-+ gimp

@@ -14,7 +14,7 @@
 	rs = git restore
 [diff]
 	tool = kdiff3
-[https]
-	proxy = socks5://127.0.0.1:1080
 [http]
+	proxy = socks5://127.0.0.1:1080
+[https]
 	proxy = socks5://127.0.0.1:1080

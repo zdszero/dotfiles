@@ -2,7 +2,13 @@
   "coc.preferences.diagnostic.displayByAle": true,
   "coc.preferences.colorSupport": true,
   "coc.preferences.extensionUpdateCheck": "weekly",
-  "coc.source.buffer.disableSyntaxes": ["comment", "string"],
+  "coc-actions.hideCursor": true,
+  "codeLens.enable": true,
+  "codeLens.separator": "‣",
+  "list.insertMappings": {
+    "<C-n>": "normal:j",
+    "<C-p>": "normal:k"
+  },
   "diagnostic.enable": false,
   "suggest.maxCompleteItemCount": 15,
   "suggest.completionItemKindLabels": {
@@ -32,10 +38,13 @@
     "value": "\uf89f",
     "variable": "\ue71b"
   },
+  "explorer.previewAction.onHover": false,
+  "explorer.icon.enableNerdfont": true,
   "explorer.keyMappings": {
-    "v": ["open:vsplit"]
+    "tt": "open:tab"
   },
-  "highlight.colors.enable": true,
+  "bookmark.sign": "⚑",
+  "highlight.colorNames.enable": false,
   "snippets.ultisnips.enable": true,
   "snippets.loadFromExtensions": true,
   "snippets.extends": {
@@ -43,5 +52,7 @@
     "html": ["javascript"]
   },
   "java.home": "/usr/lib/jvm/java-11-openjdk/",
-  "python.jediEnabled": false
+  "python.jediEnabled": true,
+  "leetcode.enabled": true,
+  "leetcode.language": "python3"
 }

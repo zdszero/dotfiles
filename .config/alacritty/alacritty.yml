@@ -81,8 +81,8 @@
 # Font configuration
 font:
   normal:
-    family: Source Code Pro
-    style: Medium
+    family: Consolas-with-Yahei
+    style: Regular
 
   # bold:
   #   family: Hack
@@ -103,7 +103,7 @@ font:
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
    x: 0
-   y: 0
+   y: 1
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
@@ -416,6 +416,8 @@ key_bindings:
   - { key: Add,      mods: Control,       action: IncreaseFontSize }
   - { key: Subtract, mods: Control,       action: DecreaseFontSize }
   - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  - { key: Return,   mods: Shift,         chars: "\x1b[13;2u"      }
+  - { key: Return,   mods: Control,       chars: "\x1b[13;5u"      }
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }

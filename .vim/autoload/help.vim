@@ -1,7 +1,3 @@
-" help.vim
-" command to show help window
-" Author: ZDS1999
-
 let s:History = []
 let s:HistMax = 16
 

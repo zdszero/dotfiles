@@ -16,9 +16,9 @@ font pango:monospace 12
 exec --no-startup-id compton
 exec --no-startup-id dunst
 exec --no-startup-id /home/zds/.local/bin/set_wallpaper
-exec --no-startup-id nm-applet
-exec --no-startup-id pamac-tray
-exec --no-startup-id blueman-applet
+# exec --no-startup-id nm-applet
+# exec --no-startup-id pamac-tray
+# exec --no-startup-id blueman-applet
 
 #########################
 #  MY OWN KEY BINDINGS  #
@@ -28,8 +28,8 @@ exec --no-startup-id blueman-applet
 floating_modifier $mod
 
 # terminal
-bindsym $mod+shift+Return exec alacritty
-bindsym $mod+Return exec /usr/local/bin/st -e /bin/zsh
+bindsym $mod+Return exec alacritty
+# bindsym $mod+Return exec /usr/local/bin/st -e /bin/zsh
 
 # browser
 bindsym $mod+g exec google-chrome-stable

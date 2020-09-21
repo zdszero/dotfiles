@@ -15,13 +15,13 @@ function EV#Commander(...) abort
 
   " map
   if l:arg == 'm'
-    edit ~/.vim/map.vim
+    edit ~/.vim/mapping.vim
     return 1
   endif
 
   " plugin config
   if l:arg == 'p'
-    edit ~/.vim/plug.vim
+    edit ~/.vim/plugin.vim
     return 1
   endif
 

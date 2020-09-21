@@ -11,6 +11,7 @@ alias sup="sudo proxychains"
 alias ll="ls -l"
 alias sp="pwd | xclip -i"
 alias gp='cd $(xclip -o)'
+alias lc='leetcode'
 
 # tmux
 alias t="tmux"
@@ -67,7 +68,7 @@ alias rg="ranger-cd"
 source ~/.config/zsh/fzf.zsh
 
 function dateCount {
-    target=$(date -d "2020-12-21" +"%j")
+    target=$(date -d "2020-12-26" +"%j")
     today=$(date +"%j")
     printf "%d days to graduate exam\n" $((target-today))
 }

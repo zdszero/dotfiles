@@ -7,6 +7,8 @@ iabbrev ,g >=
 iabbrev ,l <=
 autocmd FileType javascript iabbrev ,e ===
 autocmd FileType javascript iabbrev ,n !==
+autocmd FileType python iabbrev ,a and
+autocmd FileType python iabbrev ,o or
 
 noremap <c-h> 0
 noremap <c-l> $
@@ -17,8 +19,9 @@ noremap <silent> H 5h
 noremap <silent> K 7k
 noremap <silent> J 7j
 noremap <silent> L 5l
+noremap <silent> W 20j
+noremap <silent> E 20k
 nnoremap \j J
-noremap <C-u> gUiw
 noremap <LEADER><CR> :nohlsearch<CR>
 
 nmap s <nop>
@@ -28,17 +31,14 @@ nmap Q :q<CR>
 nmap <LEADER>q :q!<CR>
 nmap <leader><leader>q :bdelete %<CR>
 
-" 退出插入模式
 inoremap jj <Esc>
 inoremap <C-l> <Right>
 inoremap <C-b> <Left>
 inoremap <A-h> <Delete>
 
-vnoremap ;; <Esc>
-
 " split winodws vertically or horizontally
 nnoremap s; :set splitright<CR>:vsplit<CR>
-nnoremap sk :set splitbelow<CR>:split<CR>
+nnoremap s' :set splitbelow<CR>:split<CR>
 
 " move cursor between windows
 nnoremap <LEADER>; <C-w>l
@@ -53,7 +53,6 @@ nnoremap <left> :vertical resize-5<CR>
 nnoremap <right> :vertical resize+5<CR>
 
 " tab
-nnoremap tn :tabnew %<CR>
 nnoremap tc :tabclose<CR>
 " switch between tabs
 nnoremap t; :tabnext<CR>
@@ -70,7 +69,7 @@ nnoremap sh <C-w>t<C-w>K
 nnoremap se <C-w>r
 
 " terminal
-nnoremap <LEADER>t :set splitright<CR>:vsplit<CR>:term fish<CR>:vertical resize-15<CR>:set nonumber<CR>
+nnoremap <LEADER>t :set splitright<CR>:vsplit<CR>:term fish<CR>:vertical resize-15<CR>:set nonumber<CR>:setlocal statusline=terminal<CR>
 tnoremap jj <C-\><C-N>
 
 inoremap <C-w> <Tab>

@@ -24,44 +24,39 @@
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
-snippet log "console.log" b
-console.log($1)$0
+snippet cl "class .. (class)"
+class ${1:`!p snip.rv = snip.basename or "name"`}
+{
+public:
+	${1/(\w+).*/$1/} (${2:arguments});
+	virtual ~${1/(\w+).*/$1/} ();
+
+private:
+	${0:/* data */}
+};
 endsnippet
 
-snippet if "if" b
-if ($1) {
+snippet ns "namespace .. (namespace)"
+namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`}
+{
+	${VISUAL}$0
+}${1/.+/ \/* /m}$1${1/.+/ *\/ /m}
+endsnippet
+
+snippet tp "template <typename ..> (template)"
+template <typename ${1:_InputIter}>
+endsnippet
+
+snippet map "std::map (map)"
+std::map<${1:key}, ${2:value}> map$0;
+endsnippet
+
+snippet vec "std::vector (v)"
+std::vector<${1:char}> v$0;
+endsnippet
+
+snippet st "struct" b
+struct $1 {
 	$2
-}$0
-endsnippet
-
-snippet elif "else if" w
-else if ($1) {
-	$2
-}$0
-endsnippet
-
-snippet el "else" w
-else ($1) {
-	$2
-}$0
-endsnippet
-
-snippet lam "lambda multiple line" w
-($1) => {
-	$2
-}$0
-endsnippet
-
-snippet la "lambda one line" w
-($1) => { $2 }$0
-endsnippet
-
-snippet fn "function" b
-function ${1:name} (${2:parameters}) {
-	$3
-}$0
-endsnippet
-
-snippet re "require nodejs" b
-var ${1:name} = require('${2:module}')$0
+};$0
 endsnippet

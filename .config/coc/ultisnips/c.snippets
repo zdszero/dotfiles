@@ -1,6 +1,30 @@
-###########################################################################
-#                            TextMate Snippets                            #
-###########################################################################
+# vim:ft=snippets:
+
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
 priority -50
 
@@ -54,7 +78,13 @@ int main()
 endsnippet
 
 snippet for "for loop (for)"
-for (int ${1:i} = ${2:0}; $1 < ${3:count}; ++$1) {
+for (int ${1:i} = ${2:0}; $1 < ${3:count}; $1++) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet fr "for loop (for)"
+for (int ${1:i} = ${2:0}; $1 >= ${3:count}; $1--) {
 	${VISUAL}${0}
 }
 endsnippet
@@ -132,7 +162,7 @@ case ${1:/* condition */}:
 	break;
 endsnippet
 
-snippet d "case"
+snippet d "default"
 default:
 	${1}
 	break;
@@ -146,50 +176,8 @@ if (${1:/* condition */}) {
 }
 endsnippet
 
-snippet pf "printf .. (printf)"
-printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
-endsnippet
-
-snippet st "struct"
-struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`} {
-	${0:/* data */}
-};
-endsnippet
-
-snippet fun "function" b
+snippet fn "function" b
 ${1:void} ${2:function_name}(${3}) {
 	${VISUAL}${0}
 }
 endsnippet
-
-snippet fund "function declaration" b
-${1:void} ${2:function_name}(${3});
-endsnippet
-
-# vim:ft=snippets:
-
-# A valid snippet should starts with:
-#
-#		snippet trigger_word [ "description" [ options ] ]
-#
-# and end with:
-#
-#		endsnippet
-#
-# Snippet options:
-#
-#		b - Beginning of line.
-#		i - In-word expansion.
-#		w - Word boundary.
-#		r - Regular expression
-#		e - Custom context snippet
-#		A - Snippet will be triggered automatically, when condition matches.
-#
-# Basic example:
-#
-#		snippet emitter "emitter properties" b
-#		private readonly ${1} = new Emitter<$2>()
-#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
-#		endsnippet
-#
-# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt

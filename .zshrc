@@ -4,7 +4,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/zds/.oh-my-zsh"
 
-ZSH_THEME="cloud"
+ZSH_THEME="jnrowe"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

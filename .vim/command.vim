@@ -2,49 +2,43 @@ command! -nargs=? EV call EV#Commander(<f-args>)
 
 command! PrintRTP call printer#PrintRTP()
 
-command! G execute '!google-chrome-stable %'
+command! Go execute '!google-chrome-stable %'
 
-augroup MarkdownShortcut
+augroup MarkDownOptions
   autocmd!
   autocmd Filetype markdown inoremap ,f <Esc>/<++><CR>:nohlsearch<CR>d4li
+  autocmd FileType markdown inoremap ,i ** <++><Esc>F*i
+  autocmd FileType markdown inoremap ,b **** <++><Esc>F*;i
+  autocmd FileType markdown inoremap ,n ****** <++><Esc>F*;;i
+  autocmd FileType markdown inoremap ,s ~~~~ <++><Esc>F~;i
+  autocmd FileType markdown inoremap ,t - [ ] 
+  autocmd FileType markdown inoremap ,h ------<Enter><Enter>
+  autocmd FileType markdown inoremap ,l [](<++>)<Esc>F]i
+  autocmd FileType markdown inoremap ,p ![](<++>)<Esc>F]i
+  autocmd FileType markdown inoremap ,c ```<Enter><++><Enter>```<Esc>kkA
+  autocmd FileType markdown inoremap ,v `` <++><Esc>F`i
   autocmd Filetype markdown inoremap ,1 #<Space><Enter><Enter><++><Esc>2kA
   autocmd Filetype markdown inoremap ,2 ##<Space><Enter><Enter><++><Esc>2kA
   autocmd Filetype markdown inoremap ,3 ###<Space><Enter><Enter><++><Esc>2kA
   autocmd Filetype markdown inoremap ,4 ####<Space><Enter><Enter><++><Esc>2kA
   autocmd Filetype markdown inoremap ,5 #####<Space><Enter><Enter><++><Esc>2kA
   autocmd Filetype markdown inoremap ,6 ######<Space><Enter><Enter><++><Esc>2kA
+  autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+  autocmd FileType markdown set conceallevel=2
 augroup END
 
-augroup WikiShortcut
-  autocmd!
-  autocmd BufEnter *.wiki inoremap ,f <Esc>/<++><CR>:nohlsearch<CR>d4li
-  autocmd BufEnter *.wiki inoremap ,1 =<space><++><space>=<Enter><Enter><++><Esc>2kI
-  autocmd BufEnter *.wiki inoremap ,2 ==<space><++><space>==<Enter><Enter><++><Esc>2kI
-  autocmd BufEnter *.wiki inoremap ,3 ===<space><++><space>===<Enter><Enter><++><Esc>2kI
-  autocmd BufEnter *.wiki inoremap ,4 ====<space><++><space>====<Enter><Enter><++><Esc>2kI
-  autocmd BufEnter *.wiki inoremap ,5 =====<space><++><space>=====<Enter><Enter><++><Esc>2kI
-  autocmd BufEnter *.wiki inoremap ,6 ======<space><++><space>======<Enter><Enter><++><Esc>2kI
-  autocmd BufEnter *.wiki inoremap ,b ** <++><Esc>F*i
-  autocmd BufEnter *.wiki inoremap ,i __ <++><Esc>F_i
-  autocmd BufEnter *.wiki inoremap ,s ~~~~ <++><Esc>F~;i
-  autocmd BufEnter *.wiki inoremap ,l [[]] <++><Esc>F];i
-  autocmd BufEnter *.wiki inoremap ,h ----<Enter><Enter>
-  autocmd BufEnter *.wiki inoremap ,c {{{<Enter><++><Enter>}}}<Esc>2kA
-  autocmd BufEnter *.wiki nmap <leader>wa :VimwikiAll2HTML<CR>
-augroup END
-
-augroup HTMLShortCut
+augroup HTMLOptions
   autocmd!
   au BufEnter *.ejs set filetype=html
-  au BufEnter *.html :syntax sync fromstart
   au BufEnter *.ejs :syntax sync fromstart
+  au BufEnter *.html :syntax sync fromstart
 augroup END
 
-augroup TabTwoFiles
+augroup TabTwoSpaces
   autocmd!
-  autocmd FileType vim,sh,html,javascript,jst set softtabstop=2
-  autocmd FileType vim,sh,html,javascript,jst set tabstop=2
-  autocmd FileType vim,sh,html,javascript,jst set shiftwidth=2
+  autocmd FileType vim,sh,html,javascript,json set softtabstop=2
+  autocmd FileType vim,sh,html,javascript,json set tabstop=2
+  autocmd FileType vim,sh,html,javascript,json set shiftwidth=2
 augroup END
 
 function! SetTabTwo () abort
