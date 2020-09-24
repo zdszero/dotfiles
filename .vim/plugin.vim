@@ -1,31 +1,24 @@
 call plug#begin('~/.vim/plugged')
 
-"<HIGHLIGHT>
 Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot'
-"<COLORSCHEME>
 Plug 'liuchengxu/eleline.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/edge'
 Plug 'sainnhe/forest-night'
 Plug 'mhinz/vim-startify'
-"<COMPLETION>
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"<FAST-EDIT>
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/vim-easy-align'
-Plug 'nelstrom/vim-visual-star-search'
 Plug 'mattn/emmet-vim'
-"<CODE-HELP>
 Plug 'liuchengxu/vista.vim'
 Plug 'dense-analysis/ale'
-Plug 'Chiel92/vim-autoformat'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'ferrine/md-img-paste.vim'
+Plug 'sbdchd/neoformat'
 
 call plug#end()
 
@@ -132,8 +125,6 @@ nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<C
 augroup CocOptions
   autocmd!
   autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
-  autocmd BufEnter *.txt execute 'silent! CocDisable'
-  autocmd BufLeave *.txt execute 'silent! CocEnable'
 augroup END
 
 command! -nargs=0 Format :call CocAction('format')
@@ -199,9 +190,9 @@ let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                AUTO-FORMAT                                 "
+"                                  NEOFORMAT                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>f :Autoformat<CR>
+map <leader>f :NeoFormat<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 EMMET                                      "
@@ -221,3 +212,6 @@ nmap [h <Plug>(GitGutterPrevHunk)
 "                                VISTA                                       "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'coc'
+let g:vista_close_on_jump=0
+let g:vista_echo_cursor_strategy='floating_win'

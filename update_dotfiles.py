@@ -25,7 +25,8 @@ FILE_LIST = [
     '~/.pylintrc',
     '~/.ideavimrc',
     '~/.gitconfig',
-    '~/.local/share/fcitx5/data/*'
+    '~/.local/share/fcitx5/data/*',
+    '~/.config/rofi/*'
 ]
 
 # create directory that doesn't exist

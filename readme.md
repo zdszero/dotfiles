@@ -1,6 +1,6 @@
 ## pacman
 
-+ add cn mirrors
++ 添加中国源
 
 1. 切换到中国的源
 ```shell
@@ -48,12 +48,6 @@ export XMODIFIERS="@im=fcitx5"
 
 ## fonts
 
-+ list current fonts
-```shell
-fc-list
-fc-list:lang=zh
-```
-
 + install new fonts
 ```shell
 mkdir /usr/share/fonts/myfonts
@@ -64,12 +58,9 @@ fc -cache -f -v
 
 + nerd fonts
 ```python
-# Icon Patched Fonts
-awesome-terminal-fonts  # Font Awesome
-otf-font-awesome        # Font Awesome 5
-# Full Icon Support Fonts
 Fira Code Nerd Font
 JetBrans Mono Nerd Font
+Cascadia Nerd Font
 ```
 
 ## proxy
@@ -96,32 +87,34 @@ socks5 127.0.0.1:1080
 在Import | Export 中添加 restore from online: 
 [https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt](https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt)
 
-## libreoffice
+### terminal
 
-```shell
-sudo pacman -S libreoffice-fresh-zh-cn
+```
+alacritty   st   compton   ranger
 ```
 
-## softwares
+### windows manager
 
-+ i3gaps | i3status-rust | j4-denu-desktop-git
+```
+i3gaps   i3status-rust   rofi   papirus-icon-theme
+feh
+```
 
-+ compton | alacritty
+### code editor
 
-+ nm-applet | blueman
+```
+nvim   code
+```
 
-+ feh | variety
+### programming tools
 
-+ nvim | code
+```
+qt-creator   qt5-doc
+```
 
-+ ranger
+### tools
 
-+ ss-qt5 | proxychains-ng
-
-+ google-chrome
-
-+ qt5-doc | qt-creator
-
-+ kolourpaint | kcolorchooser
-
-+ simplescreenrecorder
+```
+ss-qt5   proxychains-ng   simplescreenrecorder
+libreoffice-fresh-zh-cn
+```

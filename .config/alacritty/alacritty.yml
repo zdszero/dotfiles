@@ -81,7 +81,7 @@
 # Font configuration
 font:
   normal:
-    family: Consolas-with-Yahei
+    family: Consolas Nerd Font Mono
     style: Regular
 
   # bold:

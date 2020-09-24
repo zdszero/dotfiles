@@ -38,7 +38,7 @@ bindsym $mod+g exec google-chrome-stable
 bindsym $mod+Shift+q kill
 
 # dmenu
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
+bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # screen shot
 bindsym $mod+p exec flameshot gui
@@ -252,13 +252,5 @@ for_window [window_role="About"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-# qq floating
-for_window [instance="QQ.exe"] floating enable
-for_window [instance="QQ.exe"] border none
-
-# tim floating 
-for_window [instance="Tim.exe"] floating enable
-for_window [instance="Tim.exe"] floating enable
-
 # telegram floating
-for_window [instance="telegram"] floating enable
+for_window [instance="telegram-desktop"] floating enable

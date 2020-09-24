@@ -17,6 +17,8 @@ augroup MarkDownOptions
   autocmd FileType markdown inoremap ,p ![](<++>)<Esc>F]i
   autocmd FileType markdown inoremap ,c ```<Enter><++><Enter>```<Esc>kkA
   autocmd FileType markdown inoremap ,v `` <++><Esc>F`i
+  autocmd FileType markdown inoremap ,m $  $ <++><Esc>F$hi
+  autocmd FileType markdown inoremap ,, $$  $$ <++><Esc>F$;hi
   autocmd Filetype markdown inoremap ,1 #<Space><Enter><Enter><++><Esc>2kA
   autocmd Filetype markdown inoremap ,2 ##<Space><Enter><Enter><++><Esc>2kA
   autocmd Filetype markdown inoremap ,3 ###<Space><Enter><Enter><++><Esc>2kA

@@ -52,7 +52,7 @@
     "html": ["javascript"]
   },
   "java.home": "/usr/lib/jvm/java-11-openjdk/",
-  "python.jediEnabled": true,
+  "python.jediEnabled": false,
   "leetcode.enabled": true,
   "leetcode.language": "python3"
 }
