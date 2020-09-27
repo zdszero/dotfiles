@@ -11,6 +11,7 @@
   },
   "diagnostic.enable": false,
   "suggest.maxCompleteItemCount": 15,
+  "suggest.removeDuplicateItems": true,
   "suggest.completionItemKindLabels": {
     "class": "\uf0e8",
     "color": "\ue22b",
@@ -51,8 +52,7 @@
     "cpp": ["c"],
     "html": ["javascript"]
   },
-  "java.home": "/usr/lib/jvm/java-11-openjdk/",
-  "python.jediEnabled": false,
+  "python.jediEnabled": true,
   "leetcode.enabled": true,
   "leetcode.language": "python3"
 }

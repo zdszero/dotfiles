@@ -59,6 +59,7 @@ for_window[instance="^floatterm.*"] scratchpad show
 for_window[instance="^floatterm.*"] resize set 1200 900
 for_window[instance="^floatterm.*"] move position center
 for_window[instance="^floatterm.*"] border pixel 3
+for_window[instance="^term_nvim"] resize shrink width 200 px
 
 ############################
 #  AUTOSTART APPLICATIONS  #
@@ -78,6 +79,7 @@ floating_modifier $mod
 # terminal
 bindsym $mod+Return exec --no-startup-id $term
 bindsym $mod+Shift+Return exec --no-startup-id $term --working-directory $(cat /tmp/workingdir)
+bindsym $mod+o exec --no-startup-id $term --class term_nvim --working-directory $(cat /tmp/workingdir)
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -101,8 +103,6 @@ bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
-bindsym $mod+o focus parent
-bindsym $mod+Shift+o focus parent
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
@@ -232,3 +232,6 @@ bar {
         # status_command i3status --config ~/.config/i3status/config
         tray_output primary
 }
+
+# Toggle between dock mode and hide mode
+bindsym $mod+b bar mode toggle

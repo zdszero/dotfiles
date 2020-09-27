@@ -4,14 +4,13 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/zds/.oh-my-zsh"
 
-ZSH_THEME="jnrowe"
+ZSH_THEME="norm"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
 # If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=("cloud", "robbyrussell", "frontcube", "intheloop", "candy-kingdom", "norm", "fino", 
-# "jnrowe")
+# ZSH_THEME_RANDOM_CANDIDATES=("cloud", "robbyrussell", "frontcube", "norm", "fino", "jnrowe")
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -72,7 +71,7 @@ plugins=(
     z
     zsh-autosuggestions
     zsh-syntax-highlighting
-    # zsh-interactive-cd
+    zsh-interactive-cd
 )
 
 source $ZSH/oh-my-zsh.sh
