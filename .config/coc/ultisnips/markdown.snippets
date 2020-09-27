@@ -30,7 +30,7 @@ priority -50
 # Text formatting #
 ###################
 
-snippet '(?<!\\)([0-9])([0-9])tb' "new table" r
+snippet '(?<!\\)([0-9])([0-9])tb' "new table row and col" r
 $1`!p 
 x=match.group(1)
 y=match.group(2)
@@ -46,25 +46,65 @@ snip.rv=out
 `$0
 endsnippet
 
-snippet frac "fraction"
+snippet frac "fraction" i
 \frac{$1}{$2}$0
 endsnippet
 
-snippet sum "sum"
+snippet sum "sum" i
 \sum={${1:n}=${2:0}^${3:\infty} $0}
 endsnippet
 
-snippet lim "limitation"
+snippet prod "production" i
+\prod={${1:n}=${2:0}^${3:\infty} $0}
+endsnippet
+
+snippet lim "limitation" i
 \lim\limits_{${1:x} \to ${2:\infty}} $0
 endsnippet
 
-snippet matrix "matrix"
-	\begin{matrix}
-	$1
-	\end{matrix}
+snippet int "integral" i
+\int_{$1}^{$2} ${3:f(x)dx}
 endsnippet
 
-snippet cases "piecewise function"
+snippet upper "upper" i
+\left \lceil $1 \right \rceil$0
+endsnippet
+
+snippet floor "floor" i
+\left \lfloor $1 \right \rfloor$0
+endsnippet
+
+snippet part "partial" i
+\frac{\partial $1}{\partial $2}$0
+endsnippet
+
+snippet abs "absolute" i
+\lvert $1 \rvert$0
+endsnippet
+
+snippet norm "norm" i
+\lVert $1 \rVert$0
+endsnippet
+
+snippet matrix "matrix" i
+	\begin{pmatrix}
+	$1
+	\end{pmatrix}
+endsnippet
+
+snippet align "align" b
+$$
+\begin{align}
+$1
+\end{align}
+$$$0
+endsnippet
+
+snippet trans "transportation" i
+\vec ${1:x}^{\mathrm{T}}$0
+endsnippet
+
+snippet cases "piecewise function" i
 	\begin{cases}
 	$1
 	\end{cases}

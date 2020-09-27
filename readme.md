@@ -1,4 +1,4 @@
-## pacman
+### pacman
 
 + 添加中国源
 
@@ -24,7 +24,7 @@ SigLevel = Never
 Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 ```
 
-## fcitx5拼音输入法框架
+### fcitx5拼音输入法框架
 
 + install packages
 ```shell
@@ -46,7 +46,7 @@ export XMODIFIERS="@im=fcitx5"
 + 修改配置文件
 如果是kde的话，用fcitx5-configtool进行配置，在输入法选项中添加拼音，并对插件进行配置。
 
-## fonts
+### fonts
 
 + install new fonts
 ```shell
@@ -63,7 +63,7 @@ JetBrans Mono Nerd Font
 Cascadia Nerd Font
 ```
 
-## proxy
+### proxy
 
 + ss-qt5
 
@@ -115,6 +115,8 @@ qt-creator   qt5-doc
 ### tools
 
 ```
-ss-qt5   proxychains-ng   simplescreenrecorder
-libreoffice-fresh-zh-cn
+simplescreenrecorder   libreoffice-fresh-zh-cn
+tealdeer(tldr)   graphviz(dot)
+pandoc   fzf
+cowsay   fortune
 ```

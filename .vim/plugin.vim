@@ -2,11 +2,11 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot'
-Plug 'liuchengxu/eleline.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/edge'
 Plug 'sainnhe/forest-night'
 Plug 'mhinz/vim-startify'
+Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
@@ -41,6 +41,20 @@ let g:indentLine_setConceal = 2
 let g:indentLine_fileTypeExclude = ['markdown', 'sh', 'vim', 'javascript', 'css', 'coc-explorer']
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 nmap <leader>ig :IndentLinesToggle<CR>
+
+let g:lightline = {
+\ 'colorscheme': 'wombat',
+\ 'active': {
+\   'left': [ [ 'mode', 'paste' ],
+\             [ 'filename', 'readonly', 'modified', 'gitbranch' ,'cocstatus' ] ]
+\ },
+\ 'component_function': {
+\   'cocstatus': 'coc#status',
+\   'gitbranch': 'FugitiveHead'
+\ },
+\ 'separator': { 'left': '', 'right': '' },
+\ 'subseparator': { 'left': '', 'right': '' }
+\ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 COC                                        "
@@ -106,7 +120,7 @@ inoremap <silent><expr> <s-cr> "\<C-g>u\<CR>"
 " coc snippet mapping
 imap ;<tab> <Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
-let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<s-tab>'
 " coc explorer mapping
 nmap <silent> <leader>e :CocCommand explorer --sources file+ --preset simplify --quit-on-open<CR>
@@ -184,15 +198,16 @@ nmap <silent> gj <Plug>(ale_next_wrap)
 " show detail
 nmap <Leader>d :ALEDetail<CR>
 " error sign
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '>>'
 let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  NEOFORMAT                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>f :NeoFormat<cr>
+map <leader>f :Neoformat<cr>
+let g:neoformat_enabled_python = ['autopep8', 'yapf']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 EMMET                                      "

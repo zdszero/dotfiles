@@ -67,10 +67,12 @@ ZSH_THEME="jnrowe"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     extract
+    fzf
     sudo
     z
     zsh-autosuggestions
     zsh-syntax-highlighting
+    # zsh-interactive-cd
 )
 
 source $ZSH/oh-my-zsh.sh
