@@ -6,6 +6,8 @@ FILE_LIST = [
     # i3wm
     '~/.config/i3/*',
     '~/.config/i3status/config',
+    # polybar
+    '~/.config/polybar/*',
     # alacritty
     '~/.config/alacritty/alacritty.yml',
     # ranger

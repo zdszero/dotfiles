@@ -1,7 +1,6 @@
 alias zshconfig="nvim ~/.config/zsh/zshrc"
 alias lg="lazygit"
 
-alias scf=screenfetch
 alias sudo="sudo -E"
 alias c=clear
 alias n=nvim

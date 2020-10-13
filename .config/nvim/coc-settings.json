@@ -3,15 +3,15 @@
   "coc.preferences.colorSupport": true,
   "coc.preferences.extensionUpdateCheck": "weekly",
   "coc-actions.hideCursor": true,
-  "codeLens.enable": true,
+  "highlight.disableLanguages": ["markdown"],
+  "codeLens.enable": false,
   "codeLens.separator": "‣",
-  "list.insertMappings": {
-    "<C-n>": "normal:j",
-    "<C-p>": "normal:k"
-  },
   "diagnostic.enable": false,
-  "suggest.maxCompleteItemCount": 15,
+  "suggest.minTriggerInputLength": 2,
+  "suggest.maxCompleteItemCount": 10,
   "suggest.removeDuplicateItems": true,
+  "suggest.enablePreview": true,
+  "suggest.noselect": true,
   "suggest.completionItemKindLabels": {
     "class": "\uf0e8",
     "color": "\ue22b",
@@ -42,17 +42,29 @@
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableNerdfont": true,
   "explorer.keyMappings": {
-    "tt": "open:tab"
+    "<c-t>": "open:tab",
+    "<c-v>": "open:vsplit",
+    "<c-h>": "open:split"
   },
   "bookmark.sign": "⚑",
   "highlight.colorNames.enable": false,
   "snippets.ultisnips.enable": true,
-  "snippets.loadFromExtensions": true,
+  "snippets.loadFromExtensions": false,
   "snippets.extends": {
     "cpp": ["c"],
     "html": ["javascript"]
   },
   "python.jediEnabled": true,
-  "leetcode.enabled": true,
-  "leetcode.language": "python3"
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
+    }
+  }
 }

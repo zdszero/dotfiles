@@ -1,12 +1,8 @@
 [theme]
-name = "slick"
+name = "plain"
 
 [icons]
 name = "awesome"
-
-[[block]]
-block = "music"
-buttons = ["play", "next"]
 
 [[block]]
 block = "net"

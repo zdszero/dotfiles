@@ -1,5 +1,5 @@
 export FZF_DEFAULT_OPTS='--reverse --border'
-export FZF_DEFAULT_COMMAND='fd -t f -H'
+export FZF_DEFAULT_COMMAND='fd -t f'
 export FZF_COMPLETION_TRIGGER='\'
 export FZF_TMUX=1
 export FZF_TMUX_HEIGHT='40%'

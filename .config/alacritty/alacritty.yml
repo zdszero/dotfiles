@@ -103,7 +103,7 @@ font:
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
    x: 0
-   y: 1
+   y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
@@ -200,14 +200,14 @@ background_opacity: 0.7
 # Allow terminal applications to change Alacritty's window title.
 #dynamic_title: true
 
-#cursor:
+cursor:
   # Cursor style
   #
   # Values for `style`:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  #style: Block
+  style: Block
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -416,8 +416,14 @@ key_bindings:
   - { key: Add,      mods: Control,       action: IncreaseFontSize }
   - { key: Subtract, mods: Control,       action: DecreaseFontSize }
   - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  - { key: P,        mods: Control|Shift, action: ScrollPageUp     }
+  - { key: N,        mods: Control|Shift, action: ScrollPageDown   }
+  - { key: K,        mods: Control|Shift, action: ScrollLineUp     }
+  - { key: J,        mods: Control|Shift, action: ScrollPageDown   }
   - { key: Return,   mods: Shift,         chars: "\x1b[13;2u"      }
   - { key: Return,   mods: Control,       chars: "\x1b[13;5u"      }
+  - { key: Comma,    mods: Control,       chars: "\x1b[44;5u"      }
+  - { key: Period,   mods: Control,       chars: "\x1b[46;5u"      }
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }

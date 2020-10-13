@@ -71,7 +71,6 @@ plugins=(
     z
     zsh-autosuggestions
     zsh-syntax-highlighting
-    zsh-interactive-cd
 )
 
 source $ZSH/oh-my-zsh.sh

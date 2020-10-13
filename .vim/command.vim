@@ -4,6 +4,9 @@ command! PrintRTP call printer#PrintRTP()
 
 command! Go execute '!google-chrome-stable %'
 
+command! All execute 'normal ggVG'
+command! AllCopy execute 'normal ggVG"+y'
+
 augroup MarkDownOptions
   autocmd!
   autocmd Filetype markdown inoremap ,f <Esc>/<++><CR>:nohlsearch<CR>d4li
@@ -17,8 +20,8 @@ augroup MarkDownOptions
   autocmd FileType markdown inoremap ,p ![](<++>)<Esc>F]i
   autocmd FileType markdown inoremap ,c ```<Enter><++><Enter>```<Esc>kkA
   autocmd FileType markdown inoremap ,v `` <++><Esc>F`i
-  autocmd FileType markdown inoremap ,m $  $ <++><Esc>F$hi
-  autocmd FileType markdown inoremap ,, $$  $$ <++><Esc>F$;hi
+  autocmd FileType markdown inoremap ,m $$ <++><Esc>F$i
+  autocmd FileType markdown inoremap ,, $$$$ <++><Esc>F$;i
   autocmd Filetype markdown inoremap ,1 #<Space><Enter><Enter><++><Esc>2kA
   autocmd Filetype markdown inoremap ,2 ##<Space><Enter><Enter><++><Esc>2kA
   autocmd Filetype markdown inoremap ,3 ###<Space><Enter><Enter><++><Esc>2kA
@@ -38,9 +41,9 @@ augroup END
 
 augroup TabTwoSpaces
   autocmd!
-  autocmd FileType vim,sh,html,javascript,json set softtabstop=2
-  autocmd FileType vim,sh,html,javascript,json set tabstop=2
-  autocmd FileType vim,sh,html,javascript,json set shiftwidth=2
+  autocmd FileType c,cpp,vim,sh,html,javascript,json set softtabstop=2
+  autocmd FileType c,cpp,vim,sh,html,javascript,json set tabstop=2
+  autocmd FileType c,cpp,vim,sh,html,javascript,json set shiftwidth=2
 augroup END
 
 function! SetTabTwo () abort
@@ -57,3 +60,26 @@ endfunction
 
 command! Tab2 call SetTabTwo()
 command! Tab4 call SetTabFour()
+
+let g:input_toggle = 0
+function! Fcitx2en()
+   let s:input_status = system("fcitx5-remote")
+   if s:input_status == 2
+      let g:input_toggle = 1
+      let l:a = system("fcitx5-remote -c")
+   endif
+endfunction
+
+function! Fcitx2zh()
+   let s:input_status = system("fcitx5-remote")
+   if s:input_status != 2 && g:input_toggle == 1
+      let l:a = system("fcitx5-remote -o")
+      let g:input_toggle = 0
+   endif
+endfunction
+
+" set timeoutlen=150
+" set input method to en when leaving insert mode
+autocmd InsertLeave * call Fcitx2en()
+" reset original input method when entering insert mode
+autocmd InsertEnter * call Fcitx2zh()
