@@ -1,6 +1,8 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'mhinz/vim-startify'
+Plug 'luochen1990/rainbow'
+Plug 'kshenoy/vim-signature'
 Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/edge'
@@ -17,11 +19,9 @@ Plug 'junegunn/vim-easy-align'
 Plug 'mattn/emmet-vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'dense-analysis/ale'
+Plug 'sbdchd/neoformat'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'sbdchd/neoformat'
-Plug 'luochen1990/rainbow'
-Plug 'kshenoy/vim-signature'
 
 call plug#end()
 
@@ -31,12 +31,12 @@ call plug#end()
 set t_Co=256
 " edge
 let g:edge_style='aura' " edge aura default
-let g:edge_transparent_background=0
-let g:edge_enable_italic=0 " italic keywords
+let g:edge_transparent_background = 0
+let g:edge_enable_italic = 0 " italic keywords
 let g:edge_disable_italic_comment = 1
 " gruvbox
 let g:gruvbox_material_background = 'soft' " hard medium soft
-let g:gruvbox_material_transparent_background=0
+let g:gruvbox_material_transparent_background = 0
 let g:gruvbox_material_enable_italic = 0
 let g:gruvbox_material_disable_italic_comment = 1
 " sonokai
@@ -44,7 +44,8 @@ let g:sonokai_style = 'maia' " maia shusia andromeda atlantis default
 let g:sonokai_enable_italic = 0
 let g:sonokai_disable_italic_comment = 1
 " forest night
-let g:forest_night_enable_italic = 1
+let g:forest_night_transparent_background = 0
+let g:forest_night_enable_italic = 0
 let g:forest_night_disable_italic_comment = 1
 
 " dark light
@@ -57,7 +58,7 @@ let g:rainbow_active = 1
 let g:indentLine_char = '┆'
 let g:indentLine_setConceal = 2
 let g:indentLine_faster = 1
-let g:indentLine_fileTypeExclude = ['startify', 'help', 'markdown', 'sh', 'vim', 'javascript', 'css', 'coc-explorer']
+let g:indentLine_fileTypeExclude = ['startify', 'help', 'markdown', 'sh', 'vim', 'javascript', 'css', 'coc-explorer', 'c', 'cpp']
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 nmap <leader>ig :IndentLinesToggle<CR>
 
@@ -109,14 +110,19 @@ let g:coc_filetype_map = {
   \ }
 
 let g:coc_explorer_global_presets = {
-\   'floating': {
+\   'wiki': {
+\      'root-uri': '~/Wiki',
 \      'position': 'floating'
 \   },
 \   'simplify': {
-\     'file-child-template': '[git | 2] [selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\     'file-child-template': '[git | 2] [selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]',
+\     'width': 30
 \   }
 \ } 
 
+" coc explorer mapping
+nmap <silent> <leader>e :CocCommand explorer --sources file+ --preset simplify --quit-on-open<CR>
+nmap <silent> <leader>w :CocCommand explorer --sources file+ --preset wiki --quit-on-open<CR>
 " coc general mapping
 nmap <silent> gD <Plug>(coc-declaration)
 nmap <silent> gd <Plug>(coc-definition)
@@ -139,20 +145,18 @@ nnoremap <silent> sl :CocList lines<CR>
 nnoremap <silent> ss :CocList symbols<CR>
 " search words
 nnoremap <silent> sw :CocList words<CR>
+" search by grep
+nnoremap <silent> sg :CocList grep<CR>
 " coc snippet mapping
 inoremap <silent><expr> <TAB>
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ pumvisible() ? coc#_select_confirm() :
       \ "\<TAB>"
 inoremap <silent><expr> <c-z> coc#refresh()
-inoremap <silent><expr> <cr>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ "\<cr>"
 let g:coc_snippet_next = '<tab>'
 let g:coc_snippet_prev = '<s-tab>'
 vmap <C-a> <Plug>(coc-snippets-select)
 xmap <leader>x <Plug>(coc-convert-snippet)
-" coc explorer mapping
-nmap <silent> <leader>e :CocCommand explorer --sources file+ --preset simplify --quit-on-open<CR>
 " coc bookmark mapping
 nmap <c-b>b <Plug>(coc-bookmark-toggle)
 nmap <c-b>j <Plug>(coc-bookmark-next)
@@ -200,10 +204,10 @@ map sk <Plug>(easymotion-k)
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 1
+let g:ale_lint_on_enter = 0
 let g:ale_linters = {
 \   'python': ['pylint'],
-\   'c++': ['gcc'],
+\   'cpp': ['g++'],
 \   'c': ['gcc'],
 \   'sh': ['shell'],
 \   'javascript': ['standard'],
@@ -231,7 +235,8 @@ let g:ale_fix_on_save = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  NEOFORMAT                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>f :Neoformat<cr>
+nmap <leader>f :Neoformat<cr>
+autocmd FileType javascript nmap <leader>f :ALEFix<CR>
 " Enable alignment
 let g:neoformat_basic_format_align = 1
 " Enable tab to spaces conversion

@@ -12,6 +12,8 @@ FILE_LIST = [
     '~/.config/alacritty/alacritty.yml',
     # ranger
     '~/.config/ranger/*',
+    # vifm
+    '~/.config/vifm/*',
     # vim
     '~/.config/nvim/*',
     '~/.vim/*.vim',

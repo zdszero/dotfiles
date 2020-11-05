@@ -1,0 +1,428 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'B
+	/home/zds/.local/bin
+	..
+1604569438
+'C
+	/home/zds/.config
+	..
+1604569264
+'W
+	/home/zds/Wiki
+	Politics
+1604570791
+'b
+	/home/zds/bin/
+	..
+1604570833
+'d
+	/home/zds/Documents/dotfiles
+	..
+1604569996
+'h
+	/home/zds/
+	..
+1604569626
+
+# Bookmarks:
+
+# TUI:
+al
+q0
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/home/zds
+	Wiki
+11
+d/home/zds/Wiki
+	Math
+4
+d/home/zds/Wiki/Math
+	geometry.md
+2
+d/home/zds/Wiki
+	Math
+4
+d/home/zds/Wiki/Math
+	geometry.md
+2
+d/home/zds/Wiki
+	Politics
+5
+d/home/zds/Wiki/Politics
+	唯物辩证法.md
+1
+d/home/zds/Wiki
+	Politics
+5
+d/home/zds/Wiki/Politics
+	..
+0
+d/home/zds/Wiki
+	Programming
+6
+d/home/zds/.vim
+	..
+0
+d/home/zds
+	Arduino
+1
+d/home/zds/Arduino
+	..
+0
+d/home/zds
+	Wiki
+11
+d/home/zds/Wiki
+	Math
+4
+d/home/zds/Wiki/Math
+	limit.md
+5
+d/home/zds
+	Videos
+10
+d/home
+	zds
+1
+d/
+	home
+4
+d/home
+	zds
+1
+d/home/zds
+	Videos
+10
+d/home/zds/Videos
+	..
+0
+d/home/zds
+	Videos
+10
+d/home/zds/Videos
+	..
+0
+d/home/zds
+	Pictures
+7
+d/home/zds/Pictures
+	..
+0
+d/home/zds
+	Music
+6
+d/home/zds/Music
+	..
+0
+d/home/zds
+	Pictures
+7
+d/home/zds/Pictures
+	Favorite
+1
+d/home/zds/Pictures/Favorite
+	boats_rocks_ocean_128222_1920x1080.jpg
+17
+d/home/zds/Pictures
+	Favorite
+1
+d/home/zds
+	Music
+6
+d/home/zds/Music
+	..
+0
+d/home/zds
+	..
+0
+d/home
+	zds
+1
+d/home/zds
+	..
+0
+d/home
+	zds
+1
+d/home/zds
+	..
+0
+d/home
+	zds
+1
+d/
+	etc
+3
+d/home/zds
+	LeetCode
+5
+d/home/zds/.config
+	..
+0
+d/home/zds
+	Documents
+3
+d/home/zds/.config
+	Foxit Software
+2
+d/home/zds/.local/bin
+	..
+0
+d/home/zds/.config
+	vifm
+33
+d/home/zds/.config/vifm
+	colors
+1
+d/home/zds/.config/vifm/colors
+	onedark.vifm
+2
+d/home/zds/.config/vifm
+	colors
+1
+d/home/zds/.config
+	vifm
+33
+d/home/zds/.config/vifm
+	colors
+1
+d/home/zds/.config/vifm/colors
+	Default.vifm
+1
+d/home/zds/.config/vifm
+	colors
+1
+d/home/zds/.config/vifm/colors
+	..
+0
+d/home/zds/.config/vifm
+	colors
+1
+d/home/zds/.config/vifm/colors
+	..
+0
+d/home/zds/.config/vifm
+	scripts
+2
+d/home/zds
+	Documents
+3
+d/home/zds/.config
+	vifm
+33
+d/home/zds/.config/vifm
+	colors
+1
+d/home/zds/.config/vifm/colors
+	ph.vifm
+3
+d/home/zds
+	Documents
+3
+d/home/zds/Documents
+	dotfiles
+4
+d/home/zds/Documents/dotfiles
+	..
+0
+d/home/zds
+	Documents
+3
+d/home/zds/Documents/dotfiles
+	..
+0
+d/home/zds
+	Arduino
+1
+d/home/zds/Arduino
+	..
+0
+d/home/zds
+	LeetCode
+5
+d/home/zds/LeetCode
+	分治
+2
+d/home/zds
+	LeetCode
+5
+d/home/zds/LeetCode
+	分治
+2
+d/home/zds
+	Documents
+3
+d/home/zds/Documents
+	dotfiles
+4
+d/home/zds
+	Arduino
+1
+d/home/zds/.config
+	vifm
+33
+d/home/zds
+	Desktop
+2
+d/home/zds/Desktop
+	..
+0
+d/home/zds
+	Desktop
+2
+d/home/zds/Desktop
+	..
+0
+d/home/zds
+	LeetCode
+5
+d/home/zds/LeetCode
+	模式匹配
+5
+d/home/zds/LeetCode/模式匹配
+	..
+0
+d/home/zds/LeetCode
+	动态规划
+3
+d/home/zds/LeetCode/动态规划
+	Shortest Path
+2
+d/home/zds/LeetCode/动态规划/Shortest Path
+	..
+0
+d/home/zds/LeetCode/动态规划
+	Shortest Path
+2
+d/home/zds/LeetCode
+	Solutions
+1
+d/home/zds/LeetCode/Solutions
+	96.Unique Binary Search Tree
+12
+d/home/zds/LeetCode
+	分治
+2
+d/home/zds
+	Documents
+3
+d/home/zds/.config
+	vifm
+33
+d/home/zds
+	Wiki
+11
+d/home/zds/Wiki
+	Politics
+5
+d/home/zds
+	Pictures
+7
+d/home/zds/Pictures
+	Favorite
+1
+d/home/zds/Pictures/Favorite
+	boats_rocks_ocean_128222_1920x1080.jpg
+17
+d/home/zds
+	..
+0
+d/home/zds/Documents/dotfiles
+	readme.md
+2
+d
+
+# Right window history (oldest to newest):
+D/home/zds/LeetCode/排序算法
+	__pycache__
+1
+D/home/zds/LeetCode/排序算法/__pycache__
+	..
+0
+D/home/zds/LeetCode/排序算法
+	quick.js
+6
+D/home/zds
+	Documents
+3
+D/home
+	zds
+1
+D/home/zds
+	Documents
+3
+D
+
+# Command line history (oldest to newest):
+:q
+:echo %d
+:cq
+:cquit
+:execute '!echo %d > ~/.vifm/lastdir' | quit
+:cwd
+:!cwd
+:execute '!cwd'
+:execute '!echo %d > ~/.config/.vifm/lastdir' | quit
+:execute '!echo %d > ~/.config/vifm/lastdir' | quit
+:cd ~
+:edit ~/.config/vifm/vifmrc
+:source ~/.config/vifm/colors/onedark.vim
+:set relativenumber
+:set norelativenumber
+:set number
+:13
+:cd .config
+:marks
+:cd ~/.local/bin
+:colorscheme onedark ~/.config/vifm/colors/
+:nvim
+:shell nvim
+:!nvim
+:!nvim ph.vifm
+:color ph
+:colorscheme onedark
+:fileviewer */ tree %c
+:fileview */ tree %c
+:view
+
+# Search history (oldest to newest):
+/quick
+//
+/ins
+/wi
+/vifm
+/dot
+/d
+
+# Prompt history (oldest to newest):
+pfibo.py
+pfibo2.py
+ponedark.vifm
+
+# Local filter history (oldest to newest):
+
+# Registers:
+""/home/zds/.local/share/vifm/Trash/000_fibo2.py
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+
+# State:
+f
+i1
+[.1
+[F
+F
+I1
+].1
+]F
+s0

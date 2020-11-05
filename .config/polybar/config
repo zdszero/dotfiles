@@ -51,13 +51,13 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Fira Code Nerd Font:pixelsize=10;1
+font-0 = Fira Code Nerd Font:pixelsize=11;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = i3
 modules-center =
-modules-right = powermenu filesystem xbacklight pulseaudio xkeyboard memory cpu wlan eth battery temperature date
+modules-right = fcitx5 xbacklight pulseaudio filesystem wlan memory cpu battery date
 
 tray-position = right
 tray-padding = 2
@@ -76,6 +76,12 @@ scroll-down = i3wm-wsprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/fcitx5]
+type = custom/script
+exec = ~/.local/bin/fctix5_polybar.sh
+interval = 1
+label-underline = #4433ff
 
 [module/xwindow]
 type = internal/xwindow
@@ -105,6 +111,7 @@ mount-0 = /
 
 ; label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-mounted = %mountpoint%: %percentage_free%% of %total%
+label-mounted-underline = #00aaff
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 

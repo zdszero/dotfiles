@@ -4,8 +4,12 @@ command! PrintRTP call printer#PrintRTP()
 
 command! Go execute '!google-chrome-stable %'
 
-command! All execute 'normal ggVG'
-command! AllCopy execute 'normal ggVG"+y'
+command! All execute 'normal! ggVG'
+command! AllCopy execute 'normal! ggVG"+y'
+
+function! VisualWordCount () range
+  execute '!sed -n ' . a:firstline . ',' . a:lastline . 'p % | wc -w'
+endfunction
 
 augroup MarkDownOptions
   autocmd!
@@ -83,3 +87,6 @@ endfunction
 autocmd InsertLeave * call Fcitx2en()
 " reset original input method when entering insert mode
 autocmd InsertEnter * call Fcitx2zh()
+
+autocmd BufEnter vifmrc set filetype=vim
+autocmd BufEnter *.vifm set filetype=vim

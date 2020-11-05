@@ -11,7 +11,8 @@ alias ll="ls -l"
 alias sp="pwd | xclip -i"
 alias gp='cd $(xclip -o)'
 alias lc='leetcode'
-alias rg="ranger-cd"
+alias r='ranger'
+alias ra="ranger-cd"
 
 # tmux
 alias t="tmux"
@@ -36,19 +37,32 @@ export PAGER='/usr/bin/less'
 export SHELL='/usr/bin/zsh'
 
 # functions
-function ranger-cd {
-    tempfile="$(mktemp -t tmp.XXXXXX)"
-    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
-    test -f "$tempfile" &&
+function ranger-cd
+{
+  tempfile="$(mktemp -t tmp.XXXXXX)"
+  /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+  test -f "$tempfile" &&
     if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
-        cd -- "$(cat "$tempfile")"
-    fi  
+      cd -- "$(cat "$tempfile")"
+    fi
     rm -f -- "$tempfile"
 }
 
+vifm()
+{
+  if [ -f ~/.config/vifm/lastdir ]; then
+    rm ~/.config/vifm/lastdir
+  fi
+  # "command" prevents recursive call
+  command vifm "$@"
+  if [ -f ~/.config/vifm/lastdir ]; then
+    cd $(cat ~/.config/vifm/lastdir)
+  fi
+}
+
 function mkcd {
-    mkdir $1
-    cd $1
+  mkdir $1
+  cd $1
 }
 
 precmd() { pwd > /tmp/workingdir }
@@ -56,9 +70,9 @@ precmd() { pwd > /tmp/workingdir }
 source ~/.config/zsh/fzf.zsh
 
 function dateCount {
-    target=$(date -d "2020-12-26" +"%j")
-    today=$(date +"%j")
-    cowsay $((target-today)) days to graduate exam 
+  target=$(date -d "2020-12-26" +"%j")
+  today=$(date +"%j")
+  cowsay $((target-today)) days to graduate exam
 }
 
 dateCount
