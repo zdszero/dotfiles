@@ -115,6 +115,12 @@ handle_extension() {
             mediainfo "${FILE_PATH}" && exit 5
             exiftool "${FILE_PATH}" && exit 5
             ;; # Continue with next handler on failure
+
+        ## CSV
+        csv)
+            column -t -s , "${FILE_PATH}" && exit 5
+            ;;
+
     esac
 }
 
@@ -338,8 +344,17 @@ handle_fallback() {
     exit 1
 }
 
+drop_bigsize() {
+  # 5120 = 5M
+  if [[ `du "${FILE_PATH}" | cut -f1` -gt 5120 ]]; then
+    echo '----- TOO BIG FILE -----'
+    exit 0
+  fi
+}
+
 
 MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
+drop_bigsize
 if [[ "${PV_IMAGE_ENABLED}" == 'True' ]]; then
     handle_image "${MIMETYPE}"
 fi

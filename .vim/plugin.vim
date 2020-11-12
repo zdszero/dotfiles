@@ -121,7 +121,7 @@ let g:coc_explorer_global_presets = {
 \ } 
 
 " coc explorer mapping
-nmap <silent> <leader>e :CocCommand explorer --sources file+ --preset simplify --quit-on-open<CR>
+nmap <silent> <leader>e :CocCommand explorer --sources file+ --preset simplify<CR>
 nmap <silent> <leader>w :CocCommand explorer --sources file+ --preset wiki --quit-on-open<CR>
 " coc general mapping
 nmap <silent> gD <Plug>(coc-declaration)

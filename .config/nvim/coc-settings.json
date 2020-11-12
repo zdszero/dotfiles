@@ -17,7 +17,7 @@
   "list.source.lines.defaultArgs": ["--ignore-case"],
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableNerdfont": true,
-  "explorer.keyMappings": {
+  "explorer.keyMappings.global": {
     "t": "open:tab",
     "v": "open:vsplit",
     "h": "open:split"

@@ -141,9 +141,8 @@ command! zip zip -r %f.zip %f
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a
-command! vgrep vim "+grep %a"
 command! reload :write | restart
-command! n :!nvim<cr>
+command! n :!nvim
 
 " ------------------------------------------------------------------------------
 
@@ -217,6 +216,8 @@ fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
 
 " Web
 filextype *.html,*.htm
+        \ {Open with chrome}
+        \ google-chorme-stable %f &
         \ {Open with dwb}
         \ dwb %f %i &,
         \ {Open with firefox}
@@ -339,18 +340,19 @@ filetype *.tudu tudu -f %c
 " Qt projects
 filextype *.pro qtcreator %f &
 
-" Directories
-filextype */
-        \ {View in thunar}
-        \ Thunar %f &,
+" Normal dirs, Hidden dirs and Parent dir
+fileviewer */,.*/,../ ls -1 --color=always --group-directories-first %c
+
+" csv filse
+" use ,, to escape ,
+fileviewer *.csv column -t -s ,, %c
 
 " Syntax highlighting in preview
 "
 " Explicitly set highlight type for some extensions
 "
 " 256-color terminal
-fileviewer *.[ch],*.[ch]pp highlight -O xterm256 -s dante --syntax c %c
-fileviewer Makefile,Makefile.* highlight -O xterm256 -s dante --syntax make %c
+fileviewer * bat --color always --wrap never --pager never --line-range 1:35 --plain %c
 "
 " 16-color terminal
 " fileviewer *.c,*.h highlight -O ansi -s dante %c
@@ -408,11 +410,16 @@ vnoremap w :view<cr>gv
 nnoremap s :!
 nnoremap J tj
 nnoremap K tk
-nnoremap q :q<cr>
-nnoremap Q :execute '!echo %d > ~/.config/vifm/lastdir' | quit<cr>
+nnoremap Q :q<cr>
+nnoremap q :execute '!echo %d > ~/.config/vifm/lastdir' | quit<cr>
 nnoremap <c-c> :edit ~/.config/vifm/vifmrc<cr>
 nnoremap gh :cd ~<cr>
 nnoremap b :marks<cr>
+
+nnoremap <c-v> V
+nnoremap <c-g> G
+
+source ~/.config/vifm/scripts/favicons.vifm
 
 " Open file in the background using its default program
 nnoremap gb :file &<cr>l
@@ -452,14 +459,6 @@ nnoremap ,C :!gvim --remote-tab-silent $MYVIFMRC &<cr>
 
 " Toggle wrap setting on ,w key
 nnoremap ,w :set wrap!<cr>
-
-" Example of standard two-panel file managers mappings
-nnoremap <f3> :!less %f<cr>
-nnoremap <f4> :edit<cr>
-nnoremap <f5> :copy<cr>
-nnoremap <f6> :move<cr>
-nnoremap <f7> :mkdir<space>
-nnoremap <f8> :delete<cr>
 
 " ------------------------------------------------------------------------------
 

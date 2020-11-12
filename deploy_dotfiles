@@ -1,0 +1,26 @@
+#! /usr/bin/python
+
+import os
+
+# create directories
+def walkFiles(rel_path: str):
+    for file in os.listdir(rel_path):
+        new_path = os.path.sep.join([rel_path, file])
+        if os.path.isdir(new_path):
+            target_dir = '/home/zds/' + new_path
+            if not os.path.exists(target_dir):
+                os.mkdir(target_dir)
+            walkFiles(new_path)
+
+walkFiles('.config')
+
+# copy .config dir
+os.system('cp -r -u .config/* /home/zds/.config/')
+
+# copy current dir
+for file in os.listdir('.'):
+    if file in ['.git', '.gitignore', '.config']:
+        continue
+    if file.startswith('.'):
+        target_file = '/home/zds/' + file
+        os.system('cp -u {} {}'.format(file, target_file))

@@ -1,3 +1,7 @@
+# 前后移动一个单词
+bindkey '^[^[[C' emacs-forward-word  # Alt-Right
+bindkey '^[^[[D' emacs-backward-word # Alt-Left
+
 alias zshconfig="nvim ~/.config/zsh/zshrc"
 alias lg="lazygit"
 
@@ -7,12 +11,12 @@ alias n=nvim
 alias p='proxychains'
 alias pg='proxychains wget'
 alias sup="sudo proxychains"
+alias ls="ls --color=tty --group-directories-first"
 alias ll="ls -l"
 alias sp="pwd | xclip -i"
 alias gp='cd $(xclip -o)'
 alias lc='leetcode'
-alias r='ranger'
-alias ra="ranger-cd"
+alias r='ranger-cd'
 
 # tmux
 alias t="tmux"
@@ -36,27 +40,13 @@ export EDITOR='/usr/bin/nvim'
 export PAGER='/usr/bin/less'
 export SHELL='/usr/bin/zsh'
 
-# functions
-function ranger-cd
-{
-  tempfile="$(mktemp -t tmp.XXXXXX)"
-  /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
-  test -f "$tempfile" &&
-    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
-      cd -- "$(cat "$tempfile")"
-    fi
-    rm -f -- "$tempfile"
-}
-
-vifm()
-{
-  if [ -f ~/.config/vifm/lastdir ]; then
-    rm ~/.config/vifm/lastdir
+function ranger-cd {
+  if [[ -f /tmp/ranger-dir ]]; then
+    rm /tmp/ranger-dir
   fi
-  # "command" prevents recursive call
-  command vifm "$@"
-  if [ -f ~/.config/vifm/lastdir ]; then
-    cd $(cat ~/.config/vifm/lastdir)
+  ranger
+  if [[ -f /tmp/ranger-dir ]]; then
+    cd `cat /tmp/ranger-dir`
   fi
 }
 
@@ -65,9 +55,7 @@ function mkcd {
   cd $1
 }
 
-precmd() { pwd > /tmp/workingdir }
-
-source ~/.config/zsh/fzf.zsh
+function precmd { pwd > /tmp/workingdir }
 
 function dateCount {
   target=$(date -d "2020-12-26" +"%j")
@@ -76,3 +64,5 @@ function dateCount {
 }
 
 dateCount
+
+source ~/.config/zsh/fzf.zsh

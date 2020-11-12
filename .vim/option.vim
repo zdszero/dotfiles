@@ -19,7 +19,7 @@ set laststatus=2
 set noshowmode
 
 " mouse enable
-set mouse=nv 
+set mouse-=a
 
 set number
 set norelativenumber

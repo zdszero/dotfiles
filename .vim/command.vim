@@ -34,6 +34,7 @@ augroup MarkDownOptions
   autocmd Filetype markdown inoremap ,6 ######<Space><Enter><Enter><++><Esc>2kA
   autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
   autocmd FileType markdown set conceallevel=2
+  autocmd FileType markdown set nowrap
 augroup END
 
 augroup HTMLOptions
@@ -88,5 +89,4 @@ autocmd InsertLeave * call Fcitx2en()
 " reset original input method when entering insert mode
 autocmd InsertEnter * call Fcitx2zh()
 
-autocmd BufEnter vifmrc set filetype=vim
-autocmd BufEnter *.vifm set filetype=vim
+autocmd FileType vifm set filetype=vim

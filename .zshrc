@@ -66,8 +66,6 @@ ZSH_THEME="norm"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     extract
-    fzf
-    sudo
     z
     zsh-autosuggestions
     zsh-syntax-highlighting

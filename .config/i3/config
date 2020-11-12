@@ -73,7 +73,7 @@ for_window [instance="^floatterm.*"] border pixel 3
 
 exec --no-startup-id compton
 exec --no-startup-id dunst
-exec --no-startup-id /home/zds/.local/bin/set_wallpaper
+exec --no-startup-id /home/zds/.local/bin/setBcg
 exec --no-startup-id xmodmap ~/.Xmodmap
 # use polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh

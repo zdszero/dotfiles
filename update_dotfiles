@@ -1,0 +1,29 @@
+#! /bin/python3
+
+import os
+import sys
+
+FILE_LIST = []
+
+# read dotfiles from dotfiles list
+for line in open('./dotfile_list'):
+    if line.startswith('#'):
+        continue
+    line = line[0:-1]
+    FILE_LIST.append(line)
+
+# create directory that doesn't exist
+for filepath in FILE_LIST:
+    dirs = filepath.split('/')
+    curdir = os.getcwd()
+    # in the intermediate directory
+    for directory in dirs[1:-1]:
+        curdir = os.path.sep.join([curdir, directory])
+        if not os.path.exists(curdir):
+            os.mkdir(curdir)
+            print('mkdir: {}'.format(curdir))
+
+for filepath in FILE_LIST:
+    dirs = filepath.split('/')
+    to_path = os.path.sep.join(dirs[1:-1])
+    os.system('cp -r -u {} ./{}'.format(filepath, to_path))

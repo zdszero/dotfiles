@@ -7,13 +7,17 @@
 # A simple command for demonstration purposes follows.
 # -----------------------------------------------------------------------------
 
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
 
 # You can import any python module as needed.
 import os
+import re
+from os import makedirs
+from os.path import expanduser, join, lexists
 
 # You always need to import ranger.api.commands here to get the Command class:
 from ranger.api.commands import Command
+from ranger.core.loader import CommandLoader
 
 
 # Any class that is a subclass of "Command" will be integrated into ranger as a
@@ -69,10 +73,6 @@ class mkcd(Command):
     """
 
     def execute(self):
-        from os.path import join, expanduser, lexists
-        from os import makedirs
-        import re
-
         dirname = join(self.fm.thisdir.path, expanduser(self.rest(1)))
         if not lexists(dirname):
             makedirs(dirname)
@@ -92,3 +92,43 @@ class mkcd(Command):
                     self.fm.execute_console('scout -ae ^{}$'.format(s))
         else:
             self.fm.notify("file/directory exists!", bad=True)
+
+class empty(Command):
+    """
+    :empty
+
+    Empties the trash directory ~/.Trash
+    """
+
+    def execute(self):
+        self.fm.run("rm -rf /home/myname/.Trash/{*,.[^.]*}")
+
+class compress(Command):
+    def execute(self):
+        """ Compress marked files to current directory """
+        cwd = self.fm.thisdir
+        marked_files = cwd.get_selection()
+
+        if not marked_files:
+            return
+
+        def refresh(_):
+            cwd = self.fm.get_directory(original_path)
+            cwd.load_content()
+
+        original_path = cwd.path
+        parts = self.line.split()
+        au_flags = parts[1:]
+
+        descr = "compressing files in: " + os.path.basename(parts[1])
+        obj = CommandLoader(args=['apack'] + au_flags + \
+                [os.path.relpath(f.path, cwd.path) for f in marked_files], descr=descr)
+
+        obj.signal_bind('after', refresh)
+        self.fm.loader.add(obj)
+
+    def tab(self):
+        """ Complete with current folder name """
+
+        extension = ['.zip', '.tar.gz', '.rar', '.7z']
+        return ['compress ' + os.path.basename(self.fm.thisdir.path) + ext for ext in extension]

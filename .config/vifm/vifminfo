@@ -4,19 +4,19 @@
 'B
 	/home/zds/.local/bin
 	..
-1604569438
+1604629125
 'C
-	/home/zds/.config
-	..
-1604569264
-'W
-	/home/zds/Wiki
-	Politics
-1604570791
+	/run/media/zds/Study
+	Code
+1604629071
+'S
+	/run/media/zds/Study
+	Code
+1604587876
 'b
 	/home/zds/bin/
 	..
-1604570833
+1604628835
 'd
 	/home/zds/Documents/dotfiles
 	..
@@ -25,6 +25,14 @@
 	/home/zds/
 	..
 1604569626
+'l
+	/home/zds/LeetCode
+	Solutions
+1604628129
+'s
+	/home/zds/Downloads/st
+	..
+1604628165
 
 # Bookmarks:
 
@@ -38,252 +46,165 @@ l2
 r2
 
 # Left window history (oldest to newest):
-d/home/zds
-	Wiki
-11
-d/home/zds/Wiki
-	Math
+d/run/media/zds/Study/Course
+	DS
 4
-d/home/zds/Wiki/Math
-	geometry.md
+d/run/media/zds/Study
+	Code
+3
+d/run/media/zds/Study/Code
+	Linux
+4
+d/run/media/zds/Study
+	Aria2
 2
-d/home/zds/Wiki
-	Math
-4
-d/home/zds/Wiki/Math
-	geometry.md
+d/run/media/zds/Study/Aria2
+	..
+0
+d/run/media/zds/Study
+	Code
+3
+d/run/media/zds/Study/Code
+	Python
+5
+d/run/media/zds/Study/Code/Python
+	game
+7
+d/run/media/zds/Study/Code/Python/game
+	Gomuku
 2
-d/home/zds/Wiki
-	Politics
+d/run/media/zds/Study/Code/Python
+	game
+7
+d/run/media/zds/Study/Code
+	Python
 5
-d/home/zds/Wiki/Politics
-	唯物辩证法.md
+d/run/media/zds/Study
+	Code
+3
+d/run/media/zds/Study/Code
+	Vim
+7
+d/run/media/zds/Study/Code/Vim
+	..
+0
+d/run/media/zds/Study/Code
+	Vim
+7
+d/run/media/zds/Study/Code/Vim
+	..
+0
+d/run/media/zds/Study/Code
+	Vim
+7
+d/run/media/zds/Study/Code/Vim
+	..
+0
+d/run/media/zds/Study/Code
+	Vim
+7
+d/run/media/zds/Study/Code/Vim
+	..
+0
+d/run/media/zds/Study/Code
+	Vim
+7
+d/run/media/zds/Study/Code/Vim
+	practical vim
 1
-d/home/zds/Wiki
-	Politics
-5
-d/home/zds/Wiki/Politics
-	..
-0
-d/home/zds/Wiki
-	Programming
-6
-d/home/zds/.vim
-	..
-0
-d/home/zds
-	Arduino
-1
-d/home/zds/Arduino
-	..
-0
-d/home/zds
-	Wiki
-11
-d/home/zds/Wiki
-	Math
+d/run/media/zds/Study/Code
+	Linux
 4
-d/home/zds/Wiki/Math
-	limit.md
-5
 d/home/zds
-	Videos
-10
-d/home
-	zds
+	Documents
+2
+d/home/zds/Documents
+	Grauduate
 1
-d/
-	home
-4
-d/home
-	zds
-1
-d/home/zds
-	Videos
-10
-d/home/zds/Videos
-	..
-0
-d/home/zds
-	Videos
-10
-d/home/zds/Videos
-	..
-0
 d/home/zds
 	Pictures
-7
-d/home/zds/Pictures
-	..
-0
-d/home/zds
-	Music
 6
-d/home/zds/Music
-	..
-0
-d/home/zds
-	Pictures
-7
 d/home/zds/Pictures
 	Favorite
 1
 d/home/zds/Pictures/Favorite
-	boats_rocks_ocean_128222_1920x1080.jpg
-17
+	bicycle_trees_art_131605_1920x1080.jpg
+13
 d/home/zds/Pictures
-	Favorite
-1
+	Graphviz
+2
+d/home/zds/Pictures/Graphviz
+	..
+0
+d/home/zds/Pictures
+	Graphviz
+2
+d/run/media/zds/Study
+	Code
+3
 d/home/zds
-	Music
+	Pictures
 6
-d/home/zds/Music
-	..
-0
-d/home/zds
-	..
-0
-d/home
-	zds
-1
-d/home/zds
-	..
-0
-d/home
-	zds
-1
-d/home/zds
-	..
-0
-d/home
-	zds
-1
-d/
-	etc
-3
-d/home/zds
-	LeetCode
-5
-d/home/zds/.config
-	..
-0
-d/home/zds
-	Documents
-3
-d/home/zds/.config
-	Foxit Software
-2
 d/home/zds/.local/bin
-	..
-0
-d/home/zds/.config
-	vifm
-33
-d/home/zds/.config/vifm
-	colors
-1
-d/home/zds/.config/vifm/colors
-	onedark.vifm
-2
-d/home/zds/.config/vifm
-	colors
-1
-d/home/zds/.config
-	vifm
-33
-d/home/zds/.config/vifm
-	colors
-1
-d/home/zds/.config/vifm/colors
-	Default.vifm
-1
-d/home/zds/.config/vifm
-	colors
-1
-d/home/zds/.config/vifm/colors
-	..
-0
-d/home/zds/.config/vifm
-	colors
-1
-d/home/zds/.config/vifm/colors
-	..
-0
-d/home/zds/.config/vifm
-	scripts
-2
+	pyi-set_version
+13
 d/home/zds
-	Documents
-3
-d/home/zds/.config
-	vifm
-33
-d/home/zds/.config/vifm
-	colors
-1
-d/home/zds/.config/vifm/colors
-	ph.vifm
-3
-d/home/zds
-	Documents
-3
-d/home/zds/Documents
-	dotfiles
-4
-d/home/zds/Documents/dotfiles
-	..
-0
-d/home/zds
-	Documents
-3
-d/home/zds/Documents/dotfiles
-	..
-0
-d/home/zds
-	Arduino
-1
-d/home/zds/Arduino
-	..
-0
-d/home/zds
-	LeetCode
+	Pictures
+6
+d/home/zds/.local/bin
+	listdir
 5
+d/home/zds
+	Wiki
+10
+d/home/zds/Wiki
+	Computer
+1
+d/home/zds
+	Templates
+8
+d/home/zds/Templates
+	..
+0
+d/home/zds
+	Videos
+9
+d/home/zds/Videos
+	..
+0
+d/home/zds
+	Pictures
+6
+d/home/zds/Pictures
+	Graphviz
+2
+d/home/zds
+	Wiki
+10
+d/home/zds/Wiki
+	Computer
+1
+d/home/zds
+	Wiki
+10
+d/home/zds/.config/ranger
+	..
+0
+d/home/zds
+	Documents
+2
 d/home/zds/LeetCode
-	分治
-2
-d/home/zds
-	LeetCode
-5
-d/home/zds/LeetCode
-	分治
-2
+	Solutions
+1
 d/home/zds
 	Documents
-3
-d/home/zds/Documents
-	dotfiles
-4
-d/home/zds
-	Arduino
-1
-d/home/zds/.config
-	vifm
-33
-d/home/zds
-	Desktop
 2
-d/home/zds/Desktop
+d/home/zds/LeetCode
+	贪心
+6
+d/home/zds/LeetCode/贪心
 	..
 0
-d/home/zds
-	Desktop
-2
-d/home/zds/Desktop
-	..
-0
-d/home/zds
-	LeetCode
-5
 d/home/zds/LeetCode
 	模式匹配
 5
@@ -296,68 +217,437 @@ d/home/zds/LeetCode
 d/home/zds/LeetCode/动态规划
 	Shortest Path
 2
-d/home/zds/LeetCode/动态规划/Shortest Path
-	..
-0
-d/home/zds/LeetCode/动态规划
-	Shortest Path
-2
 d/home/zds/LeetCode
-	Solutions
-1
-d/home/zds/LeetCode/Solutions
-	96.Unique Binary Search Tree
-12
-d/home/zds/LeetCode
-	分治
-2
-d/home/zds
-	Documents
+	动态规划
 3
-d/home/zds/.config
-	vifm
-33
 d/home/zds
-	Wiki
-11
-d/home/zds/Wiki
-	Politics
+	Music
 5
-d/home/zds
-	Pictures
-7
-d/home/zds/Pictures
+d/home/zds/Music
 	Favorite
 1
-d/home/zds/Pictures/Favorite
-	boats_rocks_ocean_128222_1920x1080.jpg
-17
-d/home/zds
+d/home/zds/Music/Favorite
 	..
 0
-d/home/zds/Documents/dotfiles
-	readme.md
+d/home/zds/Music
+	Favorite
+1
+d/home/zds
+	Public
+7
+d/home/zds/Public
+	..
+0
+d/home/zds
+	Pictures
+6
+d/home/zds/Pictures
+	..
+0
+d/home/zds
+	Templates
+8
+d/home/zds/Templates
+	..
+0
+d/home/zds
+	Music
+5
+d/home/zds/Music
+	Favorite
+1
+d/home/zds
+	Music
+5
+d/home
+	zds
+1
+d/
+	home
+4
+d/home/zds
+	Music
+5
+d/home
+	zds
+1
+d/
+	opt
+9
+d/opt
+	tencent-qq
 2
+d/opt/tencent-qq
+	qq
+4
+d/home/zds
+	Music
+5
+d/home
+	zds
+1
+d/
+	proc
+10
+d/proc
+	677
+31
+d/home/zds
+	program_idea.md
+11
+d/home
+	zds
+1
+d/
+	mnt
+8
+d/mnt
+	udisk
+1
+d/mnt/udisk
+	..
+0
+d/mnt
+	..
+0
+d/
+	mnt
+8
+d/mnt
+	..
+0
+d/
+	home
+4
+d/home
+	zds
+1
+d/
+	lib
+5
+d/lib
+	aspell-0.60
+14
+d/lib/aspell-0.60
+	cp1252.cmap
+9
+d/lib
+	blueman
+23
+d/lib/blueman
+	blueman-rfcomm-watcher
+2
+d/home/zds
+	program_idea.md
+11
+d/home/zds/.local/bin
+	listdir
+5
+d/home/zds
+	Public
+7
 d
 
 # Right window history (oldest to newest):
-D/home/zds/LeetCode/排序算法
-	__pycache__
-1
-D/home/zds/LeetCode/排序算法/__pycache__
+D/home/zds
+	Downloads
+4
+D/home/zds/Downloads
+	Consolas-with-Yahei-Nerd-Font
+2
+D/home/zds/Downloads/Consolas-with-Yahei-Nerd-Font
 	..
 0
-D/home/zds/LeetCode/排序算法
-	quick.js
-6
+D/home/zds/Downloads
+	qq-files
+8
+D/home/zds/Downloads/qq-files
+	..
+0
+D/home/zds/Downloads
+	proxy.txt
+14
+D/home/zds
+	Downloads
+4
+D/home/zds/Downloads
+	st
+12
+D/home/zds/Downloads/st
+	..
+0
+D/home/zds
+	Downloads
+4
+D/home/zds/Downloads/st
+	..
+0
+D/home/zds
+	Pictures
+7
+D/home/zds/Pictures
+	Favorite
+1
+D/home/zds/Pictures/Favorite
+	astronaut_space_planet_160171_1920x1080.jpg
+11
+D/home/zds/Documents/dotfiles
+	..
+0
 D/home/zds
 	Documents
 3
-D/home
-	zds
+D/home/zds/Documents
+	..
+0
+D/home/zds
+	Downloads
+4
+D/home/zds/Downloads
+	st
+12
+D/home/zds
+	Downloads
+4
+D/home/zds/LeetCode
+	分治
+2
+D/home/zds/LeetCode/分治
+	..
+0
+D/home/zds/LeetCode
+	排序算法
+4
+D/home/zds/LeetCode/排序算法
+	__pycache__
 1
+D/home/zds/LeetCode
+	模式匹配
+5
+D/home/zds/LeetCode/模式匹配
+	..
+0
+D/home/zds/LeetCode
+	排序算法
+4
+D/home/zds/LeetCode/排序算法
+	__pycache__
+1
+D/home/zds/LeetCode
+	动态规划
+3
+D/home/zds/LeetCode/动态规划
+	Shortest Path
+2
+D/home/zds/LeetCode/动态规划/Shortest Path
+	..
+0
+D/home/zds/LeetCode/动态规划
+	0-1 Knapsack
+1
+D/home/zds/LeetCode/动态规划/0-1 Knapsack
+	..
+0
+D/home/zds/LeetCode/动态规划
+	Shortest Path
+2
+D/home/zds/LeetCode/动态规划/Shortest Path
+	graph.py
+1
+D/home/zds/LeetCode/动态规划
+	0-1 Knapsack
+1
+D/home/zds/LeetCode/动态规划/0-1 Knapsack
+	demo.py
+1
+D/home/zds/LeetCode/动态规划
+	0-1 Knapsack
+1
+D/home/zds/LeetCode
+	动态规划
+3
+D/home/zds
+	Downloads
+4
+D/home/zds/Downloads
+	ss-tproxy
+11
+D/home/zds
+	Downloads
+4
+D/home/zds/LeetCode
+	Solutions
+1
+D/home/zds/LeetCode/Solutions
+	409
+19
+D/home/zds/LeetCode/Solutions/409
+	..
+0
+D/home/zds/LeetCode/Solutions
+	27.Remove Element
+8
+D/home/zds/LeetCode/Solutions/27.Remove Element
+	..
+0
+D/home/zds/LeetCode/Solutions
+	27.Remove Element
+8
 D/home/zds
 	Documents
+3
+D/home/zds/Documents
+	..
+0
+D/home/zds
+	Documents
+3
+D/home/zds/Documents
+	Shell
+2
+D/home/zds/Documents/Shell
+	..
+0
+D/home/zds/Documents
+	Grauduate
+1
+D/home/zds/Documents/Grauduate
+	..
+0
+D/home/zds
+	Documents
+3
+D/run/media/zds/Study/Aria2
+	..
+0
+D/home/zds
+	Music
+6
+D/home/zds/Pictures/Favorite
+	alone_art_field_127230_1920x1080.jpg
+9
+D/home/zds
+	Downloads
+4
+D/home/zds/Downloads
+	ss-tproxy
+11
+D/home/zds
+	Documents
+3
+D/home/zds/Documents
+	Tencent Files
+3
+D/home/zds/Documents/Tencent Files
+	..
+0
+D/home/zds/Documents
+	Tencent Files
+3
+D/home/zds
+	Arduino
+1
+D/home/zds/Arduino
+	libraries
+1
+D/home/zds/Arduino/libraries
+	..
+0
+D/home/zds/Arduino
+	libraries
+1
+D/home/zds
+	LeetCode
+4
+D/home/zds/LeetCode
+	Solutions
+1
+D/home/zds
+	LeetCode
+4
+D/home/zds/LeetCode
+	Solutions
+1
+D/home/zds
+	LeetCode
+4
+D/home/zds/LeetCode
+	Solutions
+1
+D/home/zds/LeetCode/Solutions
+	27.Remove Element
+8
+D/home/zds/LeetCode
+	Solutions
+1
+D/home/zds
+	Pictures
+6
+D/home/zds/Pictures
+	Graphviz
+2
+D/home/zds/Pictures/Graphviz
+	..
+0
+D/home/zds/Pictures
+	Graphviz
+2
+D/home/zds
+	Pictures
+6
+D/home/zds/.local/bin
+	listdir
+5
+D/home/zds
+	Documents
+2
+D/home/zds/Pictures/Favorite
+	astronaut_space_planet_160171_1920x1080.jpg
+11
+D/home/zds
+	Documents
+2
+D/home/zds/.local/bin
+	listdir
+5
+D/home/zds
+	Documents
+2
+D/home/zds/.local/bin
+	listdir
+5
+D/run/media/zds/Study/Code
+	..
+0
+D/run/media/zds/Study
+	Code
+3
+D/run/media/zds
+	Study
+1
+D/run/media
+	zds
+1
+D/run/media/zds
+	Study
+1
+D/run/media/zds/Study
+	Code
+3
+D/run/media/zds
+	Study
+1
+D/run/media
+	zds
+1
+D/run/media/zds/Study
+	Code
+3
+D/run/media/zds/Study/Code
+	..
+0
+D/run/media/zds/Study
+	Code
 3
 D
 
@@ -375,49 +665,96 @@ D
 :cd ~
 :edit ~/.config/vifm/vifmrc
 :source ~/.config/vifm/colors/onedark.vim
-:set relativenumber
-:set norelativenumber
-:set number
 :13
 :cd .config
-:marks
 :cd ~/.local/bin
 :colorscheme onedark ~/.config/vifm/colors/
 :nvim
 :shell nvim
-:!nvim
 :!nvim ph.vifm
 :color ph
 :colorscheme onedark
 :fileviewer */ tree %c
 :fileview */ tree %c
 :view
+:vimv
+:!vimv
+:cd .vim
+:filter /../
+:filter /\.\./
+:!n
+:!nvim
+:n
+:column -t -s , %
+:column -t -s , %f
+:column -t -s , %c
+:cd /run/media/zds/Study/
+:4
+:set relativenumber
+:set norelativenumber
+:set nonumber
+:set num
+:set number
+:5
+:36
+:3
+:shell
+:marks
+:mark
+:10
+:12
+:filter \.\.
+:filter ..
+:filter
+:mkcd 409
+:cd .local/bin
+:!zshconfig
 
 # Search history (oldest to newest):
 /quick
 //
 /ins
 /wi
-/vifm
 /dot
 /d
+/.conf
+/bin
+/vifm
+/leet
+/sum
+/down
+/tel
+/polu
+/pol
+/wiki
+/li
+/list
+/.config
+/docu
+/pic
+/game
+/le
+/lis
+/lee
 
 # Prompt history (oldest to newest):
 pfibo.py
 pfibo2.py
 ponedark.vifm
+plistdir2
+plistdir
 
 # Local filter history (oldest to newest):
 
 # Registers:
-""/home/zds/.local/share/vifm/Trash/000_fibo2.py
+""/home/zds/.local/bin/listdir2
 
 # Directory stack (oldest to newest):
 
 # Trash content:
 
 # State:
-f
+f\.\.
 i1
 [.1
 [F

@@ -1,0 +1,28 @@
+# i3wm
+~/.config/i3/*
+~/.config/i3status/config
+# polybar
+~/.config/polybar/*
+# alacritty
+~/.config/alacritty/alacritty.yml
+# ranger
+~/.config/ranger/*
+# vifm
+~/.config/vifm/*
+# vim
+~/.config/nvim/*
+~/.vim/*.vim
+~/.vim/autoload/*
+~/.config/coc/ultisnips/*
+# zsh
+~/.config/zsh/*
+~/.zshrc
+# fish
+~/.config/fish/*
+# some config files
+~/.config/fontconfig/fonts.conf
+~/.pylintrc
+~/.ideavimrc
+~/.gitconfig
+~/.local/share/fcitx5/data/*
+~/.config/rofi/*

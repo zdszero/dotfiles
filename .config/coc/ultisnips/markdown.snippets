@@ -30,7 +30,7 @@ priority -50
 # Text formatting #
 ###################
 
-snippet '(?<!\\)([0-9])([0-9])tb' "new table row and col" r
+snippet '(?<!\\)([0-9])([0-9])tb' "new table" r
 $1`!p 
 x = match.group(1)
 y = match.group(2)
@@ -42,6 +42,19 @@ for i in range(int(x)):
 row1 += "|\n"
 row2 += "|\n"
 out = row1 + row2 + int(y) * row1
+snip.rv = out
+`$0
+endsnippet
+
+snippet '(?<!\\)([1-9])([1-9])ma' "mathjax matrix" r
+$1`!p 
+x = int(match.group(1))
+y = int(match.group(2))
+row = "<++>"
+for i in range(x-1):
+	row += " & <++>"
+row_rt = row += "\\"
+out = row_rt * (x-1) + row
 snip.rv = out
 `$0
 endsnippet
@@ -64,6 +77,14 @@ endsnippet
 
 snippet int "integral" i
 \int_{$1}^{$2} ${3:f(x)dx}
+endsnippet
+
+snippet iint "integral" i
+\iint_{$1}^{$2} ${3:f(x)dx}
+endsnippet
+
+snippet iiint "integral" i
+\iiint_{$1}^{$2} ${3:f(x)dx}
 endsnippet
 
 snippet upper "upper" i
@@ -91,19 +112,15 @@ snippet norm "norm" i
 endsnippet
 
 snippet matrix "matrix" i
-$$
 \begin{pmatrix}
 ${VISUAL}${1}
 \end{pmatrix}
-$$
 endsnippet
 
 snippet align "align" b
-$$
 \begin{align}
 ${VISUAL}${1}
 \end{align}
-$$$0
 endsnippet
 
 snippet trans "transportation" i
@@ -111,9 +128,11 @@ snippet trans "transportation" i
 endsnippet
 
 snippet cases "piecewise function" i
-$$
 \begin{cases}
 ${VISUAL}${1}
 \end{cases}
-$$
+endsnippet
+
+snippet vec "vector" i
+\vec{$1}$0
 endsnippet

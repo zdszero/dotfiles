@@ -40,7 +40,14 @@ function! ChangeInPair () abort
   endwhile
 endfunction
 
+function! OpenUrlInBrowser () abort
+  let l:word = expand("<cWORD>")
+  silent execute '!google-chrome-stable --app ' . l:word
+  echo l:word . ' is open in chrome'
+endfunction
+
 nnoremap <silent> cii :call ChangeInPair()<CR>
+nnoremap <silent> <leader>o :call OpenUrlInBrowser()<CR>
 
 inoremap <s-cr> <cr><up>
 
@@ -89,6 +96,7 @@ inoremap <c-a> <esc>I
 inoremap <c-e> <esc>A
 " simulate shift mod
 noremap <c-'> "
+nnoremap <c-;> :
 imap <c-[> {
 imap <c-]> }
 imap <c-7> &
