@@ -1,5 +1,3 @@
-let mapleader=" "
-
 set nocompatible
 syntax enable
 syntax on
@@ -22,14 +20,13 @@ set noshowmode
 set mouse-=a
 
 set number
-set norelativenumber
+set relativenumber
 set cursorline
 set nocursorcolumn
 " set gcr=a:block
 
 set showcmd
 set wildmenu
-set textwidth=80
 set wrap
 set wrapmargin=0
 set scrolloff=5

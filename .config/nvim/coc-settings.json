@@ -15,6 +15,8 @@
   "suggest.noselect": true,
   "list.source.grep.args": ["--ignore-case"],
   "list.source.lines.defaultArgs": ["--ignore-case"],
+  "list.source.files.command": "find",
+  "list.source.files.defaultArgs": ["-maxdepth", "2", "-type", "f", "!", "-name", "*.jpg", "!", "-name", "*.png", "!", "-name", "*.jpeg"],
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableNerdfont": true,
   "explorer.keyMappings.global": {
@@ -28,7 +30,8 @@
   "snippets.loadFromExtensions": false,
   "snippets.extends": {
     "cpp": ["c"],
-    "html": ["javascript"]
+    "html": ["javascript"],
+    "zsh": ["sh"]
   },
   "python.jediEnabled": true,
   "languageserver": {

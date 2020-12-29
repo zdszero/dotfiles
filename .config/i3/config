@@ -4,14 +4,17 @@
 
 set $mod Mod1
 set $term st
-set $inner_gaps 5
-set $outer_gaps 8
+set $inner_gaps 4
+set $outer_gaps 12
 font pango:Noto Mono 12
 
 # gaps
 gaps inner $inner_gaps
 gaps outer $outer_gaps
 default_border none
+
+# hide all window's title bar
+for_window [title="^.*"] border none
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #859900 #859900 #fdf6e3 #859900   #859900
@@ -59,13 +62,13 @@ for_window [instance="anki"] floating enable
 for_window [instance="ss-qt5"] floating enable
 for_window [instance="feh"] floating enable
 
-for_window [class="st-256color"] border pixel 3
+for_window [class="st-256color"] border pixel 2
 for_window [instance="^term_nvim"] resize shrink width 200 px
 for_window [instance="^floatterm.*"] move scratchpad
 for_window [instance="^floatterm.*"] scratchpad show
-for_window [instance="^floatterm.*"] resize set 1200 900
+for_window [instance="^floatterm.*"] resize set 1300 890
 for_window [instance="^floatterm.*"] move position center
-for_window [instance="^floatterm.*"] border pixel 3
+for_window [instance="^floatterm.*"] border pixel 2
 
 ############################
 #  AUTOSTART APPLICATIONS  #
@@ -73,11 +76,11 @@ for_window [instance="^floatterm.*"] border pixel 3
 
 exec --no-startup-id compton
 exec --no-startup-id dunst
-exec --no-startup-id /home/zds/.local/bin/setBcg
+# exec --no-startup-id /home/zds/.local/bin/set_wallpaper
+exec --no-startup-id feh --bg-scale ~/Pictures/Favorite/forest_trees_fog_110485_1920x1080.jpg
 exec --no-startup-id xmodmap ~/.Xmodmap
 # use polybar
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-# exec --no-startup-id feh --bg-scale ~/Pictures/Favorite/mountain_moon_art_140992_1920x1080.jpg
+# exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 ##################
 #  KSY BINDINGS  #
@@ -183,20 +186,20 @@ bindsym $mod+Shift+w exec qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerIn
 
 # resize mode
 mode "resize" {
-        # resize by 5
-        bindsym j resize shrink width 5 px or 5 ppt
-        bindsym k resize grow height 5 px or 5 ppt
-        bindsym l resize shrink height 5 px or 5 ppt
-        bindsym semicolon resize grow width 5 px or 5 ppt
-        # resize by 20
-        bindsym Shift+j resize shrink width 20 px or 20 ppt
-        bindsym Shift+k resize grow height 20 px or 20 ppt
-        bindsym Shift+l resize shrink height 20 px or 20 ppt
-        bindsym Shift+semicolon resize grow width 20 px or 20 ppt
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+    # resize by 5
+    bindsym j resize shrink width 5 px or 5 ppt
+    bindsym k resize grow height 5 px or 5 ppt
+    bindsym l resize shrink height 5 px or 5 ppt
+    bindsym semicolon resize grow width 5 px or 5 ppt
+    # resize by 20
+    bindsym Shift+j resize shrink width 20 px or 20 ppt
+    bindsym Shift+k resize grow height 20 px or 20 ppt
+    bindsym Shift+l resize shrink height 20 px or 20 ppt
+    bindsym Shift+semicolon resize grow width 20 px or 20 ppt
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
 
@@ -229,24 +232,24 @@ bindsym --release button2 kill
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-# bar {
-#         #         USE I3 STATUS RUST
-#         font pango: Fira Code Nerd Font Medium 12
-#         position top
-#         status_command i3status-rs ~/.config/i3/config.toml
-#         colors {
-#             separator #666666
-#             background #222222
-#             statusline #dddddd
-#             focused_workspace #0088CC #0088CC #ffffff
-#             active_workspace #333333 #333333 #ffffff
-#             inactive_workspace #333333 #333333 #888888
-#             urgent_workspace #2f343a #900000 #ffffff
-#         }
-#         #           USE I3 STATUS
-#         # status_command i3status --config ~/.config/i3status/config
-#         tray_output primary
-# }
+bar {
+        #         USE I3 STATUS RUST
+        font pango: Fira Code Nerd Font Medium 12
+        position top
+        status_command i3status-rs ~/.config/i3/config.toml
+        colors {
+            separator #666666
+            background #222222
+            statusline #dddddd
+            focused_workspace #0088CC #0088CC #ffffff
+            active_workspace #333333 #333333 #ffffff
+            inactive_workspace #333333 #333333 #888888
+            urgent_workspace #2f343a #900000 #ffffff
+        }
+        #           USE I3 STATUS
+        # status_command i3status --config ~/.config/i3status/config
+        tray_output primary
+}
 
 # Toggle between dock mode and hide mode
-# bindsym $mod+b bar mode toggle
+bindsym $mod+b bar mode toggle

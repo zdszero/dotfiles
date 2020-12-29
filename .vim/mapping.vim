@@ -1,3 +1,5 @@
+let mapleader=" "
+
 iabbrev rt return
 iabbrev ,a &&
 iabbrev ,o \|\|
@@ -18,35 +20,12 @@ augroup BlockCR
   autocmd FileType python imap <c-cr> :<cr>
 augroup END
 
-function! ChangeInPair () abort
-  let l:line = getline('.')
-  let l:left = col('.') - 1
-  while l:left >= 0
-    let l:curChar = l:line[l:left]
-    if l:curChar ==# '('
-      execute 'normal! ci('
-      break
-    elseif l:curChar ==# '['
-      execute 'normal! ci['
-      break
-    elseif l:curChar ==# '{'
-      execute 'normal! ci{'
-      break
-    elseif l:curChar ==# '<'
-      execute 'normal! ci<'
-      break
-    endif
-    let l:left -= 1
-  endwhile
-endfunction
-
 function! OpenUrlInBrowser () abort
   let l:word = expand("<cWORD>")
   silent execute '!google-chrome-stable --app ' . l:word
   echo l:word . ' is open in chrome'
 endfunction
 
-nnoremap <silent> cii :call ChangeInPair()<CR>
 nnoremap <silent> <leader>o :call OpenUrlInBrowser()<CR>
 
 inoremap <s-cr> <cr><up>
@@ -66,12 +45,14 @@ nnoremap <c-s> :w<cr>
 nnoremap <c-c> :CocConfig<cr>
 nnoremap <c-,> <<
 nnoremap <c-.> >>
+nnoremap <c-q> <c-v>
 " simulate uppercase command
 nnoremap <c-a> A
 noremap <c-i> I
 noremap <c-o> O
 nnoremap <c-p> P
 nnoremap <c-v> V
+nnoremap <c-f> F
 nnoremap <c-y> yy
 nnoremap <c-[> {
 nnoremap <c-]> }
@@ -92,8 +73,11 @@ inoremap <expr> <c-k> pumvisible() ? "\<c-p>" : "\<esc>O"
 " emacs like key bindings
 inoremap <c-f> <Right>
 inoremap <c-b> <Left>
-inoremap <c-a> <esc>I
-inoremap <c-e> <esc>A
+inoremap <c-a> &
+inoremap <c-p> *
+inoremap <c-o> \|
+inoremap <c-c> ^
+inoremap <c-d> $
 " simulate shift mod
 noremap <c-'> "
 nnoremap <c-;> :
@@ -112,55 +96,56 @@ imap <c-=> +
 imap <c-;> :
 imap <c-'> "
 imap <c-space> <space>
-inoremap <c-o>a A
-inoremap <c-o>b B
-inoremap <c-o>c C
-inoremap <c-o>d D
-inoremap <c-o>e E
-inoremap <c-o>f F
-inoremap <c-o>g G
-inoremap <c-o>h H
-inoremap <c-o>i I
-inoremap <c-o>j J
-inoremap <c-o>k K
-inoremap <c-o>l L
-inoremap <c-o>m M
-inoremap <c-o>n N
-inoremap <c-o>o O
-inoremap <c-o>p P
-inoremap <c-o>q Q
-inoremap <c-o>r R
-inoremap <c-o>s S
-inoremap <c-o>t T
-inoremap <c-o>u U
-inoremap <c-o>v V
-inoremap <c-o>w W
-inoremap <c-o>x X
-inoremap <c-o>y Y
-inoremap <c-o>z Z
-inoremap <c-o>1 !
-inoremap <c-o>2 @
-inoremap <c-o>3 #
-inoremap <c-o>4 $
-inoremap <c-o>5 %
-inoremap <c-o>6 ^
-inoremap <c-o>7 &
-inoremap <c-o>8 *
-inoremap <c-o>9 (
-inoremap <c-o>0 )
-inoremap <c-o>- _
-inoremap <c-o>- +
-inoremap <c-o>[ {
-inoremap <c-o>] }
-inoremap <c-o>; :
-inoremap <c-o>' "
-inoremap <c-o>, <
-inoremap <c-o>. >
-inoremap <c-o>/ ?
-inoremap <c-o>\ |
+inoremap <c-h>a A
+inoremap <c-h>b B
+inoremap <c-h>c C
+inoremap <c-h>d D
+inoremap <c-h>e E
+inoremap <c-h>f F
+inoremap <c-h>g G
+inoremap <c-h>h H
+inoremap <c-h>i I
+inoremap <c-h>j J
+inoremap <c-h>k K
+inoremap <c-h>l L
+inoremap <c-h>m M
+inoremap <c-h>n N
+inoremap <c-h>o O
+inoremap <c-h>p P
+inoremap <c-h>q Q
+inoremap <c-h>r R
+inoremap <c-h>s S
+inoremap <c-h>t T
+inoremap <c-h>u U
+inoremap <c-h>v V
+inoremap <c-h>w W
+inoremap <c-h>x X
+inoremap <c-h>y Y
+inoremap <c-h>z Z
+inoremap <c-h>1 !
+inoremap <c-h>2 @
+inoremap <c-h>3 #
+inoremap <c-h>4 $
+inoremap <c-h>5 %
+inoremap <c-h>6 ^
+inoremap <c-h>7 &
+inoremap <c-h>8 *
+inoremap <c-h>9 (
+inoremap <c-h>0 )
+inoremap <c-h>- _
+inoremap <c-h>- +
+inoremap <c-h>[ {
+inoremap <c-h>] }
+inoremap <c-h>; :
+inoremap <c-h>' "
+inoremap <c-h>, <
+inoremap <c-h>. >
+inoremap <c-h>/ ?
+inoremap <c-h>\ |
 " visual
 vnoremap <c-,> <
 vnoremap <c-.> >
+vmap <c-s> S
 
 " shift
 nnoremap V "+p
@@ -210,7 +195,7 @@ nnoremap sh <C-w>t<C-w>K
 nnoremap se <C-w>r
 
 " terminal
-nnoremap <LEADER>t :set splitright<CR>:vsplit<CR>:term zsh<CR>:vertical resize-15<CR>:set nonumber<CR>:setlocal statusline=terminal<CR>:IndentLinesToggle<CR>
+nnoremap <LEADER>t :set splitright<CR>:vsplit<CR>:term zsh<CR>:vertical resize-15<CR>:set nonumber<CR>:set norelativenumber<CR>:setlocal statusline=terminal<CR>:IndentLinesToggle<CR>
 tnoremap <c-l> <C-\><C-N>
 
 inoremap <C-w> <Tab>

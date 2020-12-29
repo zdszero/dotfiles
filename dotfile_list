@@ -13,12 +13,17 @@
 ~/.config/nvim/*
 ~/.vim/*.vim
 ~/.vim/autoload/*
+~/.vim/ftplugin/*
 ~/.config/coc/ultisnips/*
 # zsh
 ~/.config/zsh/*
 ~/.zshrc
 # fish
 ~/.config/fish/*
+# compton
+~/.config/compton.conf
+# zathura
+~/.config/zathura/zathurarc
 # some config files
 ~/.config/fontconfig/fonts.conf
 ~/.pylintrc

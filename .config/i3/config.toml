@@ -1,5 +1,7 @@
+# plain slick bad-wolf gruvbox-light gruvbox-dark modern
+# solarized-light solarized-dark
 [theme]
-name = "plain"
+name = "slick"
 
 [icons]
 name = "awesome"
