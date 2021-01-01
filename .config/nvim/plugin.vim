@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'mhinz/vim-startify'
 Plug 'luochen1990/rainbow'
@@ -48,7 +48,7 @@ let g:forest_night_disable_italic_comment = 1
 " dark light
 set background=dark
 
-colorscheme gruvbox-material
+colorscheme edge
 
 let g:rainbow_active = 1
 
@@ -60,7 +60,7 @@ let g:indentLine_bufTypeExclude = ['help', 'terminal', '__vista__']
 nmap <leader>ig :IndentLinesToggle<CR>
 
 let g:lightline = {
-\ 'colorscheme': 'gruvbox_material',
+\ 'colorscheme': 'edge',
 \ 'active': {
 \   'left': [ [ 'mode', 'paste' ],
 \             [ 'filename', 'readonly', 'modified', 'gitbranch' ,'cocstatus' ] ]

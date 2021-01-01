@@ -9,11 +9,8 @@
 ~/.config/ranger/*
 # vifm
 ~/.config/vifm/*
-# vim
+# nvim
 ~/.config/nvim/*
-~/.vim/*.vim
-~/.vim/autoload/*
-~/.vim/ftplugin/*
 ~/.config/coc/ultisnips/*
 # zsh
 ~/.config/zsh/*
