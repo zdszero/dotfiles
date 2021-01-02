@@ -66,10 +66,11 @@ ZSH_THEME="afowler"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    extract
     z
-    zsh-autosuggestions
+    extract
     zsh-syntax-highlighting
+    zsh-autosuggestions
+    colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -82,5 +83,3 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 source ~/.config/zsh/zshrc
-
-eval $(thefuck --alias)

@@ -20,8 +20,6 @@ Plug 'mattn/emmet-vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'dense-analysis/ale'
 Plug 'sbdchd/neoformat'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
 Plug 'szw/vim-maximizer'
 
 call plug#end()
@@ -245,15 +243,6 @@ let g:neoformat_enabled_cpp = ['clangformat']
 "                                 EMMET                                      "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:user_emmet_mode='i'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                GITGUTTER                                   "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_max_signs = 500
-let g:gitgutter_max_signs = -1
-let g:gitgutter_map_keys = 0
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                VISTA                                       "

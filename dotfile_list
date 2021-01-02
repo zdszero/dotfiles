@@ -7,8 +7,6 @@
 ~/.config/alacritty/alacritty.yml
 # ranger
 ~/.config/ranger/*
-# vifm
-~/.config/vifm/*
 # nvim
 ~/.config/nvim/plugin/*
 ~/.config/nvim/*.vim
@@ -24,10 +22,12 @@
 ~/.config/compton.conf
 # zathura
 ~/.config/zathura/zathurarc
-# some config files
-~/.config/fontconfig/fonts.conf
-~/.pylintrc
-~/.ideavimrc
-~/.gitconfig
-~/.local/share/fcitx5/data/*
+# rofi
 ~/.config/rofi/*
+# fcitx5
+~/.local/share/fcitx5/data/*
+# some config files
+~/.pylintrc
+~/.gitconfig
+~/.tmux.conf
+# personal scripts

@@ -25,7 +25,6 @@ alias ta="tmux attach -t"
 alias tls="tmux list-sessions"
 alias tlk="tmux list-keys"
 alias tlc="tmux list-commands"
-alias tlsc="cat /etc/bash.bashrc | grep \"alias t\""
 alias tks="tmux kill-session -t"
 alias tss="tmux switch -t"
 alias trs="tmux rename-session -t"
@@ -36,7 +35,8 @@ alias trw="tmux rename-window"
 export EDITOR='/usr/bin/nvim'
 export PAGER='/usr/bin/less'
 export SHELL='/usr/bin/zsh'
-export PATH=$PATH:/home/zds/.gem/ruby/2.7.0/bin
+export LC_ALL='zh_CN.UTF-8'
+export LANG='zh_CN.UTF-8'
 # export NVIM_LISTEN_ADDRESS='/tmp/nvim'
 
 function ranger-cd {
