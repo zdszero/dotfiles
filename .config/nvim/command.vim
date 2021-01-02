@@ -16,9 +16,9 @@ augroup END
 
 augroup TabTwoSpaces
   autocmd!
-  autocmd FileType c,cpp,vim,sh,html,javascript,json set softtabstop=2
-  autocmd FileType c,cpp,vim,sh,html,javascript,json set tabstop=2
-  autocmd FileType c,cpp,vim,sh,html,javascript,json set shiftwidth=2
+  autocmd FileType c,cpp,vim,sh,html,javascript,json,scheme set softtabstop=2
+  autocmd FileType c,cpp,vim,sh,html,javascript,json,scheme set tabstop=2
+  autocmd FileType c,cpp,vim,sh,html,javascript,json,scheme set shiftwidth=2
 augroup END
 
 function! ChangeTabSize() abort
@@ -31,6 +31,7 @@ function! ChangeTabSize() abort
     set tabstop=4
     set shiftwidth=4
   endif
+  exe '%s/    /  /g'
 endfunction
 
 function! MoveWindowToTab () abort

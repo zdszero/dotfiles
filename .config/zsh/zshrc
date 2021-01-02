@@ -57,3 +57,8 @@ function mkcd {
 function precmd { pwd > /tmp/workingdir }
 
 source ~/.config/zsh/fzf.zsh
+
+if [[ -z $TMUX ]]; then
+  tmux
+  exit
+fi

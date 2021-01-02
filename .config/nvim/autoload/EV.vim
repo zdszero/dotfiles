@@ -9,25 +9,25 @@ function EV#Commander(...) abort
 
   " option
   if l:arg == 'o'
-    edit ~/.vim/option.vim
+    edit ~/.config/nvim/option.vim
     return 1
   endif
 
   " map
   if l:arg == 'm'
-    edit ~/.vim/mapping.vim
+    edit ~/.config/nvim/mapping.vim
     return 1
   endif
 
   " plugin config
   if l:arg == 'p'
-    edit ~/.vim/plugin.vim
+    edit ~/.config/nvim/plugin.vim
     return 1
   endif
 
   " commands
   if l:arg == 'c'
-    edit ~/.vim/command.vim
+    edit ~/.config/nvim/command.vim
     return 1
   endif
 

@@ -95,6 +95,7 @@ imap <c--> _
 imap <c-=> +
 imap <c-;> :
 imap <c-'> "
+imap <c-/> ?
 imap <c-space> <space>
 inoremap <c-h>a A
 inoremap <c-h>b B

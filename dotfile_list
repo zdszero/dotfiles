@@ -10,7 +10,10 @@
 # vifm
 ~/.config/vifm/*
 # nvim
-~/.config/nvim/*
+~/.config/nvim/plugin/*
+~/.config/nvim/*.vim
+~/.config/nvim/autoload/*
+~/.config/nvim/ftplugin/*
 ~/.config/coc/ultisnips/*
 # zsh
 ~/.config/zsh/*

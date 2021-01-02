@@ -3,7 +3,7 @@
 import os
 
 # create directories
-def walkFiles(rel_path: str):
+def createDirs(rel_path: str):
     for file in os.listdir(rel_path):
         new_path = os.path.sep.join([rel_path, file])
         if os.path.isdir(new_path):
@@ -12,7 +12,9 @@ def walkFiles(rel_path: str):
                 os.mkdir(target_dir)
             walkFiles(new_path)
 
-walkFiles('.config')
+if not os.path.exists('/home/.config'):
+    os.mkdir('/home/zds/.config')
+createDirs('.config')
 
 # copy .config dir
 os.system('cp -r -u .config/* /home/zds/.config/')
