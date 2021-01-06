@@ -5,7 +5,7 @@ command! PrintRTP call printer#PrintRTP()
 command! MoveTab call MoveWindowToTab()
 command! ChangeTab call ChangeTabSize()
 
-command! Go execute '!google-chrome-stable %'
+command! Go execute '!chromium %'
 
 augroup HTMLOptions
   autocmd!

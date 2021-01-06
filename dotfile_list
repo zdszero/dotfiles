@@ -3,8 +3,6 @@
 ~/.config/i3status/config
 # polybar
 ~/.config/polybar/*
-# alacritty
-~/.config/alacritty/alacritty.yml
 # ranger
 ~/.config/ranger/*
 # nvim
@@ -22,6 +20,8 @@
 ~/.config/compton.conf
 # zathura
 ~/.config/zathura/zathurarc
+# dunst
+~/.config/dunst/dunstrc
 # rofi
 ~/.config/rofi/*
 # fcitx5

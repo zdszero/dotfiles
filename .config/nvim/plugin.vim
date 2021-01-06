@@ -6,15 +6,14 @@ Plug 'kshenoy/vim-signature'
 Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/edge'
+Plug 'jiangmiao/auto-pairs'
 Plug 'sainnhe/forest-night'
 Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'gcmt/wildfire.vim'
-Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/vim-easy-align'
 Plug 'mattn/emmet-vim'
 Plug 'liuchengxu/vista.vim'
@@ -30,7 +29,7 @@ call plug#end()
 set t_Co=256
 " edge
 let g:edge_style='aura' " edge aura default
-let g:edge_transparent_background = 0
+let g:edge_transparent_background = 1
 let g:edge_enable_italic = 0 " italic keywords
 let g:edge_disable_italic_comment = 1
 " gruvbox
@@ -125,8 +124,8 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <leader>rn <Plug>(coc-rename)
 nmap <silent> <leader>h :call CocAction('doHover')<cr>
 " nmap <silent> <leader>x <Plug>(coc-codelens-action)
-nnoremap <expr> <C-d> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-d>"
-nnoremap <expr> <C-u> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-u>"
+nnoremap <expr> <C-d> coc#float#has_scroll() ? coc#util#float_scroll(1) : "\<C-d>"
+nnoremap <expr> <C-u> coc#float#has_scroll() ? coc#util#float_scroll(0) : "\<C-u>"
 " goto coc-lists
 nnoremap <silent> gl :CocList --number-select<CR>
 " goto buffers
@@ -183,13 +182,6 @@ nmap ga <Plug>(EasyAlign)
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                             VIM-EASY-MOTION                                "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EasyMotion_smartcase = 1
-map <c-w> <Plug>(easymotion-bd-w)
-map <c-e> <Plug>(easymotion-bd-f)
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   ALE                                      "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " when to lint
@@ -221,7 +213,7 @@ let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '⚡'
 let g:ale_sign_column_always = 0
 let g:ale_fix_on_save = 0
-let g:ale_virtualtext_cursor = 1
+let g:ale_virtualtext_cursor = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  NEOFORMAT                                 "

@@ -35,8 +35,9 @@ alias trw="tmux rename-window"
 export EDITOR='/usr/bin/nvim'
 export PAGER='/usr/bin/less'
 export SHELL='/usr/bin/zsh'
-export LC_ALL='zh_CN.UTF-8'
-export LANG='zh_CN.UTF-8'
+export PATH="$PATH:/home/zds/.local/bin"
+# export LC_ALL='zh_CN.UTF-8'
+# export LANG='zh_CN.UTF-8'
 # export NVIM_LISTEN_ADDRESS='/tmp/nvim'
 
 function ranger-cd {
@@ -57,8 +58,3 @@ function mkcd {
 function precmd { pwd > /tmp/workingdir }
 
 source ~/.config/zsh/fzf.zsh
-
-if [[ -z $TMUX ]]; then
-  tmux
-  exit
-fi

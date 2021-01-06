@@ -68,6 +68,7 @@ nnoremap <c-m> <c-o>
 nnoremap <c-n> <c-i>
 " insert
 inoremap <c-l> <esc>
+inoremap <c-w> <esc>diwa
 inoremap <expr> <c-j> pumvisible() ? "\<c-n>" : ""
 inoremap <expr> <c-k> pumvisible() ? "\<c-p>" : "\<esc>O"
 " emacs like key bindings

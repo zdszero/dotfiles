@@ -43,6 +43,7 @@ for_window [class="Kmix"] floating enable
 for_window [class="Klipper"] floating enable
 for_window [class="Plasmoidviewer"] floating enable
 for_window [instance="gwenview"] floating enable
+for_window [class='fcitx5-config-qt'] floating enable
 
 # >>> Window Rules <<<
 # >>> Avoid tiling for non-Plasma stuff <<<
@@ -74,11 +75,10 @@ for_window [instance="^floatterm.*"] border pixel 2
 #  AUTOSTART APPLICATIONS  #
 ############################
 
-exec --no-startup-id compton
-exec --no-startup-id dunst
-# exec --no-startup-id /home/zds/.local/bin/set_wallpaper
-exec --no-startup-id feh --bg-scale ~/Pictures/Favorite/forest_trees_fog_110485_1920x1080.jpg
+exec --no-startup-id feh --bg-scale ~/.config/i3/girl_shell_hare_167320_1920x1080.jpg
 exec --no-startup-id xmodmap ~/.Xmodmap
+exec --no-startup-id fcitx5
+exec --no-startup-id blueman-applet
 # use polybar
 # exec_always --no-startup-id ~/.config/polybar/launch.sh
 
@@ -90,7 +90,7 @@ exec --no-startup-id xmodmap ~/.Xmodmap
 floating_modifier $mod
 
 # terminal
-bindsym $mod+Return exec --no-startup-id $term
+bindsym $mod+Return exec --no-startup-id $term -e tmux
 bindsym $mod+Shift+Return exec --no-startup-id cat /tmp/workingdir | xargs -I {} $term -d {}
 bindsym $mod+o exec --no-startup-id cat /tmp/workingdir | xargs -I {} $term -n term_nvim -d {} -C "#333333@256" -A 0.9
 # scratchpad
@@ -182,7 +182,7 @@ bindsym $mod+Shift+z gaps outer current minus 5
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+w exec qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
+bindsym $mod+shift+x exec betterlockscreen -l dim
 
 # resize mode
 mode "resize" {

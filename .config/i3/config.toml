@@ -7,17 +7,18 @@ name = "slick"
 name = "awesome"
 
 [[block]]
+block = "battery"
+interval = 10
+full_format = " full "
+format = " {percentage}% {time}% "
+
+[[block]]
 block = "net"
 device = "wlp2s0"
 ssid = true
 signal_strength = false
 speed_up = false
 speed_down = false
-
-[[block]]
-block = "bluetooth"
-mac = "34:88:5D:EC:7D:99"
-label = "  keyboard"
 
 [[block]]
 block = "disk_space"
@@ -39,11 +40,6 @@ block = "uptime"
 block = "cpu"
 interval = 1
 format = "{barchart} {utilization}% {frequency}GHz"
-
-[[block]]
-block = "battery"
-interval = 10
-format = " {percentage}% {time}"
 
 [[block]]
 block = "backlight"

@@ -2,6 +2,8 @@
 
 import os
 
+HOME_IGNORE_LIST = ['readme.md', 'dotfile_list', 'update_dotfiles', 'deploy_dotfiles', 'gui-config.json', 'OmegaOptions.bak', '.gitignore']
+
 def copyFilesFrom(rel_path: str):
     # traverse all files and choose dirs
     for file in os.listdir(rel_path):
@@ -17,7 +19,7 @@ def copyFilesFrom(rel_path: str):
             copyFilesFrom(new_path)
         # if current file is file
         # copy the file to dest file
-        elif os.path.isfile(new_path) and file != '.gitignore':
+        elif os.path.isfile(new_path) and file not in HOME_IGNORE_LIST:
             os.system('cp -u {} {}'.format(new_path, target_path))
 
 copyFilesFrom('.')
