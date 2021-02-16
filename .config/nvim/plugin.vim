@@ -1,12 +1,12 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'mhinz/vim-startify'
+Plug 'tweekmonster/startuptime.vim'
 Plug 'luochen1990/rainbow'
 Plug 'kshenoy/vim-signature'
 Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/edge'
-Plug 'jiangmiao/auto-pairs'
 Plug 'sainnhe/forest-night'
 Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
@@ -19,7 +19,9 @@ Plug 'mattn/emmet-vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'dense-analysis/ale'
 Plug 'sbdchd/neoformat'
-Plug 'szw/vim-maximizer'
+Plug 'zdszero/auto-pairs'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -28,19 +30,21 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256
 " edge
-let g:edge_style='aura' " edge aura default
+let g:edge_style='default' " edge aura default
 let g:edge_transparent_background = 1
-let g:edge_enable_italic = 0 " italic keywords
-let g:edge_disable_italic_comment = 1
+let g:edge_enable_italic = 0
+let g:edge_disable_italic_comment = 0
 " gruvbox
 let g:gruvbox_material_background = 'soft' " hard medium soft
 let g:gruvbox_material_transparent_background = 1
 let g:gruvbox_material_enable_italic = 0
-let g:gruvbox_material_disable_italic_comment = 1
+let g:gruvbox_material_disable_italic_comment = 0
 " forest night
 let g:forest_night_transparent_background = 0
 let g:forest_night_enable_italic = 0
-let g:forest_night_disable_italic_comment = 1
+let g:forest_night_disable_italic_comment = 0
+
+let g:AutoPairs_fileTypeExclude = ['scheme', 'racket']
 
 " dark light
 set background=dark
@@ -49,11 +53,13 @@ colorscheme edge
 
 let g:rainbow_active = 1
 
-let g:indentLine_char = '┃'
+" let g:indentLine_char = '┃'
+let g:indentLine_char = '•'
 let g:indentLine_setConceal = 2
 let g:indentLine_faster = 1
-let g:indentLine_fileTypeExclude = ['startify', 'help', 'markdown', 'sh', 'vim', 'javascript', 'css', 'coc-explorer', 'c', 'cpp', 'zsh']
-let g:indentLine_bufTypeExclude = ['help', 'terminal', '__vista__']
+let g:indentLine_fileTypeExclude = ['startify', 'help', 'markdown', 'sh', 'vim', 'javascript', 
+      \'css', 'coc-explorer', 'c', 'cpp', 'zsh', 'scheme', 'racket', 'vista', 'yacc', 'lex']
+let g:indentLine_bufTypeExclude = ['help', 'terminal']
 nmap <leader>ig :IndentLinesToggle<CR>
 
 let g:lightline = {
@@ -73,17 +79,22 @@ let g:lightline = {
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 COC                                        "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files
+set nobackup
+set nowritebackup
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
 
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
-endfunction
+endfunctio
 
 let g:coc_global_extensions = [
-  \ 'coc-pyright',
+  \ 'coc-python',
   \ 'coc-html',
   \ 'coc-css',
   \ 'coc-emmet',
@@ -92,10 +103,7 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-highlight',
   \ 'coc-explorer',
-  \ 'coc-snippets',
-  \ 'coc-lists',
-  \ 'coc-bookmark',
-  \ 'coc-actions']
+  \ 'coc-snippets']
 
 let g:coc_filetype_map = {
   \ 'jst': 'html',
@@ -114,6 +122,23 @@ let g:coc_explorer_global_presets = {
 \   }
 \ } 
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 " coc explorer mapping
 nmap <silent> <leader>e :CocCommand explorer --sources file+ --preset simplify --quit-on-open<CR>
 " coc general mapping
@@ -122,54 +147,45 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <leader>rn <Plug>(coc-rename)
-nmap <silent> <leader>h :call CocAction('doHover')<cr>
 " nmap <silent> <leader>x <Plug>(coc-codelens-action)
 nnoremap <expr> <C-d> coc#float#has_scroll() ? coc#util#float_scroll(1) : "\<C-d>"
 nnoremap <expr> <C-u> coc#float#has_scroll() ? coc#util#float_scroll(0) : "\<C-u>"
-" goto coc-lists
-nnoremap <silent> gl :CocList --number-select<CR>
-" goto buffers
-nnoremap <silent> sb :CocList buffers<CR>
-" search files in current dir
-nnoremap <silent> sf :CocList files<CR>
-" search lines in current file
-nnoremap <silent> sl :CocList lines<CR>
-" search symbols
-nnoremap <silent> ss :CocList symbols<CR>
-" search words
-nnoremap <silent> sw :CocList words<CR>
-" search by grep
-nnoremap <silent> sg :CocList grep<CR>
 " coc snippet mapping
 inoremap <silent><expr> <TAB>
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ pumvisible() ? coc#_select_confirm() :
-      \ "\<TAB>"
-inoremap <silent><expr> <c-z> coc#refresh()
-let g:coc_snippet_next = '<tab>'
-let g:coc_snippet_prev = '<s-tab>'
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
 vmap <C-d> <Plug>(coc-snippets-select)
 xmap <leader>x <Plug>(coc-convert-snippet)
-" coc bookmark mapping
-nmap <c-b>b <Plug>(coc-bookmark-toggle)
-nmap <c-b>j <Plug>(coc-bookmark-next)
-nmap <c-b>k <Plug>(coc-bookmark-prev)
-nmap <c-b>a <Plug>(coc-bookmark-annotate)
-nmap <c-b>/ :CocList bookmark<CR>
-nmap <silent> <c-b>c :CocCommand bookmark.clearForCurrentFile<CR>
-nmap <silent> <c-b>C :CocCommand bookmark.clearForAllFiles<CR>
-" coc action
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
-augroup CocOptions
-  autocmd!
-  autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
-augroup END
+" autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
 
 command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 command! -nargs=0 OI   :call CocAction('runCommand', 'editor.action.organizeImport')
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                FZF-VIM                                     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! s:is_in_git_directory()
+  silent !git rev-parse --is-inside-work-tree
+  if v:shell_error == 0
+    return 1
+  endif
+  return 0
+endfunction
+
+nmap <silent><expr> sf <SID>is_in_git_directory() ? ':GFiles<CR>' : ':Files<CR>'
+nmap sb :Buffers<CR>
+nmap sl :BLines<CR>
+nmap sw :Windows<CR>
+nmap sh :Helptags<CR>
+nmap sg :Rg<CR>
+nmap <leader>sg :exe 'Rg ' . expand('<cword>')<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             VIM-EASY-ALIGN                                 "
@@ -208,6 +224,7 @@ let g:ale_python_pylint_options = '--extension-pkg-whitelist=pygame'
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(ale_previous_wrap)
 nmap <silent> ]g <Plug>(ale_next_wrap)
+nmap <silent> <leader>d :ALEDetail<CR>
 " error sign
 let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '⚡'
@@ -244,12 +261,6 @@ let g:vista_default_executive = 'coc'
 let g:vista_close_on_jump=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                MAXMIZER                                    "
+"                                WILDFIRE                                    "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:maximizer_set_default_mapping = 0
-nmap <leader>m :MaximizerToggle<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                MAXMIZER                                    "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <c-enter> <Plug>(wildfire-fuel)
+map <c-cr> <Plug>(wildfire-fuel)

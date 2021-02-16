@@ -1,16 +1,20 @@
 # plain slick bad-wolf gruvbox-light gruvbox-dark modern
 # solarized-light solarized-dark
 [theme]
-name = "slick"
+name = "native"
 
 [icons]
 name = "awesome"
-
-[[block]]
-block = "battery"
-interval = 10
-full_format = " full "
-format = " {percentage}% {time}% "
+[icons.overrides]
+volume_empty = " 🔈 "
+volume_half = " 🔉 "
+volume_full = " 🔊 "
+volume_muted = " 🔇 "
+uptime = " ⏲️ "
+memory_mem = " ❄️"
+bat_full = " 🌈"
+time = " "
+cpu = " 🔥 "
 
 [[block]]
 block = "net"
@@ -18,12 +22,12 @@ device = "wlp2s0"
 ssid = true
 signal_strength = false
 speed_up = false
-speed_down = false
+speed_down = true
 
 [[block]]
 block = "disk_space"
 path = "/"
-alias = "/"
+alias = "🖴 /"
 info_type = "available"
 unit = "GiB"
 
@@ -42,6 +46,12 @@ interval = 1
 format = "{barchart} {utilization}% {frequency}GHz"
 
 [[block]]
+block = "battery"
+interval = 10
+full_format = " full "
+format = " {percentage}% {time}% "
+
+[[block]]
 block = "backlight"
 device = "intel_backlight"
 
@@ -52,4 +62,5 @@ step_width = 5
 [[block]]
 block = "time"
 interval = 60
-format = "%a %m/%d %R"
+format = "📆 %a %m/%d %R"
+# format = "📆 %a %m/%d %R | ❤️ 🇹🇼"

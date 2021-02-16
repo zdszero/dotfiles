@@ -2,7 +2,6 @@ alias zshconfig="nvim ~/.config/zsh/zshrc"
 alias lg="lazygit"
 
 alias sudo="sudo -E"
-alias c=clear
 alias n=nvim
 alias p='proxychains'
 alias pg='proxychains wget'
@@ -16,7 +15,7 @@ alias r='ranger-cd'
 alias xi="xclip -selection clipboard"
 
 # tmux
-alias t="tmux"
+alias tm="tmux"
 alias tsj="tmux split-window"
 alias tsl="tmux split-window -h"
 alias tns="tmux new -s"
@@ -32,22 +31,18 @@ alias tnw="tmux new-window"
 alias tsw="tmux select-window -t"
 alias trw="tmux rename-window"
 
-export EDITOR='/usr/bin/nvim'
-export PAGER='/usr/bin/less'
-export SHELL='/usr/bin/zsh'
-export PATH="$PATH:/home/zds/.local/bin"
-# export LC_ALL='zh_CN.UTF-8'
-# export LANG='zh_CN.UTF-8'
+alias t="todo.sh"
+
 # export NVIM_LISTEN_ADDRESS='/tmp/nvim'
 
 function ranger-cd {
-  if [[ -f /tmp/ranger-dir ]]; then
-    rm /tmp/ranger-dir
-  fi
-  ranger
-  if [[ -f /tmp/ranger-dir ]]; then
-    cd `cat /tmp/ranger-dir`
-  fi
+    tempfile="$(mktemp -t tmp.XXXXXX)"
+    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi  
+    rm -f -- "$tempfile"
 }
 
 function mkcd {

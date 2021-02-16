@@ -30,13 +30,7 @@ priority 100
 
 snippet def "#define ..."
 #ifndef ${1}
-	#define ${1} ${2}
-#endif
-endsnippet
-
-snippet head "header"
-#ifndef ${1}
-#define ${1}
+#define ${1} ${2}
 #endif
 endsnippet
 
@@ -85,7 +79,7 @@ for (int ${1:i} = ${2:0}; $1 < ${3:count}; $1++)
 endsnippet
 
 snippet for "for loop (for)"
-for (int ${1:i} = ${2:0}; $1 < ${3:count}; $1++) {
+for (${1:int} ${2:i} = ${3:0}; $2 < ${4:count}; $2++) {
 	${VISUAL}${0}
 }
 endsnippet

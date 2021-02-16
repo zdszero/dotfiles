@@ -11,6 +11,8 @@
 ~/.config/nvim/autoload/*
 ~/.config/nvim/ftplugin/*
 ~/.config/coc/ultisnips/*
+# alacritty
+~/.config/alacritty/alacritty.yml
 # zsh
 ~/.config/zsh/*
 ~/.zshrc
@@ -24,10 +26,15 @@
 ~/.config/dunst/dunstrc
 # rofi
 ~/.config/rofi/*
+# fontconfig
+# ~/.config/fontconfig/fonts.conf
 # fcitx5
 ~/.local/share/fcitx5/data/*
 # some config files
 ~/.pylintrc
 ~/.gitconfig
 ~/.tmux.conf
+~/.xinitrc
+~/.xprofile
 # personal scripts
+~/.local/bin/script/*

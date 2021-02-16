@@ -1,9 +1,6 @@
 set nocompatible
-syntax enable
 syntax on
-filetype on
-filetype indent on
-filetype plugin on
+filetype plugin indent on
 
 " expand tab to spaces
 set expandtab
@@ -17,7 +14,8 @@ set laststatus=2
 set noshowmode
 
 " mouse enable
-set mouse-=a
+" set mouse-=a
+set mouse=n
 
 set number
 set relativenumber

@@ -7,7 +7,9 @@ command! ChangeTab call ChangeTabSize()
 
 command! Go execute '!chromium %'
 
-augroup HTMLOptions
+autocmd BufEnter *.asm,*.s setf asm
+
+augroup HtmlOptions
   autocmd!
   au BufEnter *.ejs set filetype=html
   au BufEnter *.ejs :syntax sync fromstart
@@ -16,9 +18,9 @@ augroup END
 
 augroup TabTwoSpaces
   autocmd!
-  autocmd FileType c,cpp,vim,sh,html,javascript,json,scheme set softtabstop=2
-  autocmd FileType c,cpp,vim,sh,html,javascript,json,scheme set tabstop=2
-  autocmd FileType c,cpp,vim,sh,html,javascript,json,scheme set shiftwidth=2
+  autocmd FileType c,cpp,vim,sh,html,javascript,json,scheme,lex,yacc set softtabstop=2
+  autocmd FileType c,cpp,vim,sh,html,javascript,json,scheme,lex,yacc set tabstop=2
+  autocmd FileType c,cpp,vim,sh,html,javascript,json,scheme,lex,yacc set shiftwidth=2
 augroup END
 
 function! ChangeTabSize() abort

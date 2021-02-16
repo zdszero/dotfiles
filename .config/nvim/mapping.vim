@@ -43,8 +43,6 @@ onoremap <c-l> $
 " normal
 nnoremap <c-s> :w<cr>
 nnoremap <c-c> :CocConfig<cr>
-nnoremap <c-,> <<
-nnoremap <c-.> >>
 nnoremap <c-q> <c-v>
 " simulate uppercase command
 nnoremap <c-a> A
@@ -53,100 +51,30 @@ noremap <c-o> O
 nnoremap <c-p> P
 nnoremap <c-v> V
 nnoremap <c-f> F
+nnoremap <c-w> W
+nnoremap <c-e> E
+nnoremap <c-b> B
 nnoremap <c-y> yy
-nnoremap <c-[> {
-nnoremap <c-]> }
-nnoremap <c-9> (
-nnoremap <c-0> )
-nnoremap <c-8> *
-nnoremap <c-3> #
-" use <c-]> <c-[> to scroll forward and backwoard
-nnoremap <c--> <c-f>
-nnoremap <c-=> <c-b>
+nnoremap <c-,> <<
+nnoremap <c-.> >>
+vnoremap <c-,> <
+vnoremap <c-.> >
 " use <c-m> <c-n> to jump forward and backwoard
 nnoremap <c-m> <c-o>
 nnoremap <c-n> <c-i>
 " insert
 inoremap <c-l> <esc>
 inoremap <c-w> <esc>diwa
-inoremap <expr> <c-j> pumvisible() ? "\<c-n>" : ""
-inoremap <expr> <c-k> pumvisible() ? "\<c-p>" : "\<esc>O"
 " emacs like key bindings
 inoremap <c-f> <Right>
 inoremap <c-b> <Left>
 inoremap <c-a> &
+inoremap <c-e> %
 inoremap <c-p> *
+inoremap <c-j> λ
 inoremap <c-o> \|
 inoremap <c-c> ^
 inoremap <c-d> $
-" simulate shift mod
-noremap <c-'> "
-nnoremap <c-;> :
-imap <c-[> {
-imap <c-]> }
-imap <c-7> &
-imap <c-8> *
-imap <c-9> (
-imap <c-0> )
-imap <c-{> )
-imap <c-}> )
-imap <c-,> <
-imap <c-.> >
-imap <c--> _
-imap <c-=> +
-imap <c-;> :
-imap <c-'> "
-imap <c-/> ?
-imap <c-space> <space>
-inoremap <c-h>a A
-inoremap <c-h>b B
-inoremap <c-h>c C
-inoremap <c-h>d D
-inoremap <c-h>e E
-inoremap <c-h>f F
-inoremap <c-h>g G
-inoremap <c-h>h H
-inoremap <c-h>i I
-inoremap <c-h>j J
-inoremap <c-h>k K
-inoremap <c-h>l L
-inoremap <c-h>m M
-inoremap <c-h>n N
-inoremap <c-h>o O
-inoremap <c-h>p P
-inoremap <c-h>q Q
-inoremap <c-h>r R
-inoremap <c-h>s S
-inoremap <c-h>t T
-inoremap <c-h>u U
-inoremap <c-h>v V
-inoremap <c-h>w W
-inoremap <c-h>x X
-inoremap <c-h>y Y
-inoremap <c-h>z Z
-inoremap <c-h>1 !
-inoremap <c-h>2 @
-inoremap <c-h>3 #
-inoremap <c-h>4 $
-inoremap <c-h>5 %
-inoremap <c-h>6 ^
-inoremap <c-h>7 &
-inoremap <c-h>8 *
-inoremap <c-h>9 (
-inoremap <c-h>0 )
-inoremap <c-h>- _
-inoremap <c-h>- +
-inoremap <c-h>[ {
-inoremap <c-h>] }
-inoremap <c-h>; :
-inoremap <c-h>' "
-inoremap <c-h>, <
-inoremap <c-h>. >
-inoremap <c-h>/ ?
-inoremap <c-h>\ |
-" visual
-vnoremap <c-,> <
-vnoremap <c-.> >
 vmap <c-s> S
 
 " shift
@@ -199,5 +127,3 @@ nnoremap se <C-w>r
 " terminal
 nnoremap <LEADER>t :set splitright<CR>:vsplit<CR>:term zsh<CR>:vertical resize-15<CR>:set nonumber<CR>:set norelativenumber<CR>:setlocal statusline=terminal<CR>:IndentLinesToggle<CR>
 tnoremap <c-l> <C-\><C-N>
-
-inoremap <C-w> <Tab>

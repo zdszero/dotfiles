@@ -1,0 +1,24 @@
+#! /bin/bash
+
+[[ $# -ne 1 ]] && printf "usage: $0 <cmd>\n" && exit 1
+
+case $1 in
+  "dp")
+    xrandr --output eDP-1 --auto --primary
+    ;;
+  "hdmi")
+    xrandr --output HDMI-1 --auto --primary --output eDP-1 --off
+    ;;
+  "right")
+    xrandr --output HDMI-1 --auto --primary --right-of eDP-1 --output eDP-1 --auto
+    ;;
+  "left")
+    xrandr --output HDMI-1 --auto --primary --left-of eDP-1 --output eDP-1 --auto
+    ;;
+  "same")
+    xrandr --output HDMI-1 --same-as eDP-1 --auto
+    ;;
+  *)
+    ERROR: unknown argument\n
+    ;;
+esac

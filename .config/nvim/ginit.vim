@@ -1,4 +1,4 @@
-GuiFont! Consolas-with-Yahei:h15
+GuiFont! Consolas Nerd Font:h15
 
 set mouse=a
 
