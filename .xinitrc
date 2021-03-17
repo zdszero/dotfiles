@@ -11,12 +11,12 @@ export QT_IM_MODULE=fcitx5
 export XMODIFIERS="@im=fcitx5"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export SOCKS_VERSION=5
-export SOCKS_SERVER="127.0.0.1:1080"
+export SOCKS_SERVER="127.0.0.1:1089"
 
 [[ -f ~/.xprofile ]] && source ~/.xprofile
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 if [[ `xrandr | grep "HDMI-1 connected"` ]]; then
-  /home/zds/.local/bin/script/setdisplay hdmi
+  /home/zds/.local/bin/script/setdisplay left
 fi
 
 exec i3

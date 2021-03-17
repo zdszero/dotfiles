@@ -1,13 +1,12 @@
 command! -nargs=? EV call EV#Commander(<f-args>)
-
 command! PrintRTP call printer#PrintRTP()
-
-command! MoveTab call MoveWindowToTab()
-command! ChangeTab call ChangeTabSize()
-
+command! MoveTab call util#MoveWindowToTab()
+command! ChangeTab call util#ChangeTabSize()
 command! Go execute '!chromium %'
 
 autocmd BufEnter *.asm,*.s setf asm
+autocmd BufEnter *.sy setf c
+autocmd BufEnter *.sy :ALEDisableBuffer
 
 augroup HtmlOptions
   autocmd!
@@ -23,24 +22,18 @@ augroup TabTwoSpaces
   autocmd FileType c,cpp,vim,sh,html,javascript,json,scheme,lex,yacc set shiftwidth=2
 augroup END
 
-function! ChangeTabSize() abort
-  if &tabstop == 4
-    set softtabstop=2
-    set tabstop=2
-    set shiftwidth=2
-  else
-    set softtabstop=4
-    set tabstop=4
-    set shiftwidth=4
-  endif
-  exe '%s/    /  /g'
-endfunction
+augroup SpecialAbbr
+  autocmd FileType javascript iabbrev ,e ===
+  autocmd FileType javascript iabbrev ,n !==
+  autocmd FileType python iabbrev ,a and
+  autocmd FileType python iabbrev ,o or
+  autocmd FileType go iabbrev ,s :=
+augroup END
 
-function! MoveWindowToTab () abort
-  let l:bufname = bufname()
-  close
-  exe 'tabnew ' . l:bufname
-endfunction
+augroup BlockCR
+  autocmd FileType c,cpp,javascript imap <c-cr> {<cr>
+  autocmd FileType python imap <c-cr> :<cr>
+augroup END
 
 let g:input_toggle = 0
 function! Fcitx2en()

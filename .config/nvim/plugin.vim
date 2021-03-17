@@ -2,9 +2,10 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'mhinz/vim-startify'
 Plug 'tweekmonster/startuptime.vim'
-Plug 'luochen1990/rainbow'
 Plug 'kshenoy/vim-signature'
 Plug 'itchyny/lightline.vim'
+Plug 'frazrepo/vim-rainbow'
+Plug 'maximbaz/lightline-ale'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/edge'
 Plug 'sainnhe/forest-night'
@@ -22,6 +23,7 @@ Plug 'sbdchd/neoformat'
 Plug 'zdszero/auto-pairs'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'antoinemadec/coc-fzf'
 
 call plug#end()
 
@@ -51,10 +53,7 @@ set background=dark
 
 colorscheme edge
 
-let g:rainbow_active = 1
-
-" let g:indentLine_char = '┃'
-let g:indentLine_char = '•'
+let g:indentLine_char = '┃'
 let g:indentLine_setConceal = 2
 let g:indentLine_faster = 1
 let g:indentLine_fileTypeExclude = ['startify', 'help', 'markdown', 'sh', 'vim', 'javascript', 
@@ -62,19 +61,45 @@ let g:indentLine_fileTypeExclude = ['startify', 'help', 'markdown', 'sh', 'vim',
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 nmap <leader>ig :IndentLinesToggle<CR>
 
+au FileType racket,scheme call rainbow#load()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                LIGHTLINE                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! LightlineGit () abort
+  return get(g:, 'coc_git_status')
+endfunction
+
 let g:lightline = {
 \ 'colorscheme': 'edge',
 \ 'active': {
-\   'left': [ [ 'mode', 'paste' ],
-\             [ 'filename', 'readonly', 'modified', 'gitbranch' ,'cocstatus' ] ]
+\   'left': [
+\     [ 'mode', 'paste' ],
+\     [ 'filename', 'readonly', 'modified', 'gitbranch' ,'cocstatus', 'git' ] ],
+\   'right': [ [ 'lineinfo' ],
+\              [ 'percent' ],
+\              [ 'fileformat', 'fileencoding', 'filetype' ],
+\              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ] ],
 \ },
 \ 'component_function': {
 \   'cocstatus': 'coc#status',
-\   'gitbranch': 'FugitiveHead'
+\   'git': 'LightlineGit',
+\   'linter_checking': 'lightline#ale#checking',
+\   'linter_infos': 'lightline#ale#infos',
+\   'linter_warnings': 'lightline#ale#warnings',
+\   'linter_errors': 'lightline#ale#errors',
+\   'linter_ok': 'lightline#ale#ok',
 \ },
 \ 'separator': { 'left': '', 'right': '' },
 \ 'subseparator': { 'left': '', 'right': '' }
 \ }
+
+let g:lightline#ale#indicator_checking = "\uf110 "
+let g:lightline#ale#indicator_infos = "\uf129 "
+let g:lightline#ale#indicator_warnings = "\uf071 "
+let g:lightline#ale#indicator_errors = "\uf05e "
+let g:lightline#ale#indicator_ok = "\uf00c "
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 COC                                        "
@@ -103,7 +128,8 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-highlight',
   \ 'coc-explorer',
-  \ 'coc-snippets']
+  \ 'coc-snippets',
+  \ 'coc-git']
 
 let g:coc_filetype_map = {
   \ 'jst': 'html',
@@ -167,6 +193,11 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 command! -nargs=0 OI   :call CocAction('runCommand', 'editor.action.organizeImport')
 
+" navigate chunks of current buffer
+nmap [h <Plug>(coc-git-prevchunk)
+nmap ]h <Plug>(coc-git-nextchunk)
+nmap <leader>st :CocCommand git.chunkStage<cr>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                FZF-VIM                                     "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -186,6 +217,8 @@ nmap sw :Windows<CR>
 nmap sh :Helptags<CR>
 nmap sg :Rg<CR>
 nmap <leader>sg :exe 'Rg ' . expand('<cword>')<CR>
+nmap ss :CocFzfList symbols<CR>
+nmap sc :CocFzfList commands<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             VIM-EASY-ALIGN                                 "

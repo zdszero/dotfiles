@@ -2,7 +2,7 @@
 
 import os
 
-HOME_IGNORE_LIST = ['readme.md', 'dotfile_list', 'update_dotfiles', 'deploy_dotfiles', 'gui-config.json', 'OmegaOptions.bak', '.gitignore']
+HOME_IGNORE_LIST = ['readme.md', 'dotfile_list', 'update_dotfiles', 'deploy_dotfiles', 'gui-config.json', '.gitignore']
 
 def copyFilesFrom(rel_path: str):
     # traverse all files and choose dirs
@@ -11,7 +11,7 @@ def copyFilesFrom(rel_path: str):
         new_path = os.path.sep.join([rel_path, file])
         # if current file is dir:
         # make corresponding home dirs based on current dir
-        target_path = '/home/zds/' + new_path
+        target_path = '~/' + new_path
         if os.path.isdir(new_path) and file != '.git':
             # target_dir: directory in home
             if not os.path.exists(target_path):

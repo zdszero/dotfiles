@@ -7,27 +7,9 @@ iabbrev ,e ==
 iabbrev ,n !=
 iabbrev ,g >=
 iabbrev ,l <=
-augroup SpecialAbbr
-  autocmd FileType javascript iabbrev ,e ===
-  autocmd FileType javascript iabbrev ,n !==
-  autocmd FileType python iabbrev ,a and
-  autocmd FileType python iabbrev ,o or
-  autocmd FileType go iabbrev ,s :=
-augroup END
 
-augroup BlockCR
-  autocmd FileType c,cpp,javascript imap <c-cr> {<cr>
-  autocmd FileType python imap <c-cr> :<cr>
-augroup END
-
-function! OpenUrlInBrowser () abort
-  let l:word = expand("<cWORD>")
-  silent execute '!google-chrome-stable --app ' . l:word
-  echo l:word . ' is open in chrome'
-endfunction
-
-nnoremap <silent> <leader>o :call OpenUrlInBrowser()<CR>
-
+nnoremap <silent> <leader>o :call util#OpenInBrowser()<CR>
+inoremap <silent><expr> <c-j> "<esc>:call util#JumpToRightCurlyBrace()<CR>"
 inoremap <s-cr> <cr><up>
 
 " control
@@ -71,8 +53,6 @@ inoremap <c-b> <Left>
 inoremap <c-a> &
 inoremap <c-e> %
 inoremap <c-p> *
-inoremap <c-j> λ
-inoremap <c-o> \|
 inoremap <c-c> ^
 inoremap <c-d> $
 vmap <c-s> S
