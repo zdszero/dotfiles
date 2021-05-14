@@ -1,0 +1,8 @@
+#! /bin/bash
+
+[[ $# -ne 1 ]] && printf "usage: %s <filename>\n" $1
+
+prefix=$(echo $1 | cut -d'.' -f1)
+target=$prefix".svg"
+dot $1 -Tsvg -o $target
+[[ $? -eq 0 ]] && google-chrome-stable $target

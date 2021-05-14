@@ -1,0 +1,35 @@
+#! /usr/bin/python3
+
+import os
+import music_tag
+
+ARTIST = None
+ALBUM = None
+
+def dfs(path: str, depth: int):
+    global ARTIST, ALBUM
+    for file in os.listdir(path):
+        newPath = os.path.sep.join([path, file])
+        if os.path.isdir(newPath):
+            if depth == 1:
+                ARTIST = file
+            elif depth == 2:
+                ALBUM = file
+            dfs(newPath, depth + 1)
+            continue
+        basename = os.path.splitext(file)[0]
+        print('basename: %s' % basename)
+        extension = os.path.splitext(file)[1]
+        print('extension: %s' % extension)
+        if extension in ['mp3', 'm4a', 'wav']:
+            f = music_tag.load_file(newPath)
+            f['title'] = basename
+            f['artist'] = ARTIST
+            if depth == 2:
+                f['album'] = 'Unknown'
+            elif depth == 3:
+                f['album'] = ALBUM
+            f.save()
+
+dfs('/home/zds/Music', 1)
+print('tags for all music are generated!')

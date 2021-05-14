@@ -57,22 +57,22 @@ for_window [class="Qq"] floating enable
 for_window [class="VirtualBox Manager"] floating enable
 for_window [class="VirtualBox Manager"] resize set 1000 800
 for_window [class="Pcmanfm"] floating enable
+for_window [class="Pcmanfm"] move scratchpad
+for_window [class="Pcmanfm"] scratchpad show
 for_window [class="SimpleScreenRecorder"] floating enable
 for_window [class="vlc"] floating enable
 for_window [class="Thunderbird"] floating enable
 
-for_window [class="st-256color"] border pixel 2
 for_window [instance="^term_nvim"] resize shrink width 200 px
 for_window [instance="^floatterm.*"] move scratchpad
 for_window [instance="^floatterm.*"] scratchpad show
 for_window [instance="^floatterm.*"] resize set 1300 890
 for_window [instance="^floatterm.*"] move position center
-for_window [instance="^codeblock_term.*"] border pixel 2
 for_window [instance="^codeblock_term.*"] move scratchpad
 for_window [instance="^codeblock_term.*"] scratchpad show
 for_window [instance="^codeblock_term.*"] resize set 800 600
 for_window [instance="^codeblock_term.*"] move position center
-for_window [instance="^codeblock_term.*"] border pixel 2
+# for_window [instance="^codeblock_term.*"] border pixel 2
 
 ############################
 #  AUTOSTART APPLICATIONS  #

@@ -1,9 +1,9 @@
 configuration {
 	modi: "window,drun,run,ssh,combi";
 /*	width: 50;*/
-/*	lines: 15;*/
-/*	columns: 1;*/
-	font: "JetBrains Mono 12";
+	lines: 10;
+	columns: 1;
+	font: "JetBrains Mono 24";
 /*	bw: 1;*/
 /*	location: 0;*/
 /*	padding: 5;*/
@@ -46,7 +46,7 @@ configuration {
 /*	separator-style: "dash";*/
 /*	hide-scrollbar: false;*/
 /*	fullscreen: false;*/
-/*	fake-transparency: false;*/
+	fake-transparency: true;
 /*	dpi: -1;*/
 /*	threads: 0;*/
 /*	scrollbar-width: 8;*/

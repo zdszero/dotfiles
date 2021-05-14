@@ -102,20 +102,20 @@
 font:
   # Normal (roman) font face
   normal:
-    family: JetBrains Mono Nerd Font
+    family: Consolas Nerd Font
     style: Medium
   bold:
-    family: JetBrains Mono Nerd Font
+    family: Consolas Nerd Font
     style: Bold
   italic:
-    family: JetBrains Mono Nerd Font
+    family: Consolas Nerd Font
     style: Italic
   bold_italic:
-    family: JetBrains Mono Nerd Font
+    family: Consolas Nerd Font
     style: Bold Italic
 
   # Point size
-  size: 8.0
+  size: 14
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter

@@ -49,6 +49,7 @@ inoremap <c-l> <esc>
 inoremap <c-w> <esc>diwa
 " emacs like key bindings
 inoremap <c-f> <Right>
+inoremap <c-space> <Right>
 inoremap <c-b> <Left>
 inoremap <c-a> &
 inoremap <c-e> %

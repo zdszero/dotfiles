@@ -1,0 +1,18 @@
+#! /usr/bin/python3
+
+import os
+import music_tag
+
+def dfs(path: str, depth: int):
+    for file in os.listdir(path):
+        newPath = os.path.sep.join([path, file])
+        if os.path.isdir(newPath):
+            dfs(newPath, depth + 1)
+            continue
+        suffix = file.split('.')[1]
+        if suffix in ['mp3', 'm4a', 'wav']:
+            f = music_tag.load_file(newPath)
+            print('title: %s' % f['title'])
+            print('aritst: %s' % f['artist'])
+
+dfs('/home/zds/Music', 1)

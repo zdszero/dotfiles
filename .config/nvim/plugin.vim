@@ -4,19 +4,19 @@ Plug 'mhinz/vim-startify'
 Plug 'tweekmonster/startuptime.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'itchyny/lightline.vim'
-Plug 'frazrepo/vim-rainbow'
 Plug 'maximbaz/lightline-ale'
-Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/edge'
-Plug 'sainnhe/forest-night'
 Plug 'sheerun/vim-polyglot'
-Plug 'Yggdroot/indentLine'
+Plug 'othree/html5.vim', { 'for': 'html' }
+Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'frazrepo/vim-rainbow', { 'for': ['racket', 'scheme'] }
+Plug 'Yggdroot/indentLine', { 'for': 'python' }
+Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'mattn/emmet-vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'dense-analysis/ale'
 Plug 'sbdchd/neoformat'
@@ -33,18 +33,9 @@ call plug#end()
 set t_Co=256
 " edge
 let g:edge_style='default' " edge aura default
-let g:edge_transparent_background = 1
+let g:edge_transparent_background = 0
 let g:edge_enable_italic = 0
 let g:edge_disable_italic_comment = 0
-" gruvbox
-let g:gruvbox_material_background = 'soft' " hard medium soft
-let g:gruvbox_material_transparent_background = 1
-let g:gruvbox_material_enable_italic = 0
-let g:gruvbox_material_disable_italic_comment = 0
-" forest night
-let g:forest_night_transparent_background = 0
-let g:forest_night_enable_italic = 0
-let g:forest_night_disable_italic_comment = 0
 
 let g:AutoPairs_fileTypeExclude = ['scheme', 'racket']
 
@@ -60,8 +51,6 @@ let g:indentLine_fileTypeExclude = ['startify', 'help', 'markdown', 'sh', 'vim',
       \'css', 'coc-explorer', 'c', 'cpp', 'zsh', 'scheme', 'racket', 'vista', 'yacc', 'lex']
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 nmap <leader>ig :IndentLinesToggle<CR>
-
-au FileType racket,scheme call rainbow#load()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                LIGHTLINE                                   "
@@ -120,6 +109,7 @@ endfunctio
 
 let g:coc_global_extensions = [
   \ 'coc-python',
+  \ 'coc-lua',
   \ 'coc-html',
   \ 'coc-css',
   \ 'coc-emmet',
@@ -277,9 +267,11 @@ let g:neoformat_basic_format_retab = 1
 " Enable trimmming of trailing whitespace
 let g:neoformat_basic_format_trim = 1
 let g:neoformat_enabled_python = ['autopep8', 'yapf']
+let g:neoformat_enabled_html = ['prettier']
 let g:neoformat_enabled_javascript = ['standard']
 let g:neoformat_enabled_c = ['clangformat']
 let g:neoformat_enabled_cpp = ['clangformat']
+let g:neoformat_enabled_lua = ['luaformatter']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 EMMET                                      "

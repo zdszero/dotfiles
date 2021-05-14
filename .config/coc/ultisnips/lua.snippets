@@ -24,15 +24,50 @@
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
-priority -50
+priority -100
 
-####################################
-#           html snippets          #
-####################################
-snippet e "ejs template" w
-<% $1 %>$0
+snippet for "for" b
+for ${1:i} = $2,$3 do
+	$0
+end
 endsnippet
 
-snippet ed "ejs data" w
-<%= $1 %>$0
+snippet forin "for in" b
+for $1, $2 in pairs(${3:list}) do
+	$0
+end
+endsnippet
+
+snippet fn "function" b
+function $1($2)
+	$0
+end
+endsnippet
+
+snippet if "while" b
+if ${1:cond} then
+	$0
+end
+endsnippet
+
+snippet ei "elseif" b
+elseif ${1:cond} then
+	$0
+endsnippet
+
+snippet el "else" b
+else ${1:cond} then
+	$0
+endsnippet
+
+snippet wh "while" b
+while ${1:cond} do
+	$0
+end
+endsnippet
+
+snippet do "repeat" b
+repeat
+	$0
+until ${1:cond}
 endsnippet

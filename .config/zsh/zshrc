@@ -6,13 +6,15 @@ alias n=nvim
 alias p='proxychains'
 alias pg='proxychains wget'
 alias sup="sudo proxychains"
-alias ls="ls --color=tty --group-directories-first"
-alias ll="ls -l"
+alias ls="exa"
+alias ll="exa -l"
+alias la="exa -l -a"
 alias sp="pwd | xclip -i"
 alias gp='cd $(xclip -o)'
 alias lc='leetcode'
 alias r='ranger-cd'
 alias xi="xclip -selection clipboard"
+alias ydl="youtube-dl --proxy socks5://127.0.0.1:1089"
 
 # tmux
 alias tm="tmux"
@@ -30,6 +32,8 @@ alias trs="tmux rename-session -t"
 alias tnw="tmux new-window"
 alias tsw="tmux select-window -t"
 alias trw="tmux rename-window"
+
+export PATH=$PATH:$HOME/.local/bin:$HOME/.local/bin/script
 
 # export NVIM_LISTEN_ADDRESS='/tmp/nvim'
 
@@ -49,5 +53,17 @@ function mkcd {
 }
 
 function precmd { pwd > /tmp/workingdir }
+
+function mdl { proxychains ytmdl $1 -m }
+
+function picin {
+  suffix=$(basename $1 | cut -d. -f2)
+  xclip -selection clipboard -t image/$suffix -i $1
+}
+
+function picout {
+  suffix=$(basename $1 | cut -d. -f2)
+  xclip -selection clipboard -t image/$suffix -o > $1
+}
 
 source ~/.config/zsh/fzf.zsh

@@ -4,10 +4,10 @@ filetype plugin indent on
 
 " expand tab to spaces
 set expandtab
-set softtabstop=4
-set tabstop=4
+set softtabstop=2
+set tabstop=2
 " set backspace=indent,eol,start	"use backspace to delete indent and line
-set shiftwidth=4
+set shiftwidth=2
 
 set autoindent smartindent
 set laststatus=2

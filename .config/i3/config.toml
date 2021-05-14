@@ -10,11 +10,7 @@ volume_empty = " 🔈 "
 volume_half = " 🔉 "
 volume_full = " 🔊 "
 volume_muted = " 🔇 "
-uptime = " ⏲️ "
-memory_mem = " ❄️"
-bat_full = " 🌈"
 time = " "
-cpu = " 🔥 "
 
 [[block]]
 block = "net"
@@ -27,7 +23,6 @@ speed_down = true
 [[block]]
 block = "disk_space"
 path = "/"
-alias = "🖴 /"
 info_type = "available"
 unit = "GiB"
 
