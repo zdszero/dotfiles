@@ -26,8 +26,106 @@
 
 priority -50
 
-snippet beg "begin" b
+snippet be "begin" b
 \begin{$1}
-$0
+$2
 \end{$1}
+endsnippet
+
+snippet frac "fraction" i
+\frac{$1}{$2}$0
+endsnippet
+
+snippet sum "sum" i
+\sum_{${1:n}=${2:1}}^{${3:\infty}} $0
+endsnippet
+
+snippet prod "production" i
+\prod_{${1:n}=${2:1}}^{${3:\infty}} $0
+endsnippet
+
+snippet lim "limitation" i
+\lim\limits_{${1:x} \to ${2:\infty}} $0
+endsnippet
+
+snippet int "integral" i
+\int_{$1}^{$2} ${3:f(x)dx}
+endsnippet
+
+snippet iint "integral" i
+\iint_{$1}^{$2} ${3:f(x)dx}
+endsnippet
+
+snippet iiint "integral" i
+\iiint_{$1}^{$2} ${3:f(x)dx}
+endsnippet
+
+snippet upper "upper" i
+\left \lceil $1 \right \rceil$0
+endsnippet
+
+snippet floor "floor" i
+\left \lfloor $1 \right \rfloor$0
+endsnippet
+
+snippet part "partial" i
+\frac{\partial $1}{\partial $2}$0
+endsnippet
+
+snippet abs "absolute" i
+\lvert $1 \rvert$0
+endsnippet
+
+snippet sqrt "square" i
+\sqrt[$1]{$2}$0
+endsnippet
+
+snippet norm "norm" i
+\lVert $1 \rVert$0
+endsnippet
+
+snippet bmat "bracket matrix" i
+\begin{vmatrix}
+${VISUAL}${1}
+\end{vmatrix}
+endsnippet
+
+snippet pmat "parentheses matrix" i
+\begin{pmatrix}
+${VISUAL}${1}
+\end{pmatrix}
+endsnippet
+
+snippet pmat "vertical matrix" i
+\begin{vmatrix}
+${VISUAL}${1}
+\end{vmatrix}
+endsnippet
+
+snippet align "align" b
+\begin{align}
+${VISUAL}${1}
+\end{align}
+endsnippet
+
+snippet trans "transportation" i
+\vec ${1:x}^{\mathrm{T}}$0
+endsnippet
+
+snippet cases "piecewise function" i
+\begin{cases}
+${VISUAL}${1}
+\end{cases}
+endsnippet
+
+snippet vec "vector" i
+\vec{$1}$0
+endsnippet
+
+snippet cos "cos" i
+\cos{$1}$0
+endsnippet
+
+snippet sin "sin" i
+\sin{$1}$0
 endsnippet

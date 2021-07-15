@@ -19,6 +19,7 @@ case $1 in
     xrandr --output HDMI-1 --same-as eDP-1 --auto
     ;;
   *)
-    ERROR: unknown argument\n
+    printf "ERROR: unknown argument\n"
+    exit 1
     ;;
 esac

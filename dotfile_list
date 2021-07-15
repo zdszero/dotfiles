@@ -6,7 +6,6 @@
 # ranger
 ~/.config/ranger/*
 # nvim
-~/.config/nvim/plugin/*
 ~/.config/nvim/*.vim
 ~/.config/nvim/autoload/*
 ~/.config/nvim/ftplugin/*
@@ -18,6 +17,8 @@
 ~/.zshrc
 # fish
 ~/.config/fish/*
+# fzf
+~/.config/fzf/*
 # compton
 ~/.config/compton.conf
 # zathura
@@ -26,8 +27,6 @@
 ~/.config/dunst/dunstrc
 # rofi
 ~/.config/rofi/*
-# fontconfig
-# ~/.config/fontconfig/fonts.conf
 # fcitx5
 ~/.local/share/fcitx5/data/*
 # some config files
@@ -36,5 +35,8 @@
 ~/.tmux.conf
 ~/.xinitrc
 ~/.xprofile
+~/.pam_environment
 # personal scripts
 ~/.local/bin/script/*
+# etc
+/etc/X11/xorg.conf.d/40-libinput.conf

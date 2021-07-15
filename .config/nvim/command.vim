@@ -1,31 +1,21 @@
 command! -nargs=? EV call EV#Commander(<f-args>)
-command! PrintRTP call printer#PrintRTP()
-command! MoveTab call util#MoveWindowToTab()
-command! ChangeTab call util#ChangeTabSize()
 command! Go execute '!google-chrome-stable %'
+command! Notebook lua require('telescope.builtin').file_browser({cwd='~/Documents/笔记本'})
 
 autocmd BufEnter *.asm,*.s setf asm
 autocmd BufEnter *.sy setf c | :ALEDisableBuffer | :CocDisable
 
+augroup TabOptions
+   autocmd!
+   autocmd FileType asm,python set softtabstop=4 | set tabstop=4 | set shiftwidth=4
+augroup END
+
 augroup HtmlOptions
   autocmd!
-  au BufEnter *.ejs set filetype=html
-  au BufEnter *.ejs :syntax sync fromstart
-  au BufEnter *.html :syntax sync fromstart
+  autocmd BufEnter *.ejs set filetype=html
+  autocmd FileType html syn region javaScript start=+<script\_[^>]*>+ keepend end=+</script\_[^>]*>+me=s-1 contains=@htmlJavaScript,htmlCssStyleComment,htmlScriptTag,@htmlPreproc
+  autocmd FileType html syn sync match htmlHighlight groupthere javaScript "<script"
 augroup END
-
-augroup TabTwoSpaces
-  autocmd!
-  autocmd FileType python set softtabstop=4 | set tabstop=4 | set shiftwidth=4
-augroup END
-
-augroup SpecialAbbr
-  autocmd FileType javascript iabbrev ,e === | iabbrev ,n !==
-  autocmd FileType python iabbrev ,a and | iabbrev ,o or
-  autocmd FileType go iabbrev ,s :=
-augroup END
-
-autocmd FileType python imap <c-cr> :<cr>
 
 let g:input_toggle = 0
 function! Fcitx2en()

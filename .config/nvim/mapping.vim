@@ -1,5 +1,6 @@
 let mapleader=" "
 
+" abbrevations
 iabbrev rt return
 iabbrev ,a &&
 iabbrev ,o \|\|
@@ -8,23 +9,52 @@ iabbrev ,n !=
 iabbrev ,g >=
 iabbrev ,l <=
 
-nnoremap <silent> <leader>o :call util#OpenInBrowser()<CR>
-inoremap <silent><expr> <c-j> "<esc>:call util#JumpToRightCurlyBrace()<CR>"
-inoremap <s-cr> <cr><up>
+function! s:open_in_browser()
+  let l:url = expand('<cWORD>')
+  silent! execute '!google-chrome-stable -app ' . l:url
+endfunction
 
-" control
+nnoremap <silent> <leader>o <cmd>call <SID>open_in_browser()<cr>
+inoremap <c-s-cr> <cr><up>
+
+function! s:one_paragraph() range
+  let l:endline = a:lastline - 1
+  execute a:firstline . ',' . l:endline . 's/\n/ /g'
+  silent! execute a:firstline . 's/- //g'
+endfunction
+
+xmap <silent> gp :<c-u>call <SID>one_paragraph()<cr>
+
+function! s:visualStarSearch(cmdtype, ...)
+  let temp = @"
+  normal! gvy
+  if !a:0 || a:1 != 'raw'
+    let @" = escape(@", a:cmdtype.'\*')
+  endif
+  let @/ = substitute(@", '\n', '\\n', 'g')
+  let @/ = substitute(@/, '\[', '\\[', 'g')
+  let @/ = substitute(@/, '\~', '\\~', 'g')
+  let @/ = substitute(@/, '\.', '\\.', 'g')
+  let @" = temp
+endfunction
+
+xnoremap * :<C-u>call <SID>visualStarSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>visualStarSearch('?')<CR>?<C-R>=@/<CR><CR>
+
+" use control to replace shift
 " normal and visual
-noremap <c-h> 0
-noremap <c-l> $
-noremap <c-j> 7j
-noremap <c-k> 7k
+noremap <c-h> g0
+noremap <c-l> g$
+noremap j gj
+noremap k gk
+noremap <c-j> 7gj
+noremap <c-k> 7gk
 noremap <c-g> G
 " operator pending
 onoremap <c-h> 0
 onoremap <c-l> $
 " normal
 nnoremap <c-s> :w<cr>
-nnoremap <c-c> :CocConfig<cr>
 nnoremap <c-q> <c-v>
 " simulate uppercase command
 nnoremap <c-a> A
@@ -32,55 +62,37 @@ noremap <c-i> I
 noremap <c-o> O
 nnoremap <c-p> P
 nnoremap <c-v> V
-nnoremap <c-f> F
-nnoremap <c-w> W
 nnoremap <c-e> E
-nnoremap <c-b> B
 nnoremap <c-y> yy
 nnoremap <c-,> <<
 nnoremap <c-.> >>
 vnoremap <c-,> <
 vnoremap <c-.> >
+nnoremap <c-/> /\v
 " use <c-m> <c-n> to jump forward and backwoard
 nnoremap <c-m> <c-o>
 nnoremap <c-n> <c-i>
 " insert
 inoremap <c-l> <esc>
-inoremap <c-w> <esc>diwa
 " emacs like key bindings
 inoremap <c-f> <Right>
 inoremap <c-space> <Right>
 inoremap <c-b> <Left>
-inoremap <c-a> &
-inoremap <c-e> %
-inoremap <c-p> *
-inoremap <c-c> ^
-inoremap <c-d> $
-vmap <c-s> S
+inoremap <c-a> <c-c>I
+inoremap <c-e> <c-c>A
+xmap <c-s> S
 
-" shift
+" copy and paste
 nnoremap V "+p
-vnoremap C "+y
+xnoremap C "+y
 
 " alphabet
-nnoremap s <nop>
-nnoremap S :w<CR>
 nnoremap U gUiw
 nnoremap R :source $MYVIMRC<CR>
 nnoremap Q :q<CR>	
-nnoremap <LEADER>q :q!<CR>
+nnoremap <leader>q :q!<CR>
 nnoremap <leader><leader>q :qall<CR>
-nnoremap <LEADER><CR> :nohlsearch<CR>
-
-" split winodws vertically or horizontally
-nnoremap s; :set splitright<CR>:vsplit<CR>
-nnoremap s' :set splitbelow<CR>:split<CR>
-
-" move cursor between windows
-nnoremap <LEADER>; <C-w>l
-nnoremap <LEADER>j <C-w>h
-nnoremap <LEADER>l <C-w>k
-nnoremap <LEADER>k <C-w>j
+nnoremap <leader><CR> :nohlsearch<CR>
 
 " resize
 nnoremap <up> :res +5<CR>
@@ -88,23 +100,42 @@ nnoremap <down> :res -5<CR>
 nnoremap <left> :vertical resize-5<CR>
 nnoremap <right> :vertical resize+5<CR>
 
-" tab
-" switch between tabs
+function! s:last_edit_file()
+  let v:errmsg = ''
+  silent! normal 
+  if v:errmsg == ''
+    return
+  endif
+  bprevious
+endfunction
+
+" file navigation
 nnoremap [t :tabprevious<CR>
 nnoremap ]t :tabnext<CR>
-" switch between buffers
 nnoremap [b :bprevious<CR>
 nnoremap ]b :bnext<CR>
 nnoremap [B :bfirst<CR>
 nnoremap ]B :blast<CR>
-nnoremap [f <c-^>
-nnoremap ]f <c-^>
+nnoremap [f <cmd> call <SID>last_edit_file()<cr>
 
-" change the way windows are displayed
-nnoremap sv <C-w>t<C-w>H
-nnoremap sh <C-w>t<C-w>K
-nnoremap se <C-w>r
+" window navigation
+nnoremap <leader>j <c-w>h
+nnoremap <leader>k <c-w>j
+nnoremap <leader>l <c-w>k
+nnoremap <leader>; <c-w>l
+nnoremap <leader>h <c-w>J
+nnoremap <leader>v <c-w>H
+
+function! s:open_terminal()
+  set splitright
+  vsplit
+  term zsh
+  vertical resize-15
+  setlocal nonumber
+  setlocal norelativenumber
+  setlocal statusline=terminal
+endfunction
 
 " terminal
-nnoremap <LEADER>t :set splitright<CR>:vsplit<CR>:term zsh<CR>:vertical resize-15<CR>:set nonumber<CR>:set norelativenumber<CR>:setlocal statusline=terminal<CR>:IndentLinesToggle<CR>
-tnoremap <c-l> <C-\><C-N>
+nnoremap <leader>t <cmd>call <SID>open_terminal()<cr>
+tnoremap <c-[> <C-\><C-N>

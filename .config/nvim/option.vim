@@ -1,6 +1,10 @@
 set nocompatible
 syntax on
 filetype plugin indent on
+set encoding=utf8
+
+" always open the signcolumn
+set signcolumn=yes
 
 " expand tab to spaces
 set expandtab
@@ -19,7 +23,7 @@ set mouse=n
 
 set number
 set relativenumber
-set cursorline
+set nocursorline
 set nocursorcolumn
 " set gcr=a:block
 
@@ -36,8 +40,6 @@ exec "nohlsearch"
 set ignorecase
 set smartcase
 set magic
-
-set encoding=utf8
 
 set autochdir
 set nobackup

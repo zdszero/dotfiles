@@ -53,21 +53,19 @@ for_window [class="Sxiv"] floating enable
 for_window [class="xpad"] floating enable
 for_window [instance="fcitx5-config-qt"] floating enable
 for_window [instance="feh"] floating enable
-for_window [class="Qq"] floating enable
+for_window [class="Wine"] floating enable
 for_window [class="VirtualBox Manager"] floating enable
 for_window [class="VirtualBox Manager"] resize set 1000 800
-for_window [class="Pcmanfm"] floating enable
-for_window [class="Pcmanfm"] move scratchpad
-for_window [class="Pcmanfm"] scratchpad show
+for_window [class="Org.gnome.Nautilus"] floating enable
 for_window [class="SimpleScreenRecorder"] floating enable
 for_window [class="vlc"] floating enable
 for_window [class="Thunderbird"] floating enable
 
-for_window [instance="^term_nvim"] resize shrink width 200 px
-for_window [instance="^floatterm.*"] move scratchpad
-for_window [instance="^floatterm.*"] scratchpad show
-for_window [instance="^floatterm.*"] resize set 1300 890
-for_window [instance="^floatterm.*"] move position center
+for_window [class="^term_nvim"] resize shrink width 200 px
+for_window [class="^floatterm.*"] move scratchpad
+for_window [class="^floatterm.*"] scratchpad show
+for_window [class="^floatterm.*"] resize set 1300 890
+for_window [class="^floatterm.*"] move position center
 for_window [instance="^codeblock_term.*"] move scratchpad
 for_window [instance="^codeblock_term.*"] scratchpad show
 for_window [instance="^codeblock_term.*"] resize set 800 600
@@ -90,14 +88,14 @@ floating_modifier $mod
 
 # terminal
 bindsym $mod+Return exec --no-startup-id $term -e tmux
-# bindsym $mod+Return exec --no-startup-id alacritty -e tmux
-bindsym $mod+Shift+Return exec --no-startup-id cat /tmp/workingdir | xargs -I {} $term -d {}
+# bindsym $mod+Shift+Return exec --no-startup-id $term --working-directory $(cat /tmp/workingdir)
+bindsym $mod+Shift+Return exec --no-startup-id $term --working-directory $(cat /tmp/workingdir)
 # scratchpad
-bindsym $mod+Shift+s exec --no-startup-id cat /tmp/workingdir | xargs -I {} $term -n floatterm -d {} -C "#333333@256" -e tmux
-bindsym $mod+Shift+a exec --no-startup-id $term -n floatterm -C "#333333@256" -e tmux
+# bindsym $mod+Shift+s exec --no-startup-id $term --class floatterm
+bindsym $mod+Shift+s exec --no-startup-id $term -c floatterm
 bindsym $mod+s scratchpad show
 bindsym $mod+minus move scratchpad; scratchpad show
-bindsym $mod+m exec --no-startup-id $term -n floatterm_math -C "#333333@256" -e python 
+bindsym $mod+m exec --no-startup-id $term -c floatterm_math -e bc
 
 # kill focused window
 bindsym $mod+Shift+q kill

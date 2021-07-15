@@ -1,51 +1,16 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator.
+env:
+  TERM: alacritty
 
-# Import additional configuration files
-#
-# These configuration files will be loaded in order, replacing values in files
-# loaded earlier with those loaded later in the chain. The file itself will
-# always be loaded last.
-#import:
-#  - /path/to/alacritty.yml
-
-# Any items in the `env` entry below will be added as
-# environment variables. Some entries may override variables
-# set by alacritty itself.
-#env:
-  # TERM variable
-  #
-  # This value is used to set the `$TERM` environment variable for
-  # each instance of Alacritty. If it is not present, alacritty will
-  # check the local terminfo database and use `alacritty` if it is
-  # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
-
-#window:
-  # Window dimensions (changes require restart)
-  #
-  # Number of lines/columns (not pixels) in the terminal. The number of columns
-  # must be at least `2`, while using a value of `0` for columns and lines will
-  # fall back to the window manager's recommended size.
+window:
   #dimensions:
   #  columns: 0
   #  lines: 0
-
-  # Window position (changes require restart)
-  #
-  # Specified in number of pixels.
-  # If the position is not set, the window manager will handle the placement.
   #position:
   #  x: 0
   #  y: 0
-
-  # Window padding (changes require restart)
-  #
-  # Blank space added around the window in pixels. This padding is scaled
-  # by DPI and the specified value is always added at both opposing sides.
   #padding:
   #  x: 0
   #  y: 0
-
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
 
@@ -72,10 +37,10 @@
   #startup_mode: Windowed
 
   # Window title
-  #title: Alacritty
+  title: Alacritty
 
   # Allow terminal applications to change Alacritty's window title.
-  #dynamic_title: true
+  dynamic_title: false
 
   # Window class (Linux/BSD only):
   #class:
@@ -115,18 +80,12 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 14
+  size: 9
 
-  # Offset is the extra space around each character. `offset.y` can be thought
-  # of as modifying the line spacing, and `offset.x` as modifying the letter
-  # spacing.
-  #offset:
+  # offset:
   #  x: 0
   #  y: 0
 
-  # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increasing `x` moves the glyph to the
-  # right, increasing `y` moves the glyph upward.
   #glyph_offset:
   #  x: 0
   #  y: 0
@@ -140,114 +99,50 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
-# Colors (Tomorrow Night)
-#colors:
+# KDE Breeze (Ported from Konsole)
+colors:
   # Default colors
-  #primary:
-  #  background: '#1d1f21'
-  #  foreground: '#c5c8c6'
+  primary:
+    background: '0x232627'
+    foreground: '0xfcfcfc'
 
-    # Bright and dim foreground colors
-    #
-    # The dimmed foreground color is calculated automatically if it is not
-    # present. If the bright foreground color is not set, or
-    # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
-    # color will be used.
-    #dim_foreground: '#828482'
-    #bright_foreground: '#eaeaea'
-
-  # Cursor colors
-  #
-  # Colors which should be used to draw the terminal cursor.
-  #
-  # Allowed values are CellForeground and CellBackground, which reference the
-  # affected cell, or hexadecimal colors like #ff00ff.
-  #cursor:
-  #  text: CellBackground
-  #  cursor: CellForeground
-
-  # Vi mode cursor colors
-  #
-  # Colors for the cursor when the vi mode is active.
-  #
-  # Allowed values are CellForeground and CellBackground, which reference the
-  # affected cell, or hexadecimal colors like #ff00ff.
-  #vi_mode_cursor:
-  #  text: CellBackground
-  #  cursor: CellForeground
-
-  # Selection colors
-  #
-  # Colors which should be used to draw the selection area.
-  #
-  # Allowed values are CellForeground and CellBackground, which reference the
-  # affected cell, or hexadecimal colors like #ff00ff.
-  #selection:
-  #  text: CellBackground
-  #  background: CellForeground
-
-  # Search colors
-  #
-  # Colors used for the search bar and match highlighting.
-  #search:
-    # Allowed values are CellForeground and CellBackground, which reference the
-    # affected cell, or hexadecimal colors like #ff00ff.
-    #matches:
-    #  foreground: '#000000'
-    #  background: '#ffffff'
-    #focused_match:
-    #  foreground: CellBackground
-    #  background: CellForeground
-
-    #bar:
-    #  background: '#c5c8c6'
-    #  foreground: '#1d1f21'
+    dim_foreground: '0xeff0f1'
+    bright_foreground: '0xffffff'
+    dim_background: '0x31363b'
+    bright_background: '0x000000'
 
   # Normal colors
-  #normal:
-  #  black:   '#1d1f21'
-  #  red:     '#cc6666'
-  #  green:   '#b5bd68'
-  #  yellow:  '#f0c674'
-  #  blue:    '#81a2be'
-  #  magenta: '#b294bb'
-  #  cyan:    '#8abeb7'
-  #  white:   '#c5c8c6'
+  normal:
+    black: '0x232627'
+    red: '0xed1515'
+    green: '0x11d116'
+    yellow: '0xf67400'
+    blue: '0x1d99f3'
+    magenta: '0x9b59b6'
+    cyan: '0x1abc9c'
+    white: '0xfcfcfc'
 
   # Bright colors
-  #bright:
-  #  black:   '#666666'
-  #  red:     '#d54e53'
-  #  green:   '#b9ca4a'
-  #  yellow:  '#e7c547'
-  #  blue:    '#7aa6da'
-  #  magenta: '#c397d8'
-  #  cyan:    '#70c0b1'
-  #  white:   '#eaeaea'
+  bright:
+    black: '0x7f8c8d'
+    red: '0xc0392b'
+    green: '0x1cdc9a'
+    yellow: '0xfdbc4b'
+    blue: '0x3daee9'
+    magenta: '0x8e44ad'
+    cyan: '0x16a085'
+    white: '0xffffff'
 
   # Dim colors
-  #
-  # If the dim colors are not set, they will be calculated automatically based
-  # on the `normal` colors.
-  #dim:
-  #  black:   '#131415'
-  #  red:     '#864343'
-  #  green:   '#777c44'
-  #  yellow:  '#9e824c'
-  #  blue:    '#556a7d'
-  #  magenta: '#75617b'
-  #  cyan:    '#5b7d78'
-  #  white:   '#828482'
-
-  # Indexed Colors
-  #
-  # The indexed colors include all colors from 16 to 256.
-  # When these are not set, they're filled with sensible defaults.
-  #
-  # Example:
-  #   `- { index: 16, color: '#ff00ff' }`
-  #
-  #indexed_colors: []
+  dim:
+    black: '0x31363b'
+    red: '0x783228'
+    green: '0x17a262'
+    yellow: '0xb65619'
+    blue: '0x1b668f'
+    magenta: '0x614a73'
+    cyan: '0x186c60'
+    white: '0x63686d'
 
 # Bell
 #
@@ -294,7 +189,7 @@ font:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.8
+background_opacity: 0.9
 
 #selection:
   # This string contains all characters that are used as separators for
@@ -304,33 +199,15 @@ background_opacity: 0.8
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
 
-#cursor:
-  # Cursor style
-  #
+cursor:
   # Values for `style`:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  #style: Block
-
-  # Vi mode cursor style
-  #
-  # If the vi mode cursor style is `None` or not specified, it will fall back to
-  # the style of the active value of the normal cursor.
-  #
-  # See `cursor.style` for available options.
-  #vi_mode_style: None
-
-  # If this is `true`, the cursor will be rendered as a hollow box when the
-  # window is not focused.
-  #unfocused_hollow: true
-
-  # Thickness of the cursor relative to the cell width as floating point number
-  # from `0.0` to `1.0`.
-  #thickness: 0.15
+  style: Block
 
 # Live config reload (changes require restart)
-#live_config_reload: true
+live_config_reload: true
 
 # Shell
 #
@@ -615,71 +492,29 @@ background_opacity: 0.8
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
+  - { key: Return,         mods: Control,                 chars: "\x1b[13;5u"      }
+  - { key: Return,         mods: Shift,                   chars: "\x1b[13;2u"      }
+  - { key: Return,         mods: Control|Shift,           chars: "\x1b[13;6u"      }
+  - { key: Apostrophe,     mods: Control,                 chars: "\x1b[39;5u"      }
+  - { key: Comma,          mods: Control,                 chars: "\x1b[44;5u"      }
+  - { key: Period,         mods: Control,                 chars: "\x1b[46;5u"      }
+  - { key: Slash,          mods: Control,                 chars: "\x1b[47;5u"      }
+  - { key: Semicolon,      mods: Control,                 chars: "\x1b[59;5u"      }
+  - { key: LBracket,       mods: Control,                 chars: "\x1b[91;5u"      }
+  - { key: RBracket,       mods: Control,                 chars: "\x1b[93;5u"      }
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
   #- { key: L,         mods: Control,             action: ClearLogNotice }
-  #- { key: L,         mods: Control, mode: ~Vi,  chars: "\x0c"          }
   #- { key: PageUp,    mods: Shift,   mode: ~Alt, action: ScrollPageUp,  }
   #- { key: PageDown,  mods: Shift,   mode: ~Alt, action: ScrollPageDown }
   #- { key: Home,      mods: Shift,   mode: ~Alt, action: ScrollToTop,   }
   #- { key: End,       mods: Shift,   mode: ~Alt, action: ScrollToBottom }
-
-  # Vi Mode
-  # - { key: Space,  mods: Shift|Control, mode: Vi, action: ScrollToBottom          }
-  # - { key: Space,  mods: Shift|Control,           action: ToggleViMode            }
-  # - { key: Escape,                      mode: Vi, action: ClearSelection          }
-  # - { key: I,                           mode: Vi, action: ScrollToBottom          }
-  # - { key: I,                           mode: Vi, action: ToggleViMode            }
-  # - { key: C,      mods: Control,       mode: Vi, action: ToggleViMode            }
-  # - { key: Y,      mods: Control,       mode: Vi, action: ScrollLineUp            }
-  # - { key: E,      mods: Control,       mode: Vi, action: ScrollLineDown          }
-  # - { key: G,                           mode: Vi, action: ScrollToTop             }
-  # - { key: G,      mods: Shift,         mode: Vi, action: ScrollToBottom          }
-  # - { key: B,      mods: Control,       mode: Vi, action: ScrollPageUp            }
-  # - { key: F,      mods: Control,       mode: Vi, action: ScrollPageDown          }
-  # - { key: U,      mods: Control,       mode: Vi, action: ScrollHalfPageUp        }
-  # - { key: D,      mods: Control,       mode: Vi, action: ScrollHalfPageDown      }
-  # - { key: Y,                           mode: Vi, action: Copy                    }
-  # - { key: Y,                           mode: Vi, action: ClearSelection          }
-  # - { key: Copy,                        mode: Vi, action: ClearSelection          }
-  # - { key: V,                           mode: Vi, action: ToggleNormalSelection   }
-  # - { key: V,      mods: Shift,         mode: Vi, action: ToggleLineSelection     }
-  # - { key: V,      mods: Control,       mode: Vi, action: ToggleBlockSelection    }
-  # - { key: V,      mods: Alt,           mode: Vi, action: ToggleSemanticSelection }
-  # - { key: Return,                      mode: Vi, action: Open                    }
-  # - { key: K,                           mode: Vi, action: Up                      }
-  # - { key: J,                           mode: Vi, action: Down                    }
-  # - { key: H,                           mode: Vi, action: Left                    }
-  # - { key: L,                           mode: Vi, action: Right                   }
-  # - { key: Up,                          mode: Vi, action: Up                      }
-  # - { key: Down,                        mode: Vi, action: Down                    }
-  # - { key: Left,                        mode: Vi, action: Left                    }
-  # - { key: Right,                       mode: Vi, action: Right                   }
-  # - { key: Key0,                        mode: Vi, action: First                   }
-  # - { key: Key4,   mods: Shift,         mode: Vi, action: Last                    }
-  # - { key: Key6,   mods: Shift,         mode: Vi, action: FirstOccupied           }
-  # - { key: H,      mods: Shift,         mode: Vi, action: High                    }
-  # - { key: M,      mods: Shift,         mode: Vi, action: Middle                  }
-  # - { key: L,      mods: Shift,         mode: Vi, action: Low                     }
-  # - { key: B,                           mode: Vi, action: SemanticLeft            }
-  # - { key: W,                           mode: Vi, action: SemanticRight           }
-  # - { key: E,                           mode: Vi, action: SemanticRightEnd        }
-  # - { key: B,      mods: Shift,         mode: Vi, action: WordLeft                }
-  # - { key: W,      mods: Shift,         mode: Vi, action: WordRight               }
-  # - { key: E,      mods: Shift,         mode: Vi, action: WordRightEnd            }
-  # - { key: Key5,   mods: Shift,         mode: Vi, action: Bracket                 }
-  # - { key: Slash,                       mode: Vi, action: SearchForward           }
-  # - { key: Slash,  mods: Shift,         mode: Vi, action: SearchBackward          }
-  # - { key: N,                           mode: Vi, action: SearchNext              }
-  # - { key: N,      mods: Shift,         mode: Vi, action: SearchPrevious          }
-
+  
   # (Windows, Linux, and BSD only)
   - { key: V,              mods: Control|Shift,           action: Paste            }
   - { key: C,              mods: Control|Shift,           action: Copy             }
   - { key: F,              mods: Control|Shift,           action: SearchForward    }
   - { key: B,              mods: Control|Shift,           action: SearchBackward   }
-  - { key: Return,         mods: Shift,                   chars: "\x1b[13;2u"       }
-  - { key: Return,         mods: Control,                 chars: "\x1b[13;5u"       }
   #- { key: C,              mods: Control|Shift, mode: Vi, action: ClearSelection   }
   #- { key: Insert,         mods: Shift,                   action: PasteSelection   }
   #- { key: Key0,           mods: Control,                 action: ResetFontSize    }

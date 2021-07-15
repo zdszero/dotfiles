@@ -1,8 +1,11 @@
-function! MakeMathBlock () range
+set conceallevel=2
+set textwidth=0
+
+function! s:MakeMathBlock () range
   '<,'> s/[\x00-\xff]\+/$\0$/g
 endfunction
 
-function! DeleteMarkdownPicture () abort
+function! s:DeleteMarkdownPicture () abort
   let l:path = matchstr(getline('.'), '\v\(\zs.*\ze\)')
   if l:path ==# ''
     return
@@ -14,12 +17,9 @@ function! DeleteMarkdownPicture () abort
   endif
 endfunction
 
-function! VisualWordCount () range
+function! s:VisualWordCount () range
   execute '!sed -n ' . a:firstline . ',' . a:lastline . 'p % | wc -w'
 endfunction
-
-set conceallevel=2
-set textwidth=0
 
 inoremap <c-;> <Esc>/<++><CR>:nohlsearch<CR>d4li
 inoremap ;f <Esc>/<++><CR>:nohlsearch<CR>d4li
@@ -42,6 +42,8 @@ inoremap ;4 ####<Space><Enter><Enter><++><Esc>2kA
 inoremap ;5 #####<Space><Enter><Enter><++><Esc>2kA
 inoremap ;6 ######<Space><Enter><Enter><++><Esc>2kA
 nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
-vnoremap <silent> <c-f> :call MakeMathBlock()<CR>
-vnoremap <silent> <c-c> :call VisualWordCount()<CR>
-nmap <silent> <leader>d :call DeleteMarkdownPicture()<CR>
+vnoremap <silent> <c-f> :call s:MakeMathBlock()<CR>
+vnoremap <silent> <c-c> :call s:VisualWordCount()<CR>
+nmap <silent> <leader>d :call s:DeleteMarkdownPicture()<CR>
+
+command! TOC call toc#GenerateToc()

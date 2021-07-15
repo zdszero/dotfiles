@@ -26,8 +26,8 @@
 priority -50
 
 snippet fn "Function" b
-function! ${1:function_name} (${2}) ${3:abort}
-	$0
+function! ${1:function_name}(${2})$3
+	$4
 endfunction
 endsnippet
 
@@ -59,7 +59,7 @@ for ${1:i} in range($2)
 endfor
 endsnippet
 
-snippet for "normal for" b
+snippet forin "normal for" b
 for ${1:elem} in ${2:list}
 	$3
 endfor

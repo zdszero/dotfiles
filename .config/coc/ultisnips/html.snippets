@@ -26,13 +26,45 @@
 
 priority -50
 
-####################################
-#           html snippets          #
-####################################
-snippet e "ejs template" w
-<% $1 %>$0
+extends javascript
+
+snippet html:5 "html5 template" b
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$1</title>
+</head>
+<body>
+	$2
+</body>
+</html>
 endsnippet
 
-snippet ed "ejs data" w
-<%= $1 %>$0
+snippet div "divison" b
+<div$2>$1</div>$0
+endsnippet
+
+snippet p "paragraph" b
+<p$2>$1</p>$0
+endsnippet
+
+snippet li "list item" b
+<li>$1</li>$0
+endsnippet
+
+snippet ul "unordered list" b
+<ul>$1</ul>$0
+endsnippet
+
+snippet img "image" b
+<img src="$1" alt="$2"></img>$0
+endsnippet
+
+snippet sp "span" b
+<span$2>$1</span>$0
+endsnippet
+
+snippet btn "button" b
+<button$2>$1</button>$0
 endsnippet
