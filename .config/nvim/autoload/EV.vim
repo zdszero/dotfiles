@@ -1,4 +1,4 @@
-function EV#Commander(...) abort
+function EV#Commander(...)
   " if no parameters, edit vimrc
   if a:0 == 0
     edit $MYVIMRC
@@ -17,7 +17,11 @@ function EV#Commander(...) abort
   elseif l:arg == 'c'
     edit ~/.config/nvim/command.vim
   elseif l:arg == 's'
-    execute 'UltiSnipsEdit'
+    let v:errmsg = ''
+    silent! exe 'UltiSnipsEdit'
+    if v:errmsg != ''
+      exe 'CocCommand snippets.editSnippets'
+    endif
   else
     echoerr 'Option not defined!'
   endif

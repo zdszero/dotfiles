@@ -2,211 +2,102 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'mhinz/vim-startify'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
-Plug 'kshenoy/vim-signature'
-Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
-Plug 'sainnhe/edge'
-Plug 'sheerun/vim-polyglot'
-Plug 'othree/html5.vim', { 'for': 'html' }
 Plug 'frazrepo/vim-rainbow', { 'for': ['racket', 'scheme'] }
-Plug 'Yggdroot/indentLine', { 'for': 'python' }
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'gcmt/wildfire.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'liuchengxu/vista.vim'
-Plug 'dense-analysis/ale'
-Plug 'Raimondi/delimitMate'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'antoinemadec/coc-fzf'
-Plug 'zdszero/nvim-hugo'
-Plug 'sbdchd/neoformat'
+Plug 'justinmk/vim-sneak'
+Plug 'windwp/nvim-autopairs'
+Plug 'liuchengxu/vista.vim', { 'on': 'Vista' }
+Plug 'zdszero/nvim-hugo', { 'branch': 'main' }
+Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+Plug 'glepnir/lspsaga.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'SirVer/ultisnips'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'norcalli/nvim-colorizer.lua', { 'for': ['vim', 'html', 'css', 'yml'] }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'RRethy/vim-illuminate'
+Plug 'hoob3rt/lualine.nvim'
+Plug 'marko-cerovac/material.nvim'
+Plug 'akinsho/nvim-bufferline.lua'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua', 'for': 'python' }
 
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                COLOR                                       "
+"                                color                                       "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256
-" edge
-let g:edge_style='default' " edge aura default
-let g:edge_transparent_background = 1
-let g:edge_enable_italic = 0
-let g:edge_disable_italic_comment = 0
 
-let g:delimitMate_expand_space = 1
-let g:delimitMate_expand_cr = 1
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = { "verilog" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {},               -- list of language that will be disabled
+  },
+}
 
-" dark light
-set background=dark
+-- oceanic darker
+vim.g.material_style = 'darker'
+vim.g.material_italic_comments = true
+vim.g.material_italic_keywords = false
+vim.g.material_italic_functions = false
+vim.g.material_italic_variables = false
+vim.g.material_contrast = true
+vim.g.material_borders = false
+vim.g.material_disable_background = false
+--vim.g.material_custom_colors = { black = "#000000", bg = "#0F111A" }
 
-colorscheme edge
+-- Load the colorscheme
+require('material').set()
+require('bufferline').setup{}
 
-let g:indentLine_char = '┃'
-let g:indentLine_setConceal = 2
-let g:indentLine_faster = 1
-let g:indentLine_bufTypeExclude = ['help', 'terminal']
-nmap <leader>ig :IndentLinesToggle<cr>
+-- autopairs
+local npairs = require('nvim-autopairs')
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                LIGHTLINE                                   "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+npairs.setup({
+  disable_filetype = { "TelescopePrompt", "racket", "scheme"},
+})
 
-function! LightlineGit () abort
-  return get(g:, 'coc_git_status')
-endfunction
+EOF
 
-let g:lightline = {
-\ 'colorscheme': 'edge',
-\ 'active': {
-\   'left': [
-\     [ 'mode', 'paste' ],
-\     [ 'filename', 'readonly', 'modified', 'gitbranch' ,'cocstatus', 'git' ] ],
-\   'right': [ [ 'lineinfo' ],
-\              [ 'percent' ],
-\              [ 'fileformat', 'fileencoding', 'filetype' ],
-\              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ] ],
-\ },
-\ 'component_function': {
-\   'cocstatus': 'coc#status',
-\   'git': 'LightlineGit',
-\   'linter_checking': 'lightline#ale#checking',
-\   'linter_infos': 'lightline#ale#infos',
-\   'linter_warnings': 'lightline#ale#warnings',
-\   'linter_errors': 'lightline#ale#errors',
-\   'linter_ok': 'lightline#ale#ok',
-\ },
-\ 'separator': { 'left': '', 'right': '' },
-\ 'subseparator': { 'left': '', 'right': '' }
-\ }
-
-let g:lightline#ale#indicator_checking = "\uf110 "
-let g:lightline#ale#indicator_infos = "\uf129 "
-let g:lightline#ale#indicator_warnings = "\uf071 "
-let g:lightline#ale#indicator_errors = "\uf05e "
-let g:lightline#ale#indicator_ok = "\uf00c "
+luafile ~/.config/nvim/statusline.lua
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                 COC                                        "
+"                                NVIM-TELESCOPE                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TextEdit might fail if hidden is not set.
-set hidden
 
-" Some servers have issues with backup files
-set nobackup
-set nowritebackup
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunctio
-
-let g:coc_global_extensions = [
-      \ 'coc-texlab',
-      \ 'coc-pyright',
-      \ 'coc-lua',
-      \ 'coc-html',
-      \ 'coc-css',
-      \ 'coc-tsserver',
-      \ 'coc-vimlsp',
-      \ 'coc-json',
-      \ 'coc-highlight',
-      \ 'coc-explorer',
-      \ 'coc-snippets',
-      \ 'coc-git']
-
-let g:coc_filetype_map = {
-  \ 'jst': 'html',
-  \ 'h': 'c',
-  \ 'hpp': 'cpp'
-  \ }
-
-let g:coc_explorer_global_presets = {
-\   'wiki': {
-\      'root-uri': '~/Documents/笔记本',
-\      'position': 'floating'
-\   },
-\   'snip': {
-\      'root-uri': '~/.config/coc/ultisnips',
-\      'position': 'floating'
-\   },
-\   'simplify': {
-\     'file-child-template': '[git | 2] [selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]',
-\     'width': 30
-\   }
-\ } 
-
-command! NoteBook :CocCommand explorer --preset wiki --sources=file+
-command! SnipDir :CocCommand explorer --preset snip --sources=file+
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<cr>
-" coc explorer mapping
-nmap <silent> <leader>e :CocCommand explorer --sources file+ --preset simplify --quit-on-open<cr>
-" coc general mapping
-nmap <silent> gD <Plug>(coc-declaration)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <leader>rn <Plug>(coc-rename)
-" nmap <silent> <leader>x <Plug>(coc-codelens-action)
-nnoremap <expr> <C-d> coc#float#has_scroll() ? coc#util#float_scroll(1) : "\<C-d>"
-nnoremap <expr> <C-u> coc#float#has_scroll() ? coc#util#float_scroll(0) : "\<C-u>"
-" coc snippet mapping
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<cr>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-let g:coc_snippet_next = '<c-j>'
-let g:coc_snippet_prev = '<c-k>'
-vmap <C-d> <Plug>(coc-snippets-select)
-xmap <leader>x <Plug>(coc-convert-snippet)
-" map func and class obj
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-command! -nargs=0 Format :call CocAction('format')
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
-command! -nargs=0 OI   :call CocAction('runCommand', 'editor.action.organizeImport')
-
-" navigate chunks of current buffer
-nmap [h <Plug>(coc-git-prevchunk)
-nmap ]h <Plug>(coc-git-nextchunk)
-nmap <leader>st :CocCommand git.chunkStage<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                FZF-VIM                                     "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    layout_config = {
+      center = {
+        preview_cutoff = 40
+      },
+      height = 0.75,
+      horizontal = {
+        preview_cutoff = 120,
+        prompt_position = "bottom"
+      },
+      vertical = {
+        preview_cutoff = 40
+      },
+      width = 0.8
+    }
+  }
+}
+EOF
 
 function! s:is_in_git_directory()
   silent !git rev-parse --is-inside-work-tree
@@ -216,17 +107,19 @@ function! s:is_in_git_directory()
   return 0
 endfunction
 
-nmap <silent><expr> sf <SID>is_in_git_directory() ? ':GFiles<cr>' : ':Files<cr>'
-nmap sb :Buffers<cr>
-nmap sl :BLines<cr>
-nmap sg :Rg<cr>
-nmap st :HelpTags<cr>
-nmap <leader>sg :exe 'Rg ' . expand('<cword>')<cr>
-nmap ss :CocFzfList symbols<cr>
-nmap sc :CocFzfList commands<cr>
-
-let g:coc_fzf_preview = ''
-let g:coc_fzf_opts = []
+nnoremap <silent> gr <cmd>Telescope lsp_references<cr>
+nnoremap <silent> gi <cmd>Telescope lsp_implementations<cr>
+nmap <silent> <expr> <leader>sf <SID>is_in_git_directory() ?
+      \'<cmd>Telescope git_files theme=get_dropdown<cr>' : '<cmd>Telescope find_files theme=get_dropdown<cr>'
+nmap <silent> <leader>sb <cmd>Telescope buffers theme=get_dropdown<cr>
+nmap <silent> <leader>st <cmd>Telescope colorscheme theme=get_dropdown<cr>
+nmap <silent> <leader>sl <cmd>Telescope current_buffer_fuzzy_find<cr>
+nmap <silent> <leader>sg <cmd>Telescope live_grep<cr>
+nmap <silent> <leader>sw <cmd>Telescope grep_string<cr>
+nmap <silent> <leader>sc <cmd>Telescope commands<cr>
+nmap <silent> <leader>sh <cmd>Telescope help_tags<cr>
+nmap <silent> <leader>se <cmd>Telescope lsp_workspace_diagnostics<cr>
+nmap <silent> <leader>sr <cmd>Telescope lsp_references<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             VIM-EASY-ALIGN                                 "
@@ -239,39 +132,9 @@ nmap ga <Plug>(EasyAlign)
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   ALE                                      "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" when to lint
-let g:ale_disable_lsp = 1
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 0
-let g:ale_linters = {
-\   'python': ['pylint'],
-\   'cpp': ['g++'],
-\   'c': ['gcc'],
-\   'sh': ['shell'],
-\   'javascript': ['standard'],
-\   'css': ['stylelint'],
-\   'json': ['jsonlint'],
-\}
-let g:ale_css_stylelint_options = '--config ~/.stylelintrc'
-nmap <silent> [g <Plug>(ale_previous_wrap)
-nmap <silent> ]g <Plug>(ale_next_wrap)
-nmap <silent> <leader>d :ALEDetail<cr>
-" error sign
-let g:ale_sign_error = '✕'
-let g:ale_sign_warning = '⚡'
-let g:ale_sign_column_always = 0
-let g:ale_fix_on_save = 0
-let g:ale_virtualtext_cursor = 0
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                VISTA                                       "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'coc'
 let g:vista_close_on_jump=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -292,7 +155,7 @@ let g:hugo_post_template = [
       \ 'draft: true',
       \ '---',
       \ '' ]
-let g:hugo_build_script_path = '~/Documents/博客/haha'
+let g:hugo_build_script_path = '~/Documents/博客/update_blog'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                NEOFORMAT                                   "
@@ -316,3 +179,101 @@ let g:neoformat_enabled_python = ['autopep8']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vim_markdown_auto_insert_bullets = 1
 let g:vim_markdown_folding_disabled = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               NVIM-LSPCONFIG                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+nvim_lsp["ccls"].setup {
+  init_options = {
+    compilationDatabaseDirectory = "build";
+    index = {
+      threads = 0;
+    },
+    clang = {
+      excludeArgs = { "-frounding-math"} ;
+    },
+    cache = {
+      directory = "/tmp/ccls";
+    };
+  };
+  on_attach = function(client)
+    -- [[ other on_attach code ]]
+    require 'illuminate'.on_attach(client)
+    require "lsp_signature".on_attach()
+  end,
+}
+
+-- using the default config
+local servers = { "pyright", "rust_analyzer", "tsserver", "rust_analyzer", "html", "vimls", "texlab"}
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = function(client)
+      -- [[ other on_attach code ]]
+      require "lsp_signature".on_attach()
+      require 'illuminate'.on_attach(client)
+    end,
+  }
+end
+
+EOF
+
+hi def link LspReferenceText CursorLine 
+hi def link LspReferenceWrite CursorLine
+hi def link LspReferenceRead CursorLine
+
+nnoremap <expr> <c-n> pumvisible() ? "\<c-n>" : ":lua require'illuminate'.next_reference{wrap=true}<cr>"
+nnoremap <expr> <c-p> pumvisible() ? "\<c-p>" : ":lua require'illuminate'.next_reference{reverse=true,wrap=true}<cr>"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               COMPLETION                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set shortmess+=c
+set completeopt=menuone,noselect
+
+" Use completion-nvim in every buffer
+autocmd BufEnter * lua require'completion'.on_attach()
+
+let g:completion_enable_auto_popup = 1
+let g:completion_enable_snippet = 'UltiSnips'
+let g:completion_enable_auto_hover = 1
+let g:completion_enable_auto_signature = 0
+let g:completion_trigger_keyword_length = 2
+" length, alphabet, none
+let g:completion_sorting = "length"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               LSP-SAGA                                     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+lua require'lspsaga'.init_lsp_saga()
+
+function! s:show_documentation()
+  if index(['vim', 'help'], &filetype) >= 0
+    execute 'h ' . expand('<cword>')
+  else
+    lua require('lspsaga.hover').render_hover_doc()
+  endif
+endfunction
+
+nnoremap <silent> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
+nnoremap <silent> <leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<cr>
+nnoremap <silent> K :call <SID>show_documentation()<cr>
+nnoremap <silent> <leader>rn <cmd>lua require('lspsaga.rename').rename()<CR>
+nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               ULTISNIPS                                    "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsSnippetDirectories = ['ultisnips']
+imap <silent><expr> <c-t> compe#complete()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               LUA-TREE                                     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> <leader>e <cmd>NvimTreeToggle<cr>

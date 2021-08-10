@@ -10,10 +10,10 @@ fi
 feh --bg-scale ~/.config/i3/manjaro_mountain.jpg &
 blueman-applet &
 nm-applet &
-fcitx5 &
 flameshot &
 compton &
 dunst &
 qv2ray &
+fcitx5 &
 
 exec i3

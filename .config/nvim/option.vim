@@ -4,7 +4,7 @@ filetype plugin indent on
 set encoding=utf8
 
 " always open the signcolumn
-set signcolumn=yes
+set signcolumn=number
 
 " expand tab to spaces
 set expandtab

@@ -36,6 +36,7 @@
 ~/.xinitrc
 ~/.xprofile
 ~/.pam_environment
+~/.curlrc
 # personal scripts
 ~/.local/bin/script/*
 # etc

@@ -1,6 +1,5 @@
 command! -nargs=? EV call EV#Commander(<f-args>)
-command! Go execute '!google-chrome-stable %'
-command! Notebook lua require('telescope.builtin').file_browser({cwd='~/Documents/笔记本'})
+command! Go silent exe '!google-chrome-stable %'
 
 autocmd BufEnter *.asm,*.s setf asm
 autocmd BufEnter *.sy setf c | :ALEDisableBuffer | :CocDisable

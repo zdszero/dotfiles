@@ -37,7 +37,7 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/.local/bin/script
 
 # export NVIM_LISTEN_ADDRESS='/tmp/nvim'
 
-function ranger-cd {
+ranger-cd() {
     tempfile="$(mktemp -t tmp.XXXXXX)"
     /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
     test -f "$tempfile" &&
@@ -47,21 +47,21 @@ function ranger-cd {
     rm -f -- "$tempfile"
 }
 
-function mkcd {
+mkcd() {
   mkdir $1
   cd $1
 }
 
-function precmd { pwd > /tmp/workingdir }
+precmd() { pwd > /tmp/workingdir }
 
-function mdl { proxychains ytmdl $1 -m }
+mdl() { proxychains ytmdl $1 -m }
 
-function picin {
+picin() {
   suffix=$(basename $1 | cut -d. -f2)
   xclip -selection clipboard -t image/$suffix -i $1
 }
 
-function picout {
+picout() {
   suffix=$(basename $1 | cut -d. -f2)
   xclip -selection clipboard -t image/$suffix -o > $1
 }
