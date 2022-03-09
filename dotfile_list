@@ -5,11 +5,6 @@
 ~/.config/polybar/*
 # ranger
 ~/.config/ranger/*
-# nvim
-~/.config/nvim/*.vim
-~/.config/nvim/autoload/*
-~/.config/nvim/ftplugin/*
-~/.config/coc/ultisnips/*
 # alacritty
 ~/.config/alacritty/alacritty.yml
 # zsh
@@ -17,8 +12,6 @@
 ~/.zshrc
 # fish
 ~/.config/fish/*
-# fzf
-~/.config/fzf/*
 # compton
 ~/.config/compton.conf
 # zathura
