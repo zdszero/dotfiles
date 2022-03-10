@@ -11,7 +11,7 @@ def copyFilesFrom(rel_path: str):
         new_path = os.path.sep.join([rel_path, file])
         # if current file is dir:
         # make corresponding home dirs based on current dir
-        target_path = '~/' + new_path
+        target_path = '/home/{}/'.format(os.getlogin()) + new_path
         if os.path.isdir(new_path) and file != '.git':
             # target_dir: directory in home
             if not os.path.exists(target_path):

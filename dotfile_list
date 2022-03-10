@@ -28,9 +28,5 @@
 ~/.tmux.conf
 ~/.xinitrc
 ~/.xprofile
-~/.pam_environment
-~/.curlrc
 # personal scripts
 ~/.local/bin/script/*
-# etc
-/etc/X11/xorg.conf.d/40-libinput.conf

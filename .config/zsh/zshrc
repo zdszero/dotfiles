@@ -3,6 +3,7 @@ alias lg="lazygit"
 
 alias sudo="sudo -E"
 alias n=nvim
+alias vim="nvim -u ~/.vimrc"
 alias p='proxychains'
 alias pg='proxychains wget'
 alias sup="sudo proxychains"
@@ -15,6 +16,8 @@ alias lc='leetcode'
 alias r='ranger-cd'
 alias xi="xclip -selection clipboard"
 alias ydl="youtube-dl --proxy socks5://127.0.0.1:1089"
+alias c++="clang++"
+alias gn="goneovim"
 
 # tmux
 alias tm="tmux"
@@ -34,6 +37,28 @@ alias tsw="tmux select-window -t"
 alias trw="tmux rename-window"
 
 export PATH=$PATH:$HOME/.local/bin:$HOME/.local/bin/script
+export GOPROXY=https://goproxy.cn
+
+# git
+alias g="git"
+alias gad="git add"
+alias gada="git add --all"
+
+alias gcm="git commit"
+alias gcmm="git commit -m"
+alias gcmam="git commit -a -m"
+
+alias gck="git checkout"
+alias gbr="git branch"
+
+alias gmg="git merge"
+alias grb="git rebase"
+
+alias grs="git restore"
+alias grt="git reset"
+
+alias gvi="git log --oneline --decorate --graph --all"
+alias gst="git status"
 
 # export NVIM_LISTEN_ADDRESS='/tmp/nvim'
 
@@ -64,6 +89,10 @@ picin() {
 picout() {
   suffix=$(basename $1 | cut -d. -f2)
   xclip -selection clipboard -t image/$suffix -o > $1
+}
+
+print_path() {
+  echo $PATH | sed 's/:/\n/g'
 }
 
 source ~/.config/zsh/fzf.zsh
