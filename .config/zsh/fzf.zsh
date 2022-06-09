@@ -16,22 +16,30 @@ fh() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
 }
 
-# fd - cd to selected directory
+# fda - including hidden directories
 fdir() {
   local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
+  dir=$(fd -t d 2> /dev/null | fzf +m) && cd "$dir"
 }
 
-# fda - including hidden directories
-fda() {
-  local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+ff() {
+  local file
+  file=$(fd -t f 2>/dev/null | fzf +m) && nvim "$file"
 }
 
-fbk() {
-  local name
-  name=$(find ~/Book | fzf)
-  zathura $name &
+fenv() {
+  local out
+  out=$(env | fzf)
+  echo $(echo $out | cut -d= -f2)
+}
+
+function fman(){
+  MAN="/usr/bin/man"
+  if [ -n "$1" ]; then
+	  $MAN "$@"
+	  return $?
+  else
+	  $MAN -k . | fzf --reverse --preview="echo {1,2} | sed 's/ (/./' | sed -E 's/\)\s*$//' | xargs $MAN" | awk '{print $1 "." $2}' | tr -d '()' | xargs -r $MAN
+	  return $?
+  fi
 }
