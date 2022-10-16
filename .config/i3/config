@@ -3,7 +3,7 @@
 #######################
 
 set $mod Mod1
-set $term alacritty
+set $term kitty
 set $inner_gaps 5
 set $outer_gaps 5
 font pango:JetBrains Mono 12
@@ -53,11 +53,15 @@ for_window [class="Sxiv"] floating enable
 for_window [class="xpad"] floating enable
 for_window [instance="fcitx5-config-qt"] floating enable
 for_window [instance="feh"] floating enable
+for_window [class="Eog"] floating enable
 for_window [class="Wine"] floating enable
+for_window [class="Cheese"] floating enable
 for_window [class="VirtualBox Manager"] floating enable
 for_window [class="VirtualBox Manager"] resize set 1000 800
 for_window [class="Org.gnome.Nautilus"] floating enable
+for_window [class="Org.gnome.Software"] floating enable
 for_window [class="SimpleScreenRecorder"] floating enable
+for_window [class="Clash for Windows"] floating enable
 for_window [class="vlc"] floating enable
 for_window [class="Thunderbird"] floating enable
 
@@ -78,6 +82,11 @@ for_window [instance="^codeblock_term.*"] move position center
 
 # use polybar
 # exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id volumeicon
+exec --no-startup-id feh --bg-scale ~/.config/i3/manjaro_mountain.jpg
+exec --no-startup-id xmodmap ~/.Xmodmap
+exec --no-startup-id dunst
+exec --no-startup-id picom
 
 ##################
 #  KSY BINDINGS  #
@@ -87,13 +96,15 @@ for_window [instance="^codeblock_term.*"] move position center
 floating_modifier $mod
 
 # terminal
-bindsym $mod+Return exec --no-startup-id $term -e tmux
-bindsym $mod+Shift+Return exec --no-startup-id $term --working-directory $(cat /tmp/workingdir)
-# scratchpad
-bindsym $mod+Shift+s exec --no-startup-id $term --class floatterm
-bindsym $mod+s scratchpad show
-bindsym $mod+minus move scratchpad; scratchpad show
-bindsym $mod+m exec --no-startup-id $term --class floatterm_math -e bc
+bindsym $mod+Return exec $term
+
+# bindsym $mod+Return exec --no-startup-id $term -e tmux
+# bindsym $mod+Shift+Return exec --no-startup-id $term --working-directory $(cat /tmp/workingdir)
+# # scratchpad
+# bindsym $mod+Shift+s exec --no-startup-id $term --class floatterm
+# bindsym $mod+s scratchpad show
+# bindsym $mod+minus move scratchpad; scratchpad show
+# bindsym $mod+m exec --no-startup-id $term --class floatterm_math -e bc
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -248,9 +259,9 @@ bar {
         #         USE I3 STATUS RUST
         font pango: Fira Code Nerd Font Medium 12
         position top
-        status_command i3status-rs ~/.config/i3/config.toml
+        # status_command i3status-rs ~/.config/i3/config.toml
         #           USE I3 STATUS
-        # status_command i3status --config ~/.config/i3status/config
+        status_command i3status --config ~/.config/i3status/config
         # system tray
         tray_output primary
         # status bar output

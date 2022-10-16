@@ -65,6 +65,10 @@ alias gst="git status"
 
 # export NVIM_LISTEN_ADDRESS='/tmp/nvim'
 
+youtube_music() {
+    yt-dlp --proxy socks5://127.0.0.1:1089 $1 -x --audio-format mp3
+}
+
 ranger-cd() {
     tempfile="$(mktemp -t tmp.XXXXXX)"
     /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"

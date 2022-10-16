@@ -25,4 +25,5 @@ for filepath in FILE_LIST:
 for filepath in FILE_LIST:
     dirs = filepath.split('/')
     to_path = os.path.sep.join(dirs[1:-1])
-    os.system('cp -r -u {} ./{}'.format(filepath, to_path))
+    if os.path.exists(filepath):
+        os.system('cp -r -u {} ./{}'.format(filepath, to_path))
