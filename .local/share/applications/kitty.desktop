@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+GenericName=Terminal emulator
+Comment=Fast, feature-rich, GPU based terminal
+Exec=/home/zds/Downloads/kitty/bin/kitty
+Name=kitty
+Icon=/home/zds/Downloads/kitty/share/icons/hicolor/scalable/apps/kitty.svg

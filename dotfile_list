@@ -1,19 +1,15 @@
 # i3wm
-~/.config/i3/*
-~/.config/i3status/config
-# polybar
-~/.config/polybar/*
+~/.config/i3
+~/.config/i3status
 # ranger
-~/.config/ranger/*
+~/.config/ranger
 # alacritty
 ~/.config/alacritty/alacritty.yml
 # kitty
 ~/.config/kitty/kitty.conf
 # zsh
-~/.config/zsh/*
+~/.config/zsh
 ~/.zshrc
-# fish
-~/.config/fish/*
 # compton
 ~/.config/compton.conf
 # zathura
@@ -21,9 +17,11 @@
 # dunst
 ~/.config/dunst/dunstrc
 # rofi
-~/.config/rofi/*
+~/.config/rofi/config.rasi
 # fcitx5
-~/.local/share/fcitx5/data/*
+~/.local/share/fcitx5/data/QuickPhrase.mb
+~/.local/share/applications/Clash.desktop
+~/.local/share/applications/kitty.desktop
 # some config files
 ~/.pylintrc
 ~/.gitconfig
@@ -31,4 +29,4 @@
 ~/.xinitrc
 ~/.xprofile
 # personal scripts
-~/.local/bin/script/*
+~/Develop/Scripts

@@ -1,0 +1,5 @@
+#! /bin/bash
+
+cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+[[ $? -ne 0 ]] && exit 1
+ln -s build/compile_commands.json .

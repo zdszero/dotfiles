@@ -1,0 +1,8 @@
+#! /bin/bash
+
+[[ $# -ne 1 ]] && printf "usage: %s <filename>\n" $1
+
+prefix=$(echo $1 | cut -d'.' -f1)
+target=$prefix".png"
+dot $1 -Tpng -o $target
+[[ $? -eq 0 ]] && [[ $(ps | grep -c 'sxiv') -eq 0 ]] && sxiv $target &

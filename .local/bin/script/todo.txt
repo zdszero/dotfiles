@@ -1,2 +1,0 @@
-(A) finish sicp chapter 1
-(C) learn some parts in acwj

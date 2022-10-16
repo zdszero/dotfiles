@@ -1,0 +1,11 @@
+#! /bin/bash
+
+for arg in "$@"; do
+  prefix=$(echo $arg | cut -d'.' -f1)
+  postfix=$(echo $arg | cut -d'.' -f2)
+  if [[ $postfix == 'c' ]]; then
+    gcc $arg -o $prefix
+  elif [[ $postfix == 'cpp' ]]; then
+    g++ $arg -o $prefix
+  fi
+done

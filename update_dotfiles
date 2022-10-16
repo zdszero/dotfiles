@@ -1,29 +1,43 @@
 #! /bin/python3
 
 import os
+from os import path
 
-FILE_LIST = []
+def parse_src_dst(line: str):
+    src_file = line.strip('\n')
+    cwd = os.getcwd()
+    dirs = src_file.split('/')
+    if src_file.startswith('~'):
+        start_idx = 1
+    else:
+        start_idx = 0
+    dst_file = path.sep.join([cwd, path.sep.join(dirs[start_idx:])])
+    return (path.expanduser(src_file), dst_file)
 
-# read dotfiles from dotfiles list
-for line in open('./dotfile_list'):
+def get_parent_dir(dst_file: str):
+    idx = dst_file.rfind('/')
+    if idx != -1:
+        return dst_file[:idx]
+    return ''
+
+def copy_files(src_file, dst_file):
+    if path.exists(src_file):
+        if path.isdir(src_file):
+            if not path.exists(dst_file):
+                # print('mkdir -p %s' % dst_file)
+                os.system('mkdir -p %s' % dst_file)
+            cmd = 'cp -r %s/* %s/' % (src_file, dst_file)
+        else:
+            parent_dir = get_parent_dir(dst_file)
+            if parent_dir != '':
+                if not path.exists(parent_dir):
+                    os.system('mkdir -p %s' % parent_dir)
+            cmd = 'cp %s %s' % (src_file, dst_file)
+        # print(cmd)
+        os.system(cmd)
+
+for line in open('./dotfile_list', 'r'):
     if line.startswith('#'):
         continue
-    line = line[0:-1]
-    FILE_LIST.append(line)
-
-# create directory that doesn't exist
-for filepath in FILE_LIST:
-    dirs = filepath.split('/')
-    curdir = os.getcwd()
-    # in the intermediate directory
-    for directory in dirs[1:-1]:
-        curdir = os.path.sep.join([curdir, directory])
-        if not os.path.exists(curdir):
-            os.mkdir(curdir)
-            print('mkdir: {}'.format(curdir))
-
-for filepath in FILE_LIST:
-    dirs = filepath.split('/')
-    to_path = os.path.sep.join(dirs[1:-1])
-    if os.path.exists(filepath):
-        os.system('cp -r -u {} ./{}'.format(filepath, to_path))
+    src_file, dst_file = parse_src_dst(line)
+    copy_files(src_file, dst_file)
