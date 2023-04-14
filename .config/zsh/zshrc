@@ -1,6 +1,7 @@
 alias zshconfig="nvim ~/.config/zsh/zshrc"
 alias lg="lazygit"
 
+alias s="kitty +kitten ssh"
 alias sudo="sudo -E"
 alias n="nvim -u ~/.config/nvim/minimal_init.vim"
 alias p='proxychains'
@@ -34,10 +35,10 @@ alias trs="tmux rename-session -t"
 alias tnw="tmux new-window"
 alias tsw="tmux select-window -t"
 alias trw="tmux rename-window"
-alias python3="python3.10"
-alias python="python3.10"
-alias pip3="python3.10 -m pip"
-alias pip="python3.10 -m pip"
+# alias python3="python3.10"
+# alias python="python3.10"
+# alias pip3="python3.10 -m pip"
+# alias pip="python3.10 -m pip"
 
 export PATH=$PATH:$HOME/Develop/Scripts:/usr/local/go/bin
 export GOPROXY=https://goproxy.cn

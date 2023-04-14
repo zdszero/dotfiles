@@ -64,6 +64,13 @@ for_window [class="SimpleScreenRecorder"] floating enable
 for_window [class="Clash for Windows"] floating enable
 for_window [class="vlc"] floating enable
 for_window [class="Thunderbird"] floating enable
+for_window [class="Spotify"] floating enable
+for_window [class="QQ"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="mpv"] resize set 1000 800
+for_window [class="Gnome-terminal"] floating enable
+for_window [class="Gnome-terminal"] resize set 1000 800
+for_window [class="wemeetapp"] floating enable
 
 for_window [instance="^term_nvim"] resize shrink width 200 px
 for_window [instance="^floatterm.*"] move scratchpad
@@ -82,11 +89,12 @@ for_window [instance="^codeblock_term.*"] move position center
 
 # use polybar
 # exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec --no-startup-id volumeicon
 exec --no-startup-id feh --bg-scale ~/.config/i3/manjaro_mountain.jpg
 exec --no-startup-id xmodmap ~/.Xmodmap
 exec --no-startup-id dunst
 exec --no-startup-id picom
+exec --no-startup-id nm-applet
+exec --no-startup-id volumeicon
 
 ##################
 #  KSY BINDINGS  #
@@ -96,20 +104,21 @@ exec --no-startup-id picom
 floating_modifier $mod
 
 # terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec kitty
 
 # bindsym $mod+Return exec --no-startup-id $term -e tmux
 # bindsym $mod+Shift+Return exec --no-startup-id $term --working-directory $(cat /tmp/workingdir)
 # # scratchpad
 # bindsym $mod+Shift+s exec --no-startup-id $term --class floatterm
-# bindsym $mod+s scratchpad show
-# bindsym $mod+minus move scratchpad; scratchpad show
+bindsym $mod+s scratchpad show
+bindsym $mod+minus move scratchpad; scratchpad show
 # bindsym $mod+m exec --no-startup-id $term --class floatterm_math -e bc
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # dmenu
+# bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 
@@ -231,7 +240,7 @@ bindsym $mod+q mode "move"
 
 set $mode_system System (l) lock, (e) exit i3, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff
 mode "$mode_system" {
-    bindsym l exec --no-startup-id betterlockscreen -l dim, mode "default"
+    bindsym l exec --no-startup-id i3lock-fancy, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
