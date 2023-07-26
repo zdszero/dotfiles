@@ -1,4 +1,5 @@
 alias zshconfig="nvim ~/.config/zsh/zshrc"
+alias i3config="nvim ~/.config/i3/config"
 alias lg="lazygit"
 
 alias s="kitty +kitten ssh"

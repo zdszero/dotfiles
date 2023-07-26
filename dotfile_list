@@ -27,6 +27,8 @@
 ~/.gitconfig
 ~/.tmux.conf
 ~/.xinitrc
-~/.xprofile
+~/.Xprofile
+~/.Xmodmap
+/etc/environment
 # personal scripts
 ~/Develop/Scripts
