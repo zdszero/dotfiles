@@ -2,16 +2,22 @@
 
 import os
 from os import path
+import sys
 
 def parse_src_dst(line: str):
     src_file = line.strip('\n')
     cwd = os.getcwd()
-    dirs = src_file.split('/')
-    if src_file.startswith('~'):
+    dirs = src_file.split(os.path.sep)
+    assert len(dirs) > 0
+    if dirs[0] == '~':
         start_idx = 1
     else:
         start_idx = 0
-    dst_file = path.sep.join([cwd, path.sep.join(dirs[start_idx:])])
+    if dirs[-1] == '*':
+        end_idx = len(dirs) - 1
+    else:
+        end_idx = len(dirs)
+    dst_file = path.sep.join([cwd, path.sep.join(dirs[start_idx:end_idx])])
     return (path.expanduser(src_file), dst_file)
 
 def get_parent_dir(dst_file: str):
@@ -26,7 +32,7 @@ def copy_files(src_file, dst_file):
             if not path.exists(dst_file):
                 # print('mkdir -p %s' % dst_file)
                 os.system('mkdir -p %s' % dst_file)
-            cmd = 'cp -r %s/* %s/' % (src_file, dst_file)
+            cmd = 'cp %s/* %s/' % (src_file, dst_file)
         else:
             parent_dir = get_parent_dir(dst_file)
             if parent_dir != '':
@@ -36,8 +42,22 @@ def copy_files(src_file, dst_file):
         # print(cmd)
         os.system(cmd)
 
-for line in open('./dotfile_list', 'r'):
-    if line.startswith('#'):
-        continue
-    src_file, dst_file = parse_src_dst(line)
-    copy_files(src_file, dst_file)
+def main():
+    filter_args = []
+    if len(sys.argv) >= 2:
+        filter_args = sys.argv[1:]
+    for line in open('./dotfile_list', 'r'):
+        if line.startswith('#'):
+            continue
+        found = False
+        if len(filter_args) > 0:
+            for arg in filter_args:
+                if line.find(arg) != -1:
+                    found = True
+                    break
+        if len(filter_args) == 0 or found:
+            src_file, dst_file = parse_src_dst(line)
+            copy_files(src_file, dst_file)
+
+if __name__ == '__main__':
+    main()

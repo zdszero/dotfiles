@@ -2,7 +2,8 @@
 
 import os
 
-HOME_IGNORE_LIST = ['readme.md', 'dotfile_list', 'update_dotfiles', 'deploy_dotfiles', 'gui-config.json', '.gitignore']
+HOME_IGNORE_LIST = ['readme.md', 'dotfile_list', 'update_dotfiles', 'deploy_dotfiles', '.gitignore']
+HOME_IGNORE_DIRS = ['.git', 'etc']
 
 def copyFilesFrom(rel_path: str):
     # traverse all files and choose dirs
@@ -12,7 +13,7 @@ def copyFilesFrom(rel_path: str):
         # if current file is dir:
         # make corresponding home dirs based on current dir
         target_path = '/home/{}/'.format(os.getlogin()) + new_path
-        if os.path.isdir(new_path) and file != '.git':
+        if os.path.isdir(new_path) and file not in HOME_IGNORE_DIRS:
             # target_dir: directory in home
             if not os.path.exists(target_path):
                 os.mkdir(target_path)
@@ -20,6 +21,7 @@ def copyFilesFrom(rel_path: str):
         # if current file is file
         # copy the file to dest file
         elif os.path.isfile(new_path) and file not in HOME_IGNORE_LIST:
-            os.system('cp -u {} {}'.format(new_path, target_path))
+            os.system(f'cp -u {new_path} {target_path}')
 
-copyFilesFrom('.')
+if __name__ == '__main__':
+    copyFilesFrom('.')
