@@ -1,0 +1,16 @@
+#! /bin/bash
+
+
+if [[ $# -eq 0 ]]; then
+  dirname="build"
+elif [[ $# -eq 1 ]]; then
+  dirname=$1
+else
+  echo "usage: ccls_setup <build directory>"
+fi
+build_cmd="-B${dirname}"
+
+echo $build_cmd
+# cmake -H. $build_cmd -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+# [[ $? -ne 0 ]] && exit 1
+# ln -s build/compile_commands.json .

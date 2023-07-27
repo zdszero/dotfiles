@@ -1,0 +1,11 @@
+#! /bin/bash
+
+[[ $# -ne 1 ]] && echo 'usage: edit <file>' && exit 1
+which $1 1>/dev/null 2>&1
+if [[ $? -eq 0 ]]; then
+  path=$(which $1)
+  nvim $path
+else
+  printf "file %s not found in path\n" $1
+  exit 1
+fi

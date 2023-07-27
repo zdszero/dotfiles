@@ -1,0 +1,28 @@
+#! /bin/bash
+
+[[ $# -ne 1 ]] && printf "usage: $0 <cmd>\n" && exit 1
+
+dp=$(xrandr | grep DP | awk '{print $1}')
+hdmi=$(xrandr | grep HDMI | awk '{print $1}')
+
+case $1 in
+  "dp")
+    xrandr --output $dp --auto --primary --output $hdmi --off
+    ;;
+  "hdmi")
+    xrandr --output $hdmi --auto --primary --output $dp --off
+    ;;
+  "right")
+    xrandr --output $hdmi --auto --primary --right-of $dp --output $dp --auto
+    ;;
+  "left")
+    xrandr --output $dp --auto --primary --left-of $hdmi --output $hdmi --auto
+    ;;
+  "same")
+    xrandr --output $hdmi --same-as $dp --auto
+    ;;
+  *)
+    printf "ERROR: unknown argument\n"
+    exit 1
+    ;;
+esac
