@@ -23,12 +23,14 @@
 ~/.local/share/applications/Clash.desktop
 ~/.local/share/applications/kitty.desktop
 # some config files
-~/.pylintrc
+~/.npmrc
+~/.config/pip/pip.conf
 ~/.gitconfig
 ~/.tmux.conf
 ~/.xinitrc
 ~/.Xprofile
 ~/.Xmodmap
+~/Downloads/Clash/Clash_Logo.png
 /etc/environment
 # personal scripts
 ~/.scripts

@@ -4,10 +4,6 @@ import os
 from os import path
 import sys
 
-HOME_IGNORE_LIST = ['readme.md', 'dotfile_list',
-                    'manage', '.gitignore']
-HOME_IGNORE_DIRS = ['.git', 'etc']
-
 
 def copy_files(src_file, dst_file):
     if path.exists(src_file):
