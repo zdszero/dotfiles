@@ -10,7 +10,6 @@ else
 fi
 build_cmd="-B${dirname}"
 
-echo $build_cmd
-# cmake -H. $build_cmd -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
-# [[ $? -ne 0 ]] && exit 1
-# ln -s build/compile_commands.json .
+cmake -H. $build_cmd -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+[[ $? -ne 0 ]] && exit 1
+ln -s build/compile_commands.json .

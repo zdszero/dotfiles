@@ -6,7 +6,7 @@
 EDITOR='nvim'
 PAGER='less'
 SHELL='zsh'
-PATH="$PATH:/home/zds/.local/bin"
+PATH="$PATH:/home/zds/.local/bin:/home/zds/.scripts"
 INPUT_METHOD=fcitx5
 GTK_IM_MODULE=fcitx5
 QT_IM_MODULE=fcitx5
