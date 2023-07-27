@@ -31,4 +31,4 @@
 ~/.Xmodmap
 /etc/environment
 # personal scripts
-~/Develop/Scripts
+~/.scripts/*
