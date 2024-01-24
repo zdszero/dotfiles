@@ -4,7 +4,7 @@
 # ranger
 ~/.config/ranger
 # alacritty
-~/.config/alacritty/alacritty.yml
+~/.config/alacritty/alacritty.toml
 # kitty
 ~/.config/kitty/kitty.conf
 # zsh

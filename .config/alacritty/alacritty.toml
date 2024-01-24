@@ -1,0 +1,33 @@
+# for more config: https://alacritty.org/config-alacritty.html
+# keybindings: https://alacritty.org/config-alacritty-bindings.html
+[window]
+opacity = 0.85
+blur = true
+
+[font]
+size = 20
+
+[font.bold]
+family = "Consolas Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "Consolas Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "Consolas Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "Consolas Nerd Font"
+style = "Regular"
+
+[cursor.style]
+blinking = "Always"
+
+[mouse]
+hide_when_typing = true
+
+[env]
+TERM = "xterm-256color"
