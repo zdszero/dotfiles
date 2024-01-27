@@ -1,9 +1,15 @@
+export PATH=$PATH:$HOME/.scripts:/usr/local/go/bin
+export GOPROXY=https://goproxy.cn
+export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node/
+export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+# export NVIM_LISTEN_ADDRESS='/tmp/nvim'
+
 alias zshconfig="nvim ~/.config/zsh/zshrc"
 alias i3config="nvim ~/.config/i3/config"
 alias lg="lazygit"
 alias nols="ls | grep -v"
 
-alias s="kitty +kitten ssh"
+alias ks="kitty +kitten ssh"
 alias sudo="sudo -E"
 alias n="nvim -u ~/.config/nvim/minimal_init.vim"
 alias p='proxychains'
@@ -11,57 +17,27 @@ alias pg='proxychains wget'
 alias r='ranger-cd'
 alias xi="xclip -selection clipboard"
 alias ydl="youtube-dl --proxy socks5://127.0.0.1:1089"
-alias c++="clang++"
-alias k="minikube kubectl --"
+alias mk="minikube kubectl --"
+alias k="kubectl --"
+alias pcpu='ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'
+alias pmem='ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head'
+alias path="echo $PATH | sed 's/:/\n/g'"
 
 # tmux
-alias tm="tmux"
-alias tsj="tmux split-window"
-alias tsl="tmux split-window -h"
 alias tns="tmux new -s"
 alias td="tmux detach"
 alias ta="tmux attach -t"
-alias tls="tmux list-sessions"
 alias tlk="tmux list-keys"
 alias tlc="tmux list-commands"
 alias tks="tmux kill-session -t"
-alias tss="tmux switch -t"
 alias trs="tmux rename-session -t"
-alias tnw="tmux new-window"
-alias tsw="tmux select-window -t"
-alias trw="tmux rename-window"
-
-export PATH=$PATH:$HOME/.scripts:/usr/local/go/bin
-export GOPROXY=https://goproxy.cn
-export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node/
-
-# git
-alias g="git"
-alias gad="git add"
-alias gada="git add --all"
-
-alias gcm="git commit"
-alias gcmm="git commit -m"
-alias gcmam="git commit -a -m"
-
-alias gck="git checkout"
-alias gbr="git branch"
-
-alias gmg="git merge"
-alias grb="git rebase"
-
-alias grs="git restore"
-alias grt="git reset"
-
-alias gvi="git log --oneline --decorate --graph --all"
-alias gst="git status"
-
-# export NVIM_LISTEN_ADDRESS='/tmp/nvim'
+alias tsb="tmux show-buffer"
 
 # download from youtube
 ytdlp_proxy="socks5://127.0.0.1:1089"
 alias yt-music="yt-dlp --proxy ${ytdlp_proxy} -f \"ba\" -x --audio-format mp3"
 alias yt-video="yt-dlp --proxy ${ytdlp_proxy} --write-auto-sub"
+alias yt-subs="yt-dlp --proxy ${ytdlp_proxy} --all-subs --skip-download"
 
 ranger-cd() {
     tempfile="$(mktemp -t tmp.XXXXXX)"
@@ -78,18 +54,19 @@ mkcd() {
   cd $1
 }
 
-picin() {
-  suffix=$(basename $1 | cut -d. -f2)
-  xclip -selection clipboard -t image/$suffix -i $1
-}
-
-picout() {
-  suffix=$(basename $1 | cut -d. -f2)
-  xclip -selection clipboard -t image/$suffix -o > $1
-}
-
-print_path() {
-  echo $PATH | sed 's/:/\n/g'
+install_zsh_dependency() {
+    zsh_autosuggestions_path="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    tpm_path="$HOME/.tmux/plugins/tpm"
+    zsh_syntax_highlight_path="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+    if [ ! -d "$zsh_autosuggestions_path" ]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions $zsh_autosuggestions_path
+    fi
+    if [ ! -d "$tpm_path" ]; then
+        git clone https://github.com/tmux-plugins/tpm $tpm_path
+    fi
+    if [ ! -d "$zsh_syntax_highlight_path" ]; then
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting $zsh_syntax_highlight_path
+    fi
 }
 
 source ~/.config/zsh/fzf.zsh
