@@ -1,8 +1,6 @@
 # i3wm
 ~/.config/i3
 ~/.config/i3status
-# ranger
-~/.config/ranger
 # alacritty
 ~/.config/alacritty/alacritty.toml
 # kitty

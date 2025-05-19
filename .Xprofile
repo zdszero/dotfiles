@@ -1,6 +1,7 @@
 export EDITOR='nvim'
 export PAGER='less'
 export SHELL='zsh'
+export BROWSER='google-chrome-stable'
 export PATH="$PATH:/home/zds/.local/bin"
 export INPUT_METHOD=fcitx5
 export GTK_IM_MODULE=fcitx5

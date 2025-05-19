@@ -1,0 +1,23 @@
+#!/bin/bash
+
+[[ $# -ne 2 ]] && printf 'Usage: %s ${DIRECTORY} ${OUTPUT}\n' `basename $0` && exit 1
+
+# Directory containing the mp3 files
+MP3_DIR=$1
+OUTPUT_FILE=$2
+
+# Create a temporary file to list all mp3 files
+TMP_FILE=$(mktemp)
+echo $TMP_FILE
+
+# List all mp3 files in the directory
+find "$MP3_DIR" -type f -name "*.mp3" -exec realpath {} \; | sort | xargs -I {} echo "file '{}'" >> "$TMP_FILE"
+cat $TMP_FILE
+
+# Combine the mp3 files using ffmpeg
+ffmpeg -f concat -safe 0 -i "$TMP_FILE" -c copy "$OUTPUT_FILE"
+
+# Remove the temporary file
+rm "$TMP_FILE"
+
+echo "All MP3 files have been combined into $OUTPUT_FILE"

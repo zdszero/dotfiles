@@ -1,0 +1,103 @@
+#! /bin/bash
+
+if [[ $# -eq 2 ]]; then
+  OUTFILE=$1
+else
+  base=$(basename "$(pwd)")
+  OUTFILE="${base}.mkv"
+fi
+
+# 图片展示的秒数
+IMAGE_SECONDS=3
+# ffmpeg 中间文件名
+FFMPEG_FILELIST="file_list.txt"
+# 合并当前命令中的那些文件
+EXTENSIONS="mp4|mkv|avi|mov"
+# 图片展示的字体
+FONTPATH=/usr/share/fonts/noto-cjk/NotoSerifCJK-Medium.ttc
+# 静音音频名称，MKV 使用
+SILENT_AUDIO="silent_audio.ogg"
+# 不同章节的开始时间，方便添加分节
+SECTION_FILE="sections.txt"
+
+# 获取视频时长 hh:mm:ss
+get_length() {
+  ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $1 | awk '{printf "%d:%02d:%02d\n", $1/3600, ($1%3600)/60, $1%60}'
+}
+
+# 将 hh:mm:ss 转换为秒
+time_to_seconds() {
+    local time=$1
+    IFS=: read -r h m s <<< "$time"
+    echo $((10#$h * 3600 + 10#$m * 60 + 10#$s))
+}
+
+# 将秒转换为 hh:mm:ss
+seconds_to_time() {
+    local total_seconds=$1
+    local h=$((total_seconds / 3600))
+    local m=$(((total_seconds % 3600) / 60))
+    local s=$((total_seconds % 60))
+    printf "%02d:%02d:%02d\n" $h $m $s
+}
+
+CUR_TIME="00:00:00"
+NEXT_TIME="00:00:00"
+
+# hh:mm:ss 累加函数
+add_time() {
+  seconds1=$(time_to_seconds $1)
+  seconds2=$(time_to_seconds $2)
+  total_seconds=$((prev_seconds + seconds1 + seconds2))
+  result=$(seconds_to_time $total_seconds)
+  echo $result
+}
+
+[ -f ${FFMPEG_FILELIST} ] && rm ${FFMPEG_FILELIST}
+[ -f ${OUTFILE} ] && rm ${OUTFILE}
+[ -f ${SILENT_AUDIO} ] && rm ${SILENT_AUDIO}
+[ -f ${SECTION_FILE} ] && rm ${SECTION_FILE}
+
+# 使用 SimpleScreenRecorder 录制的视频格式
+ffmpeg -f lavfi -t ${IMAGE_SECONDS} -i anullsrc=r=48000:cl=stereo -c:a libvorbis -b:a 128k ${SILENT_AUDIO} >/dev/null 2>&1
+
+i=1
+for filename in $(find . -maxdepth 1 -type f | grep -E "\.($EXTENSIONS)$" | grep -v -P "intro\d+_video" | sort); do
+  # 生成每个小节的介绍图片
+  title_name=$(basename $filename)
+  title_name="${title_name%.*}"
+  title_name=$(perl -pe 'use utf8; s/^\d+(.|-)(.*)$/\2/' <<< "$title_name")
+  imagename="intro${i}.png"
+  [ -f $imagename ] && rm $imagename
+  # 生成白底黑字的图片
+  magick -size 1920x1080 xc:white -fill black -gravity center -pointsize 120 -font ${FONTPATH} -annotate 0 "${title_name}" $imagename > /dev/null
+  # 生成若干秒的图片视频
+  videoname="intro${i}_video.mkv"
+  [ -f $videoname ] && rm $videoname
+  # 如果是 mkv 的话，要导入空白音频轨道
+  ffmpeg -loop 1 -i ${imagename} -c:v libx264 -t ${IMAGE_SECONDS} -pix_fmt yuv420p -an temp_video.mkv >/dev/null 2>&1
+  ffmpeg -i temp_video.mkv -i ${SILENT_AUDIO} -c:v copy -c:a libvorbis -b:a 128k -shortest ${videoname} >/dev/null 2>&1
+  rm temp_video.mkv
+
+  # 生成 ffmpeg 指令文件
+  printf "file '${videoname}'\n" >> ${FFMPEG_FILELIST}
+  printf "file '${filename}'\n" >> ${FFMPEG_FILELIST}
+
+  # 打印不同小节的开始时间
+  NEXT_TIME=$(add_time $(add_time "00:00:0${IMAGE_SECONDS}" $(get_length ${filename})) $CUR_TIME)
+  printf "%s %s\n" $CUR_TIME  ${title_name} >> ${SECTION_FILE}
+  CUR_TIME=${NEXT_TIME}
+  ((i++))
+done
+
+# 合并视频
+ffmpeg -f concat -safe 0 -i ${FFMPEG_FILELIST} -c copy ${OUTFILE} > /dev/null 2>&1
+
+# 删除中间文件，保持目录整洁
+for ((j=1; j<$i; j++)); do
+  imagename="intro${j}.png"
+  videoname="intro${j}_video.mkv"
+  rm ${imagename} ${videoname}
+done
+rm ${FFMPEG_FILELIST}
+rm ${SILENT_AUDIO}

@@ -1,0 +1,3 @@
+#! /bin/sh
+
+ffplay -fast -vf hflip /dev/video0 &> /dev/null

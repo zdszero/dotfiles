@@ -1,0 +1,13 @@
+#!/bin/bash
+
+[ $# -ne 3 ] && echo 'printf: %s ${IMAGE_FILE} ${AUDIO_FILE} ${OUTPUT_FILE}\n' `basename $0` && exit 1
+
+# Input files
+IMAGE_FILE=$1
+AUDIO_FILE=$2
+OUTPUT_FILE=$3
+
+# Combine image and audio into an MKV video
+ffmpeg -loop 1 -i "$IMAGE_FILE" -i "$AUDIO_FILE" -c:v libx264 -c:a aac -strict experimental -b:a 192k -shortest "$OUTPUT_FILE"
+
+echo "The MKV video has been created as $OUTPUT_FILE"

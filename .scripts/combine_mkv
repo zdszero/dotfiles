@@ -1,0 +1,8 @@
+#! /bin/bash
+
+[[ $# -ne 1 ]] && echo "Usage: combined_mkv output_filename"
+
+tmp_filename="combined_filenames.txt"
+ls | grep -E '^[0-9]+\.mkv$' | sed "s/^/file '/;s/$/'/" > $tmp_filename
+ffmpeg -f concat -i $tmp_filename -c copy $1
+rm $tmp_filename
