@@ -1,27 +1,38 @@
-export PATH=$PATH:$HOME/.scripts:/usr/local/go/bin
+export GOPATH=$(brew --prefix go)
+export GOROOT=$(brew --prefix golang)/libexec
+export GOSUMDB=sum.golang.org
+export PATH=$PATH:$GOPATH:$GOROOT/bin
+if [ -d $HOME/.scripts ]; then
+	export PATH=$HOME/.scripts:$PATH
+fi
 export GOPROXY=https://goproxy.cn
 export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node/
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+export EDITOR=nvim
 # export NVIM_LISTEN_ADDRESS='/tmp/nvim'
 
-alias zshconfig="nvim ~/.config/zsh/zshrc"
-alias i3config="nvim ~/.config/i3/config"
+alias zshconfig="${EDITOR} ~/.config/zsh/zshrc"
+alias i3config="${EDITOR} ~/.config/yabai/yabairc ~/.config/skhd/skhdrc"
 alias lg="lazygit"
-alias nols="ls | grep -v"
 
+alias tw="taskwarrior-tui"
 alias ks="kitty +kitten ssh"
 alias sudo="sudo -E"
-alias n="nvim -u ~/.config/nvim/minimal_init.vim"
+alias nn="nvim -u none"
+alias nv="nvim"
 alias p='proxychains'
 alias pg='proxychains wget'
-alias r='ranger-cd'
 alias xi="xclip -selection clipboard"
 alias ydl="youtube-dl --proxy socks5://127.0.0.1:1089"
 alias mk="minikube kubectl --"
 alias k="kubectl --"
-alias pcpu='ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'
-alias pmem='ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head'
 alias path="echo $PATH | sed 's/:/\n/g'"
+
+ytdlp_proxy="socks5://127.0.0.1:1089"
+alias yt-music="yt-dlp --proxy ${ytdlp_proxy} -f \"ba\" -x --audio-format mp3"
+alias yt-video="yt-dlp --proxy ${ytdlp_proxy} --write-auto-sub"
+alias yt-subs="yt-dlp --proxy ${ytdlp_proxy} --all-subs --skip-download"
+alias yt-pic="yt-dlp --proxy ${ytdlp_proxy} --skip-download --write-thumbnail --convert-thumbnails png"
 
 # tmux
 alias tns="tmux new -s"
@@ -33,20 +44,24 @@ alias tks="tmux kill-session -t"
 alias trs="tmux rename-session -t"
 alias tsb="tmux show-buffer"
 
-# download from youtube
-ytdlp_proxy="socks5://127.0.0.1:1089"
-alias yt-music="yt-dlp --proxy ${ytdlp_proxy} -f \"ba\" -x --audio-format mp3"
-alias yt-video="yt-dlp --proxy ${ytdlp_proxy} --write-auto-sub"
-alias yt-subs="yt-dlp --proxy ${ytdlp_proxy} --all-subs --skip-download"
+alias ls='ls --color=auto'
+alias ll='ls -la'
+alias la='ls -A'
+alias l='ls -CF'
+alias grep='grep --color=auto'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ~='cd ~'
+alias c='clear'
 
-ranger-cd() {
-    tempfile="$(mktemp -t tmp.XXXXXX)"
-    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
-    test -f "$tempfile" &&
-    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
-        cd -- "$(cat "$tempfile")"
-    fi  
-    rm -f -- "$tempfile"
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
 
 mkcd() {
@@ -54,19 +69,42 @@ mkcd() {
   cd $1
 }
 
-install_zsh_dependency() {
-    zsh_autosuggestions_path="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-    tpm_path="$HOME/.tmux/plugins/tpm"
-    zsh_syntax_highlight_path="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-    if [ ! -d "$zsh_autosuggestions_path" ]; then
-        git clone https://github.com/zsh-users/zsh-autosuggestions $zsh_autosuggestions_path
-    fi
-    if [ ! -d "$tpm_path" ]; then
-        git clone https://github.com/tmux-plugins/tpm $tpm_path
-    fi
-    if [ ! -d "$zsh_syntax_highlight_path" ]; then
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting $zsh_syntax_highlight_path
-    fi
+ZSH_CUSTOM=~/.zsh
+zsh_autosuggestions_path="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/zsh-autosuggestions"
+zsh_syntax_highlight_path="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/zsh-syntax-highlighting"
+tpm_path="$HOME/.tmux/plugins/tpm"
+
+install_plugins() {
+    [ ! -d "$zsh_autosuggestions_path" ] && git clone https://github.com/zsh-users/zsh-autosuggestions $zsh_autosuggestions_path
+    [ ! -d "$zsh_syntax_highlight_path" ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting $zsh_syntax_highlight_path
+    [ ! -d "$tpm_path" ] && git clone https://github.com/tmux-plugins/tpm $tpm_path
 }
 
-source ~/.config/zsh/fzf.zsh
+load_plugins() {
+    [ -d "$zsh_autosuggestions_path" ] && source $zsh_autosuggestions_path/zsh-autosuggestions.zsh
+    [ -d "$zsh_syntax_highlight_path" ] && source $zsh_syntax_highlight_path/zsh-syntax-highlighting.zsh
+}
+
+conda() {
+    # Check if a conda environment is already active
+	if [[ -z "$CONDA_DEFAULT_ENV" ]]; then
+		echo "Conda environment not active, activating base environment..."
+		# Adjust the path below to your conda installation path if needed
+		source ~/miniconda3/bin/activate
+		conda env list
+	else
+		 # Execute the conda command with any given arguments
+		 command conda "$@"
+   fi
+}
+
+load_plugins
+
+which -a starship &> /dev/null && eval "$(starship init zsh)"
+which -a fzf &> /dev/null && eval "$(fzf --zsh)"
+which -a zoxide &> /dev/null && eval "$(zoxide init zsh)"
+
+bindkey '^J' history-incremental-search-backward
+bindkey '^K' history-incremental-search-forward
+
+[ -f ~/miniconda3/bin/activate ] && source ~/miniconda3/bin/activate
