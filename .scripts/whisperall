@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 file1 [file2 ...]"
+    exit 1
+fi
+
+for file in "$@"; do
+    if [ ! -e "$file" ]; then
+        echo "File not found: $file" >&2
+        continue
+
+    fi
+    
+    # Check if file has supported extension
+    if [[ "$file" =~ \.(mp3|wav|m4a)$ ]]; then
+        whisper "$file" --model large --output_format vtt
+    else
+        echo "Skipping unsupported file type: $file" >&2
+    fi
+
+done
+

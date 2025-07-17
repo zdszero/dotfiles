@@ -1,0 +1,53 @@
+#! /home/zds/miniconda3/bin/python3
+
+import sys
+import os
+import re
+from transformers import MarianMTModel, MarianTokenizer
+
+# 模型名称：中文 → 英文
+# model_name = "Helsinki-NLP/opus-mt-zh-en"
+model_name = "Helsinki-NLP/opus-mt-en-zh"
+tokenizer = MarianTokenizer.from_pretrained(model_name)
+model = MarianMTModel.from_pretrained(model_name)
+
+def translate(text):
+    inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
+    translated = model.generate(**inputs)
+    return tokenizer.decode(translated[0], skip_special_tokens=True)
+
+# 获取输入文件名（例如：filename.md）
+if len(sys.argv) < 2:
+    print(f"Usage: {sys.argv[0]} <filename.md>")
+    sys.exit(1)
+
+input_file = sys.argv[1]
+if not os.path.exists(input_file):
+    print(f"File '{input_file}' does not exist.")
+    sys.exit(1)
+
+# 生成输出文件名（filename-translated.md）
+basename, ext = os.path.splitext(input_file)
+output_file = f"{basename}-translated{ext}"
+
+# 读取原始 Markdown 内容
+with open(input_file, "r", encoding="utf-8") as f:
+    lines = f.readlines()
+
+output_lines = []
+
+for line in lines:
+    if line.strip() == "" or re.match(r"^\s*([#>\-\*\d\.!`]|```)", line):
+        output_lines.append(line)
+        continue
+    translated_line = translate(line.strip())
+    output_lines.append(line)
+
+    output_lines.append(f"> {translated_line}\n")
+
+# 写入翻译结果
+with open(output_file, "w", encoding="utf-8") as f:
+    f.writelines(output_lines)
+
+print(f"Translation complete. Output saved to {output_file}")
+

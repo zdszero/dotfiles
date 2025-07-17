@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import glob
+
+filenames = []
+
+wanted_suffix = sys.argv[1]
+ignore_suffix = sys.argv[2]
+
+for filename in os.listdir('.'):
+    if not filename.endswith(wanted_suffix):
+        continue
+    basename = os.path.splitext(os.path.basename(filename))[0]
+    # Use glob to match any file that starts with basename and ends with ignore_suffix
+    test_files = glob.glob(basename + "*." + ignore_suffix)
+    if test_files:
+        continue
+    filenames.append(filename)
+
+print('\t'.join(filenames) + '\n')

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Default output file
+OUTPUT_FILE="output.md"
+
+
+# Parse options
+while getopts "o:" opt; do
+  case $opt in
+    o)
+      OUTPUT_FILE="$OPTARG"
+      ;;
+    *)
+      echo "Usage: $0 [-o output_file] file1 file2 ..."
+      exit 1
+      ;;
+  esac
+done
+
+# Shift parsed options
+shift $((OPTIND -1))
+
+# Check if any files are passed
+if [ "$#" -eq 0 ]; then
+  echo "No input files specified."
+  echo "Usage: $0 [-o output_file] file1 file2 ..."
+  exit 1
+fi
+
+# Create or clear the output file
+: > "$OUTPUT_FILE"
+
+# Process input files
+for file in "$@"; do
+  name_without_ext="${file%.*}"
+  prefix="${name_without_ext%%-*}"
+  header=$(echo "$prefix" | tr '_' ' ' | tr '[:lower:]' '[:upper:]')
+  echo -e "# $header\n" >> "$OUTPUT_FILE"
+  cat "$file" >> "$OUTPUT_FILE"
+  echo -e "\n" >> "$OUTPUT_FILE"
+done
+
+
