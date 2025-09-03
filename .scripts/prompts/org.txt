@@ -1,0 +1,7 @@
+Please format the following passage by splitting it into multiple shorter paragraphs.
+
+1. **Do not remove, summarize, or rewrite** any part of the original text.
+2. Only insert paragraph breaks at logical points (e.g., change of idea, topic, or pause).
+3. Ensure that **no paragraph exceeds 4–5 sentences or 80–100 words**.
+4. If a paragraph is still too long, split it further at natural breaks, even within the same topic.
+5. **Critically important**: You must process the **entire input**. Do **not truncate or omit** any content, even if the input is long.

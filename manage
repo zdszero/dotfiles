@@ -11,13 +11,13 @@ def copy_files(src_file, dst_file):
             if not path.exists(dst_file):
                 # print('mkdir -p %s' % dst_file)
                 os.system('mkdir -p %s' % dst_file)
-            cmd = 'cp %s/* %s/' % (src_file, dst_file)
+            cmd = 'cp -r %s/* %s/' % (src_file, dst_file)
         else:
             parent_dir = get_parent_dir(dst_file)
             if parent_dir != '':
                 if not path.exists(parent_dir):
                     os.system('mkdir -p %s' % parent_dir)
-            cmd = 'cp %s %s' % (src_file, dst_file)
+            cmd = 'cp -r %s %s' % (src_file, dst_file)
         # print(cmd)
         os.system(cmd)
 

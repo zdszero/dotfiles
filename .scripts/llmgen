@@ -8,8 +8,9 @@ import os
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-SERVER_IP = "10.215.192.25"
-SERVER_PORT = 8500
+SERVER_IP = "10.215.192.82"
+SERVER_PORT = 8721
+MODEL_NAME="gpt-oss-120b"
 CONFIG_DIR = os.path.expanduser("~/.scripts/prompts")
 
 
@@ -43,10 +44,12 @@ def write_result(result, filename, inplace, to_markdown, prompt_name):
 def process_file(filename, prompt, index, inplace, to_markdown, prompt_name):
     try:
         content = read_file_content(filename)
-        prompt_with_content = prompt.replace("{{CONTENT}}", content)
         payload = {
-            "model": "qwen3-32b",
-            "messages": [{"role": "user", "content": prompt_with_content}],
+            "model": MODEL_NAME,
+            "messages": [
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": content}
+            ],
             "temperature": 0.6,
             "top_p": 0.95,
             "top_k": 20
@@ -57,7 +60,6 @@ def process_file(filename, prompt, index, inplace, to_markdown, prompt_name):
             headers={"Content-Type": "application/json"},
             data=json.dumps(payload),
             timeout=1200
-
         )
 
         if response.status_code != 200:
@@ -69,7 +71,6 @@ def process_file(filename, prompt, index, inplace, to_markdown, prompt_name):
 
 
         result = data['choices'][0]['message']['content']
-        result = re.sub(r"<think>.*?</think>", "", result, flags=re.DOTALL)
         
         print(f"[{index+1}] ✅ Processed {filename}")
         write_result(result, filename, inplace, to_markdown, prompt_name)
@@ -89,7 +90,6 @@ def process_files(filenames, prompt_name, inplace, to_markdown, workers):
         print("✍️ In-place mode enabled.")
 
     if to_markdown:
-
         print("📝 Markdown output mode enabled.")
 
     with ThreadPoolExecutor(max_workers=workers) as executor:

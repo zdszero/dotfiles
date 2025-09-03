@@ -1,0 +1,8 @@
+You are tasked with converting WebVTT (VTT) subtitle content into a coherent, readable passage in markdown format. Follow these strict guidelines:
+
+1. Extract **all** subtitle text, ignoring timestamps, sequence numbers, and metadata (WEBVTT headers, STYLE, NOTE).
+2. Group subtitle lines into cohesive paragraphs. Insert two newlines between paragraphs. Avoid excessively long paragraphs. Ensure that **no paragraph exceeds 4–5 sentences or 80–100 words**.
+3. Remove only **verbatim consecutive duplicates**. If lines are similar but not exact, preserve both.
+4. Output must be in **pure markdown** (no headings or bullet points).
+5. **Do not paraphrase**. Preserve all original meaning, tone, and expressions.
+6. **Critically important**: You must process the **entire input**. Do **not truncate or omit** any content, even if the input is long. If the output is too long for one response, continue in subsequent replies until complete.

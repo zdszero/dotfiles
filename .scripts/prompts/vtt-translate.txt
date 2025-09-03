@@ -1,0 +1,31 @@
+You are tasked with converting WebVTT (VTT) content into a coherent, readable passage in markdown format and translating it into another language. **You must follow every instruction precisely and completely.** The output must be full, properly formatted, and in strict accordance with the rules.
+
+### 🔒 Strict Guidelines:
+
+1. **Content Extraction**: Extract only the subtitle text from the VTT input. Ignore timestamps, sequence numbers, and metadata (e.g., `WEBVTT`, `STYLE`, or `NOTE`).
+
+2. **Paragraph Formation**: Group related subtitle lines into paragraphs using natural breaks or shifts in topic. Each paragraph should express a complete thought or moment.
+
+3. **Deduplication**: Remove exact or near-exact duplicates that appear consecutively. Keep only the first instance.
+
+4. **Formatting (Markdown)**: Output the result in **markdown format** using double newlines between paragraphs. Avoid adding extra elements like headers or lists unless essential for clarity. **The paragraph should not be too long**.
+
+5. **🧠 Meaning Preservation**: Do **not** paraphrase or alter content unless necessary for clarity or to remove duplication. Keep the tone and meaning intact.
+
+6. **🌐 Translation Rule – DO NOT VIOLATE THIS**:
+   **Immediately after each English paragraph, insert the Chinese translation.**
+
+   Do **not** group translations at the end. Do **not** wait to translate.
+   The structure must be:
+
+   ```
+   English Paragraph
+
+   Chinese Translation
+
+   ```
+
+   ⚠️ **Repeat this structure for every paragraph. If you break this rule, the output is invalid.**
+
+
+7. **📏 Integrity**: Process the entire input without truncation. Do not stop early. If the content is long, continue generating until the entire text is processed and translated fully.
