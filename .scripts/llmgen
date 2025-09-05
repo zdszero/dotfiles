@@ -1,23 +1,20 @@
 #! /usr/bin/env python3
 
-import requests
-import json
 import argparse
 import os
-
-import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+from openai import OpenAI
 
 SERVER_IP = "10.215.192.82"
 SERVER_PORT = 8721
-MODEL_NAME="gpt-oss-120b"
+MODEL_NAME = "gpt-oss-120b"
 CONFIG_DIR = os.path.expanduser("~/.scripts/prompts")
 
 
 def load_prompt(prompt_name):
     prompt_file = os.path.join(CONFIG_DIR, f"{prompt_name}.txt")
     if not os.path.exists(prompt_file):
-
         raise FileNotFoundError(f"Prompt file {prompt_file} not found")
     with open(prompt_file, 'r', encoding='utf-8') as f:
         return f.read()
@@ -26,6 +23,7 @@ def load_prompt(prompt_name):
 def read_file_content(filename):
     with open(filename, 'r', encoding='utf-8') as f:
         return f.read()
+
 
 def write_result(result, filename, inplace, to_markdown, prompt_name):
     if inplace:
@@ -36,46 +34,33 @@ def write_result(result, filename, inplace, to_markdown, prompt_name):
         with open(md_path, 'w', encoding='utf-8') as f:
             f.write(result)
         print(f"📝 Wrote Markdown output to {md_path}")
-
     else:
         print(f"\n=== Output for {filename} ===\n")
         print(result)
 
-def process_file(filename, prompt, index, inplace, to_markdown, prompt_name):
+
+def process_file(filename, prompt, index, inplace, to_markdown, prompt_name, client):
     try:
         content = read_file_content(filename)
-        payload = {
-            "model": MODEL_NAME,
-            "messages": [
+
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
                 {"role": "system", "content": prompt},
                 {"role": "user", "content": content}
             ],
-            "temperature": 0.6,
-            "top_p": 0.95,
-            "top_k": 20
-        }
-
-        response = requests.post(
-            f"http://{SERVER_IP}:{SERVER_PORT}/v1/chat/completions",
-            headers={"Content-Type": "application/json"},
-            data=json.dumps(payload),
-            timeout=1200
+            temperature=0.6,
+            extra_body={"reasoning_effort": "medium"}
         )
 
-        if response.status_code != 200:
-            raise RuntimeError(f"HTTP {response.status_code}: {response.text}")
-
-        data = response.json()
-        if 'choices' not in data or not data['choices']:
+        if not response.choices:
             raise ValueError("Invalid response: no choices")
 
+        result = response.choices[0].message.content
 
-        result = data['choices'][0]['message']['content']
-        
         print(f"[{index+1}] ✅ Processed {filename}")
         write_result(result, filename, inplace, to_markdown, prompt_name)
         return index, result, filename
-
 
     except Exception as e:
         print(f"[{index+1}] ❌ Error processing {filename}: {e}")
@@ -83,24 +68,24 @@ def process_file(filename, prompt, index, inplace, to_markdown, prompt_name):
         write_result(error_result, filename, inplace, to_markdown, prompt_name)
         return index, error_result, filename
 
-def process_files(filenames, prompt_name, inplace, to_markdown, workers):
+
+def process_files(filenames, prompt_name, inplace, to_markdown, workers, client):
     prompt = load_prompt(prompt_name)
     print(f"📄 Processing {len(filenames)} file(s) with prompt '{prompt_name}'")
     if inplace:
         print("✍️ In-place mode enabled.")
-
     if to_markdown:
         print("📝 Markdown output mode enabled.")
 
     with ThreadPoolExecutor(max_workers=workers) as executor:
         futures = [
-            executor.submit(process_file, filename, prompt, idx, inplace, to_markdown, prompt_name)
+            executor.submit(process_file, filename, prompt, idx, inplace, to_markdown, prompt_name, client)
             for idx, filename in enumerate(filenames)
         ]
-        
-        for future in as_completed(futures):
 
-            future.result()  # Just wait for completion, results are already written
+        for future in as_completed(futures):
+            future.result()  # 等待完成，写文件已在内部完成
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -111,25 +96,36 @@ def main():
     parser.add_argument('--prompt', default='default', help='Prompt name (without .txt)')
     parser.add_argument('--inplace', action='store_true', help='Modify files in place')
     parser.add_argument('--markdown', action='store_true', help='Write output to markdown')
-    parser.add_argument('--workers', type=int, default=16, help='Number of workers')
+    parser.add_argument('--workers', type=int, default=1, help='Number of workers')
+    parser.add_argument('--host', type=str, default='', help='Host of llm server')
+    parser.add_argument('--port', type=int, default=-1, help='Port of llm server')
 
     args = parser.parse_args()
-
 
     if not os.path.exists(CONFIG_DIR):
         raise FileNotFoundError(f"Config directory '{CONFIG_DIR}' not found")
 
     for filename in args.filenames:
-
         if not os.path.exists(filename):
             raise FileNotFoundError(f"Input file {filename} not found")
 
     if args.inplace and args.markdown:
-
         raise ValueError("Cannot use --inplace and --markdown together")
 
-    process_files(args.filenames, args.prompt, args.inplace, args.markdown, args.workers)
+    global SERVER_IP, SERVER_PORT
+    if args.host:
+        SERVER_IP = args.host
+    if args.port != -1:
+        SERVER_PORT = args.port
+
+    # 初始化 OpenAI client，指向自定义 server
+    client = OpenAI(
+        base_url=f"http://{SERVER_IP}:{SERVER_PORT}/v1",
+        api_key="EMPTY"  # 兼容 openai sdk 的必填字段
+    )
+
+    process_files(args.filenames, args.prompt, args.inplace, args.markdown, args.workers, client)
+
 
 if __name__ == '__main__':
     main()
-
