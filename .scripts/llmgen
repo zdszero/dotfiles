@@ -2,16 +2,31 @@
 
 import argparse
 import os
+import json
+import time
+import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from openai import OpenAI
+# =======================
+# Config
+# =======================
+SERVER_ADDR = "https://api.deepseek.com/chat/completions"
+API_KEY = "sk-25708c5d4945471784a11ebfc6fa64b7"
+MODEL_NAME = "deepseek-chat"
 
-SERVER_IP = "10.215.192.82"
-SERVER_PORT = 8721
-MODEL_NAME = "gpt-oss-120b"
+# SERVER_ADDR = "http://10.178.29.70:80/v2/chat/completions"
+# API_KEY = "bce-v3/ALTAK-seG05tfjoB4V83dl1I60P/df902ea834c2c21559ac5feb3a5720dc175c9733"
+# MODEL_NAME = "aiak_bzz2_deepseek_v32_rd_test3"
+
 CONFIG_DIR = os.path.expanduser("~/.scripts/prompts")
 
+MAX_RETRIES = 3
+API_TIMEOUT = 600
+VERIFY_SSL = True
 
+# =======================
+# Helpers
+# =======================
 def load_prompt(prompt_name):
     prompt_file = os.path.join(CONFIG_DIR, f"{prompt_name}.txt")
     if not os.path.exists(prompt_file):
@@ -39,24 +54,57 @@ def write_result(result, filename, inplace, to_markdown, prompt_name):
         print(result)
 
 
-def process_file(filename, prompt, index, inplace, to_markdown, prompt_name, client):
+# =======================
+# Core HTTP Call
+# =======================
+def call_llm(prompt, content):
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {API_KEY}",
+    }
+
+    payload = {
+        "model": MODEL_NAME,
+        "messages": [
+            {"role": "system", "content": prompt},
+            {"role": "user", "content": content}
+        ]
+    }
+
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            response = requests.post(
+                SERVER_ADDR,
+                headers=headers,
+                data=json.dumps(payload),
+                timeout=API_TIMEOUT,
+                verify=VERIFY_SSL
+            )
+
+            response.raise_for_status()
+            data = response.json()
+
+            if 'choices' not in data or not data['choices']:
+                raise ValueError("Invalid response: no choices")
+
+            return data['choices'][0]['message']['content']
+
+        except Exception as e:
+            print(f"⚠️ Attempt {attempt}/{MAX_RETRIES} failed: {e}")
+            if attempt < MAX_RETRIES:
+                time.sleep(2 * attempt)
+            else:
+                raise
+
+
+# =======================
+# File Processing
+# =======================
+def process_file(filename, prompt, index, inplace, to_markdown, prompt_name):
     try:
         content = read_file_content(filename)
 
-        response = client.chat.completions.create(
-            model=MODEL_NAME,
-            messages=[
-                {"role": "system", "content": prompt},
-                {"role": "user", "content": content}
-            ],
-            temperature=0.6,
-            extra_body={"reasoning_effort": "medium"}
-        )
-
-        if not response.choices:
-            raise ValueError("Invalid response: no choices")
-
-        result = response.choices[0].message.content
+        result = call_llm(prompt, content)
 
         print(f"[{index+1}] ✅ Processed {filename}")
         write_result(result, filename, inplace, to_markdown, prompt_name)
@@ -69,9 +117,10 @@ def process_file(filename, prompt, index, inplace, to_markdown, prompt_name, cli
         return index, error_result, filename
 
 
-def process_files(filenames, prompt_name, inplace, to_markdown, workers, client):
+def process_files(filenames, prompt_name, inplace, to_markdown, workers):
     prompt = load_prompt(prompt_name)
     print(f"📄 Processing {len(filenames)} file(s) with prompt '{prompt_name}'")
+
     if inplace:
         print("✍️ In-place mode enabled.")
     if to_markdown:
@@ -79,14 +128,25 @@ def process_files(filenames, prompt_name, inplace, to_markdown, workers, client)
 
     with ThreadPoolExecutor(max_workers=workers) as executor:
         futures = [
-            executor.submit(process_file, filename, prompt, idx, inplace, to_markdown, prompt_name, client)
+            executor.submit(
+                process_file,
+                filename,
+                prompt,
+                idx,
+                inplace,
+                to_markdown,
+                prompt_name
+            )
             for idx, filename in enumerate(filenames)
         ]
 
         for future in as_completed(futures):
-            future.result()  # 等待完成，写文件已在内部完成
+            future.result()
 
 
+# =======================
+# Main
+# =======================
 def main():
     parser = argparse.ArgumentParser(
         description="Process files with LLM using configurable prompts",
@@ -97,8 +157,6 @@ def main():
     parser.add_argument('--inplace', action='store_true', help='Modify files in place')
     parser.add_argument('--markdown', action='store_true', help='Write output to markdown')
     parser.add_argument('--workers', type=int, default=1, help='Number of workers')
-    parser.add_argument('--host', type=str, default='', help='Host of llm server')
-    parser.add_argument('--port', type=int, default=-1, help='Port of llm server')
 
     args = parser.parse_args()
 
@@ -112,20 +170,15 @@ def main():
     if args.inplace and args.markdown:
         raise ValueError("Cannot use --inplace and --markdown together")
 
-    global SERVER_IP, SERVER_PORT
-    if args.host:
-        SERVER_IP = args.host
-    if args.port != -1:
-        SERVER_PORT = args.port
-
-    # 初始化 OpenAI client，指向自定义 server
-    client = OpenAI(
-        base_url=f"http://{SERVER_IP}:{SERVER_PORT}/v1",
-        api_key="EMPTY"  # 兼容 openai sdk 的必填字段
+    process_files(
+        args.filenames,
+        args.prompt,
+        args.inplace,
+        args.markdown,
+        args.workers
     )
-
-    process_files(args.filenames, args.prompt, args.inplace, args.markdown, args.workers, client)
 
 
 if __name__ == '__main__':
     main()
+
